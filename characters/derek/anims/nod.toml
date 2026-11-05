@@ -1,0 +1,75 @@
+# Derek stands with his arms down, crosses them, nods twice, and drops them again.
+run = "keys"
+model = "qwen-edit"
+master = "crossed/4"
+canvas = [148, 192]
+margin_left = 11
+frame_ms = 110
+preview_scale = 3
+static_below_row = 131
+
+# Large-image coordinates on the master.
+head = [[330, 20], [840, 20], [840, 330], [770, 400], [740, 415], [490, 415], [440, 372], [415, 345], [330, 345]]
+neck_keep = [[485, 350], [745, 350], [745, 420], [485, 420]]
+pivot = [610, 420]
+
+[bodies.crossed]
+pose = "crossed/4"
+[bodies.relaxed]
+pose = "relaxed/1"
+legs_from_master_below = 800
+
+[[frames]]
+body = "relaxed"
+hold = 8
+[[frames]]
+body = "crossed"
+hold = 6
+[[frames]]
+body = "crossed"
+rot = 3
+dy = 3
+[[frames]]
+body = "crossed"
+rot = 7
+dy = 8
+[[frames]]
+body = "crossed"
+rot = 10
+dy = 13
+hold = 2
+[[frames]]
+body = "crossed"
+rot = 7
+dy = 8
+[[frames]]
+body = "crossed"
+rot = 3
+dy = 3
+[[frames]]
+body = "crossed"
+hold = 2
+[[frames]]
+body = "crossed"
+rot = 3
+dy = 3
+[[frames]]
+body = "crossed"
+rot = 7
+dy = 8
+[[frames]]
+body = "crossed"
+rot = 10
+dy = 13
+hold = 2
+[[frames]]
+body = "crossed"
+rot = 7
+dy = 8
+[[frames]]
+body = "crossed"
+rot = 3
+dy = 3
+[[frames]]
+body = "crossed"
+hold = 8

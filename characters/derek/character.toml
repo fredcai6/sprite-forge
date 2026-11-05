@@ -1,0 +1,28 @@
+name = "Derek Borg"
+description = """a green cartoon parrot mascot with a large grey hooked beak, a yellow-ringed eye, \
+a black backwards baseball cap with a red strap, a glowing teal cybernetic goggle over his left eye, \
+a robotic silver shoulder and forearm on one wing, feathered green wing on the other, \
+a black sleeveless baseball jersey with teal piping, a silver chain with a square teal bar-chart \
+pendant, robotic silver legs, black sneakers with teal laces and lime soles, long green tail feathers"""
+
+[sprite]
+# Derek's drawn pixels are about 6.2px wide on a figure 1148px tall.
+height = 185
+# Votes for saturated colours when a cell is mixed. Cells here are nearly uniform.
+accent = 1.3
+
+[palette.families.neutral]
+max_chroma = 0.04
+n = 16
+[palette.families.green]
+hue = [110, 160]
+n = 16
+[palette.families.teal]
+hue = [160, 215]
+n = 10
+[palette.families.red]
+hue = [10, 40]
+n = 6
+[palette.families.gold]
+hue = [40, 110]
+n = 6

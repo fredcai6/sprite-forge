@@ -1,0 +1,19 @@
+{
+ "frame": {
+  "w": 148,
+  "h": 192
+ },
+ "count": 36,
+ "frame_ms": 110,
+ "loop": true,
+ "rev": {
+  "sha": "HEAD",
+  "dirty": true,
+  "comfy": "v0.44.0"
+ },
+ "source": {
+  "run": "keys",
+  "model": "qwen-edit",
+  "master": "crossed/4"
+ }
+}

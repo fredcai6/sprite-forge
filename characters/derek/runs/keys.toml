@@ -1,0 +1,18 @@
+# The three key poses every frame is built from. Same reference, same style, same camera.
+models = ["klein", "qwen-edit"]
+seeds = [1, 2, 3, 4]
+width = 1248
+height = 1248
+# Leaves headroom for the interactive pair; weights page in as needed.
+comfy_args = ["--reserve-vram", "1.5"]
+refs = ["characters/derek/references/derek_borg_default_black.png"]
+template = """Redraw this exact character: {description}. Keep the character, proportions, colours, \
+camera angle and art style exactly the same. {action} Full body, feet at the bottom, standing still, \
+detailed high-resolution pixel art with the same fine feather, metal and chain detail as the reference, flat solid magenta background."""
+
+[shots.relaxed]
+prompt = "He stands relaxed facing forward with both arms hanging at his sides, beak closed."
+[shots.crossed]
+prompt = "He stands facing forward with both arms firmly crossed over his chest, the pendant still visible, beak closed, a confident look."
+[shots.crossed_nod]
+prompt = "He stands facing forward with both arms firmly crossed over his chest, his head tipped down in a nod, beak closed, a confident look."
