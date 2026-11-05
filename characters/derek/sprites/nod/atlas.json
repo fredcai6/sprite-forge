@@ -7,8 +7,8 @@
  "frame_ms": 110,
  "loop": true,
  "rev": {
-  "sha": "HEAD",
-  "dirty": true,
+  "sha": "bafc4b14acb662962424812483b51202c601f887",
+  "dirty": false,
   "comfy": "v0.44.0"
  },
  "source": {

@@ -1,7 +1,7 @@
 # sprite-forge
 
-Sketches and references in, consistent animated pixel sprites out. Nothing here is committed to a
-model's output: every result is rebuilt from the run file and the seed.
+Sketches and references in, consistent animated pixel sprites out. Each sprite's `atlas.json` records
+the code revision and the key pose it was built from.
 
 ## Setup
 
