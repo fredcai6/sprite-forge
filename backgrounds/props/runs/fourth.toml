@@ -1,0 +1,8 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4, 5, 6]
+width = 832
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+[shots.barricade]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, warm light from the upper left, deep violet shadows, gritty and a little funny. Flat solid magenta background. A chunky street barricade made of two stacked bright-orange-brown wooden shipping crates with a bold yellow-and-black hazard-striped board across the front and two lumpy tan sandbags on top, seen straight-on from the side, a little taller than wide (four units wide by five tall), strong clear shapes, high contrast, heavy and solid, flat top."

@@ -1,0 +1,31 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+
+[shots.table]
+width = 2048
+height = 768
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, warm light from the upper left, deep violet shadows, gritty and a little funny. Flat solid magenta background. No text unless asked. A very long battered wooden pizza-shop prep table seen straight-on from the front, spanning almost the full width of the picture: thick scarred wooden top with flour dust, grease stains and knife cuts, a lower shelf with a few flat pizza boxes, chunky wooden legs to the floor, a few dents and stickers. Nothing on top of the table."
+[shots.box]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, warm light from the upper left, deep violet shadows, gritty and a little funny. Flat solid magenta background. No text unless asked. An open cardboard pizza box seen from slightly above, lid propped open behind it, the box is empty with a plain flat clean corrugated cardboard interior surface, greasy stains on the lid and rim, slightly squashed corners, a faded red logo on the lid. The box fills most of the picture."
+[shots.platform]
+width = 2048
+height = 512
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, warm light from the upper left, deep violet shadows, gritty and a little funny. Flat solid magenta background. No text unless asked. A horizontal strip of rusted metal fire-escape walkway grating, seen from the side, flat top edge, riveted steel plates with orange rust and peeling grey paint, diagonal struts beneath, a flat straight top surface, repeating pattern, filling the picture width."
+[shots.barricade]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, warm light from the upper left, deep violet shadows, gritty and a little funny. Flat solid magenta background. No text unless asked. A grimy stacked street barricade for a platformer: a pile of wooden crates and sandbags with a scrap of caution tape and a rusty sheet of metal, seen straight-on from the side, roughly square, flat sturdy top, solid and heavy looking."
+[shots.barrel]
+width = 768
+height = 1024
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, warm light from the upper left, deep violet shadows, gritty and a little funny. Flat solid magenta background. No text unless asked. A rusty dented oil drum seen from the side with bright orange and yellow flames roaring out of the open top, glowing hot orange light on the drum, a few sparks. Tall upright drum."
+[shots.barrel_out]
+width = 768
+height = 1024
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, warm light from the upper left, deep violet shadows, gritty and a little funny. Flat solid magenta background. No text unless asked. A rusty dented oil drum seen from the side, cold and burnt out, the open top full of black charred wood with a thin curl of grey smoke rising, no flames, dull and grey. Tall upright drum."
+[shots.door]
+width = 768
+height = 1024
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, warm light from the upper left, deep violet shadows, gritty and a little funny. Flat solid magenta background. No text unless asked. A warm-lit front door of a house seen straight-on: a tall wooden door with a glowing warm yellow window, a welcome mat, a small hand-painted wooden sign hanging on the door that reads exactly the word DELIVER in clear capital letters, a porch light glowing orange above. Inviting and bright."
