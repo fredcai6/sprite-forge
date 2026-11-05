@@ -1,0 +1,28 @@
+name = "turtle"
+description = "an old wrinkled tortoise with a big mossy domed olive-brown shell, a long wrinkly neck, droopy half-closed eyes, thick round spectacles, four stubby legs, a tiny plaid scarf"
+[sprite]
+height = 80
+accent = 1.3
+[palette]
+sources = ["keys/klein/*/*.png"]
+[palette.families.neutral]
+max_chroma = 0.045
+n = 14
+[palette.families.red]
+hue = [0, 40]
+n = 8
+[palette.families.orange]
+hue = [40, 75]
+n = 12
+[palette.families.yellow]
+hue = [75, 115]
+n = 10
+[palette.families.green]
+hue = [115, 200]
+n = 8
+[palette.families.blue]
+hue = [200, 290]
+n = 6
+[palette.families.purple]
+hue = [290, 360]
+n = 6

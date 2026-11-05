@@ -1,0 +1,11 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+
+[shots.a]
+prompt = "Character design for a late-1990s 2D platformer hero, hand-painted game sprite art with chunky dark purple outline and cel shading with a strong warm rim light. Full body, the whole figure visible from head to sneakers, standing in a confident heroic pose, facing slightly right. Character: a cute cartoon New York pizza slice, wide triangular slice with the pointed tip at the bottom and a thin folded crust along the top edge, glossy golden melted cheese, three round pepperoni, a big expressive face on the cheese with two large white eyes, thick eyebrows and a cheeky grin, small stubby arms in white gloves, small stubby legs with beat-up red sneakers. Flat solid magenta background."
+[shots.b]
+prompt = "Chunky pixel-art style game character, late-1990s platformer mascot with attitude, bold black-purple outline, saturated colours, dramatic shading. Full body from head to feet, determined stance with fists up, facing right. A New York style pizza slice with arms and legs: big triangle slice, droopy floppy tip, thin crust at the top, melted cheese with grease shine, a few pepperoni, a big goofy expressive face with huge eyes and an eyebrow raised, white cartoon gloves, small legs, red high-top sneakers. Flat solid magenta background."

@@ -1,0 +1,8 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+[shots.a]
+prompt = "Chunky pixel-art style game character, late-1990s platformer, bold black-purple outline, saturated colours, dramatic shading with a warm rim light. Full body, head to sneakers, side view facing right, walking. A lanky goofy cartoon teenager, an original character: huge messy mop of hair covering one eye, an oversized orange hoodie, baggy jeans, enormous white sneakers, head bowed and eyes glued to a glowing smartphone held in both hands, bored slack expression. Unarmed, no mask, no weapons, plain clothes. Flat solid magenta background."

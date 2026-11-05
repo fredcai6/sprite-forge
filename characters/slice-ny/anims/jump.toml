@@ -1,0 +1,15 @@
+# Takeoff stretch, then the tuck; the last frame holds.
+run = "keys"
+model = "klein"
+cell = 7.4
+canvas = [124, 124]
+frame_ms = 120
+loop = false
+preview_scale = 4
+
+[[frames]]
+pose = "jump_rise/2"
+hold = 3
+[[frames]]
+pose = "jump_fall/2"
+hold = 3

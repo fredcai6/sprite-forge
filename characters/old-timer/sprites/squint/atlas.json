@@ -1,0 +1,37 @@
+{
+ "frame": {
+  "w": 128,
+  "h": 130
+ },
+ "count": 16,
+ "frame_ms": 140,
+ "loop": false,
+ "rev": {
+  "sha": "b5e368d7d167701408de65f34499b5f74e25cab2",
+  "dirty": true,
+  "comfy": "v0.44.0"
+ },
+ "source": {
+  "run": "keys",
+  "model": "qwen-edit",
+  "cell": 7.0,
+  "poses": [
+   "idle_a/1",
+   "idle_a/1",
+   "squint_open/1",
+   "squint_open/1",
+   "squint_open/1",
+   "squint/1",
+   "squint/1",
+   "squint/1",
+   "squint/1",
+   "squint/1",
+   "squint/1",
+   "squint/1",
+   "squint/1",
+   "squint/1",
+   "squint/1",
+   "squint/1"
+  ]
+ }
+}

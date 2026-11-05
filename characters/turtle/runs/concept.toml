@@ -1,0 +1,8 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+[shots.a]
+prompt = "Chunky pixel-art style game character, late-1990s platformer, bold black-purple outline, saturated colours, dramatic shading with a warm rim light. Full body, side view facing right, walking on all four stubby legs slowly. An old wrinkled real-looking tortoise, an original character: big mossy domed olive-brown shell with moss patches, a long wrinkly neck, droopy half-closed tired eyes behind thick round spectacles, a tiny plaid scarf, a grumpy old man expression. A plain old turtle, no mask, no bandana, no weapons, no clothes besides the scarf. Flat solid magenta background."

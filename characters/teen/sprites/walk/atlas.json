@@ -1,0 +1,25 @@
+{
+ "frame": {
+  "w": 112,
+  "h": 118
+ },
+ "count": 4,
+ "frame_ms": 130,
+ "loop": true,
+ "rev": {
+  "sha": "b5e368d7d167701408de65f34499b5f74e25cab2",
+  "dirty": true,
+  "comfy": "v0.44.0"
+ },
+ "source": {
+  "run": "keys",
+  "model": "qwen-edit",
+  "cell": 8.0,
+  "poses": [
+   "walk_contact_a/2",
+   "walk_passing_a/1",
+   "walk_contact_b/3",
+   "walk_passing_b/3"
+  ]
+ }
+}

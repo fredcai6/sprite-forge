@@ -1,0 +1,25 @@
+{
+ "frame": {
+  "w": 124,
+  "h": 124
+ },
+ "count": 4,
+ "frame_ms": 90,
+ "loop": true,
+ "rev": {
+  "sha": "b5e368d7d167701408de65f34499b5f74e25cab2",
+  "dirty": true,
+  "comfy": "v0.44.0"
+ },
+ "source": {
+  "run": "keys",
+  "model": "klein",
+  "cell": 7.4,
+  "poses": [
+   "run_contact_a/1",
+   "run_passing_a/1",
+   "run_contact_b/1",
+   "run_passing_b/1"
+  ]
+ }
+}

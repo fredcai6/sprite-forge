@@ -1,0 +1,8 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4, 5, 6]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+[shots.a]
+prompt = "Chunky pixel-art style game character, late-1990s platformer, bold black-purple outline, saturated colours, dramatic shading with a warm rim light. Full body, head to boots, standing hunched facing right. A grizzled stale old pizza slice character, a dried-out wide triangular slice with cracked leathery brown cheese, a few shriveled pepperoni, curled burnt crust, a bite missing from one corner, huge bushy white eyebrows, tired drooping eyelids with bags, a grumpy scowl with a few stubble hairs, a battered olive army field cap, thin skinny arms with a bony pointing finger, small legs in worn brown boots. Too old for this. Slightly threatening, slightly pathetic. Flat solid magenta background."

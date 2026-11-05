@@ -1,0 +1,26 @@
+{
+ "frame": {
+  "w": 112,
+  "h": 118
+ },
+ "count": 5,
+ "frame_ms": 260,
+ "loop": true,
+ "rev": {
+  "sha": "b5e368d7d167701408de65f34499b5f74e25cab2",
+  "dirty": true,
+  "comfy": "v0.44.0"
+ },
+ "source": {
+  "run": "keys",
+  "model": "qwen-edit",
+  "cell": 8.0,
+  "poses": [
+   "idle_a/2",
+   "idle_a/2",
+   "idle_b/2",
+   "idle_b/2",
+   "idle_a/2"
+  ]
+ }
+}

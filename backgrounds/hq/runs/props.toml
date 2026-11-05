@@ -1,0 +1,13 @@
+models = ["klein"]
+seeds = [1, 2, 3]
+width = 1280
+height = 720
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+
+[shots.boxes]
+prompt = "Game asset sheet in late-1990s 2D platformer hand-painted pixel-art style with bold dark purple outlines: a tall wobbly stack of flat cardboard pizza boxes, a mop bucket with a mop, and a couple of flour sacks, arranged side by side in a row standing on the ground, seen straight-on, warm orange light from above, deep violet shadows. Flat solid magenta background."
+[shots.table]
+prompt = "Game asset sheet in late-1990s 2D platformer hand-painted pixel-art style with bold dark purple outlines: a battered wooden prep table with a stack of pizza boxes on it and a rolling pin, a wooden stool, and a steel dough mixer, arranged side by side in a row standing on the ground, seen straight-on, warm orange light from above, deep violet shadows. Flat solid magenta background."
+[shots.shelf]
+prompt = "Game asset: one tall dark wooden storage shelf unit seen straight-on, cluttered with tomato tins, flour sacks, dusty jars and pizza boxes, strongly backlit so it is mostly dark violet silhouette with a faint warm rim light, late-1990s 2D platformer hand-painted pixel-art style, bold outline. Flat solid magenta background."

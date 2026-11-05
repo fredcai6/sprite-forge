@@ -1,0 +1,32 @@
+{
+ "frame": {
+  "w": 124,
+  "h": 124
+ },
+ "count": 11,
+ "frame_ms": 70,
+ "loop": false,
+ "rev": {
+  "sha": "b5e368d7d167701408de65f34499b5f74e25cab2",
+  "dirty": true,
+  "comfy": "v0.44.0"
+ },
+ "source": {
+  "run": "keys2",
+  "model": "qwen-edit",
+  "cell": 7.4,
+  "poses": [
+   "fold_closed/3",
+   "fold_closed/3",
+   "fold_closed/3",
+   "fold_closed/3",
+   "fold_closed/3",
+   "fold_closed/3",
+   "fold_closed/3",
+   "fold_closed/3",
+   "fold_closed/3",
+   "fold_closed/3",
+   "fold_closed/3"
+  ]
+ }
+}

@@ -1,0 +1,9 @@
+models = ["klein"]
+seeds = [1, 2, 3]
+width = 1280
+height = 720
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+
+[shots.room]
+prompt = "Background art for a late-1990s 2D platformer, hand-painted with chunky shading and slightly gritty texture. Interior of a dim, cramped back room of a New York pizza shop, one bare bulb hanging from a cord casting a warm pool of orange light, deep violet shadows in the corners, cluttered shelves stacked with flour sacks, cans and tomato tins, stacks of flat pizza boxes, a stained brick wall, a large empty cork bulletin board on the wall at the right, a worn concrete floor, a wooden table. No characters, no people. Moody, a little mysterious, a little goofy."

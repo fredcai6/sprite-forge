@@ -1,0 +1,19 @@
+models = ["qwen-edit"]
+seeds = [1, 2, 3, 4]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+refs = ["characters/old-timer/references/old_seed1.png"]
+template = """Redraw this exact same character: an ancient, stale, grizzled old pizza slice, same design, same chunky pixel-art style, same thick dark outline, same olive army field cap, grey gloves and boots. Make him look older and more worn: dull matte cracked leathery cheese with no gloss, only two shriveled pepperoni, droopy bags under his eyes, a hunched stance with his shoulders slumped. Exactly two arms and two legs. {action} Full body visible, flat solid magenta background."""
+[shots.idle_a]
+prompt = "Idle: standing hunched facing the viewer, tired heavy-lidded eyes looking off to the side, mouth a flat grumpy line, both arms hanging."
+[shots.idle_b]
+prompt = "Idle: standing hunched facing the viewer, a long weary sigh, eyes closed for a moment, mouth slightly open, shoulders drooped even lower, both arms hanging."
+[shots.talk_open]
+prompt = "Talking: one grey-gloved hand raised with a bony finger pointing up lecturing, the other hand on his lower back, mouth wide open mid-sentence showing a few teeth, bushy white eyebrows raised, eyes wide and intense, leaning forward."
+[shots.talk_closed]
+prompt = "Talking: one grey-gloved hand raised with a bony finger pointing up lecturing, the other hand on his lower back, mouth shut in a tight scowl between words, bushy white eyebrows lowered, leaning forward."
+[shots.squint]
+prompt = "Squinting suspiciously: his eyes are narrowed into thin slits under heavily lowered bushy white eyebrows, head tilted forward, mouth a tight suspicious scowl, one hand stroking his chin, leaning toward the viewer."
+[shots.squint_open]
+prompt = "Looking: his eyes are wide open and unblinking, bushy white eyebrows raised, mouth a flat line, one hand stroking his chin, leaning toward the viewer."

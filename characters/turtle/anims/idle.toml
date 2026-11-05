@@ -1,0 +1,16 @@
+# Idle: a slow blink and a settle.
+run = "keys"
+model = "klein"
+cell = 9.2
+canvas = [150, 92]
+frame_ms = 330
+preview_scale = 4
+[[frames]]
+pose = "idle_a/1"
+hold = 4
+[[frames]]
+pose = "idle_b/1"
+dy = -1
+[[frames]]
+pose = "idle_a/1"
+hold = 3

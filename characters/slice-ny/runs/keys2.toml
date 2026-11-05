@@ -1,0 +1,18 @@
+models = ["qwen-edit"]
+seeds = [1, 2, 3, 4]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+refs = ["characters/slice-ny/references/master.png"]
+template = """Redraw this exact same cartoon pizza slice character ({description}), same colours, thick dark outline and chunky pixel-art game style. Exactly two arms and two legs. {action} Full body visible from head to sneakers, flat solid magenta background."""
+
+[shots.idle_b]
+prompt = "He stands relaxed, facing the viewer, arms hanging loose at his sides, one leg slightly forward, a mild smug smile, one eyebrow raised, the whole body leaning slightly to one side."
+[shots.jump_crouch]
+prompt = "Crouching down to jump: his legs are bent in a deep squat so the slice body is squashed low and wide and sits close to the ground, both arms swung back behind him, eyes wide and determined, the head near knee height."
+[shots.fold_open]
+prompt = "The slice body is bending in the middle like a hinge: the tip of the slice is curling upward toward the crust so the triangle is folded about half way, forming a V-shape seen from the side, with the cheese on the inside of the V, his small arms holding the two edges, sneakers on the ground, face squinting with effort."
+[shots.fold_closed]
+prompt = "The slice is folded completely in half lengthwise into a narrow tight taco shape like a folded New York slice, much thinner and narrower than before, the crust along the top edge, a long thin shape with the cheese and pepperoni peeking out of the fold, his face on the narrow side looking out confidently, tiny arms with gloves crossed, small sneakers sticking out the bottom."
+[shots.cold_b]
+prompt = "He has gone cold and stale: pale greyish-blue stiff cheese, dull dark pepperoni, he is lying flat on his back on the ground seen from the front, eyes closed, a small frozen sad frown, arms at his sides, legs straight, a few tiny frost crystals."

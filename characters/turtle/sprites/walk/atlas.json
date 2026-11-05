@@ -1,0 +1,25 @@
+{
+ "frame": {
+  "w": 150,
+  "h": 92
+ },
+ "count": 4,
+ "frame_ms": 220,
+ "loop": true,
+ "rev": {
+  "sha": "b5e368d7d167701408de65f34499b5f74e25cab2",
+  "dirty": true,
+  "comfy": "v0.44.0"
+ },
+ "source": {
+  "run": "keys",
+  "model": "klein",
+  "cell": 9.2,
+  "poses": [
+   "walk_a/1",
+   "walk_c/1",
+   "walk_b/1",
+   "walk_c/1"
+  ]
+ }
+}

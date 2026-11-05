@@ -1,0 +1,29 @@
+{
+ "frame": {
+  "w": 128,
+  "h": 130
+ },
+ "count": 8,
+ "frame_ms": 110,
+ "loop": true,
+ "rev": {
+  "sha": "b5e368d7d167701408de65f34499b5f74e25cab2",
+  "dirty": true,
+  "comfy": "v0.44.0"
+ },
+ "source": {
+  "run": "keys",
+  "model": "qwen-edit",
+  "cell": 7.0,
+  "poses": [
+   "talk_open/1",
+   "talk_closed/1",
+   "talk_open/1",
+   "talk_closed/1",
+   "talk_open/1",
+   "talk_open/1",
+   "talk_closed/1",
+   "talk_closed/1"
+  ]
+ }
+}

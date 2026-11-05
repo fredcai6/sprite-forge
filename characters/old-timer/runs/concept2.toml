@@ -1,0 +1,9 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4, 5, 6]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+refs = ["characters/old-timer/references/slice_master.png"]
+template = "{action}"
+[shots.a]
+prompt = "Redraw the pizza slice character in this image as his grizzled stale old grandfather, same cartoon pizza-slice-with-a-face design family, same chunky pixel-art style, same thick dark outline and same big round cartoon eyes, but ancient: cheese gone dull, cracked and dried to a leathery tan, a bite missing from one corner, curled brown burnt crust, only two shriveled pepperoni, huge bushy white eyebrows over heavy droopy eyelids with bags, a deep scowl, a battered olive army field cap, thin wiry arms with old grey gloves, a hunched stance, scuffed brown boots. Too old for this: slightly threatening, slightly pathetic. Exactly two arms and two legs. Full body, facing the viewer in three-quarter view, flat solid magenta background."

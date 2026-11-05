@@ -1,0 +1,19 @@
+models = ["klein"]
+seeds = [1, 2, 3]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+refs = ["characters/teen/references/master.png"]
+template = """Redraw this exact same cartoon teenager ({description}), same proportions, colours, thick dark outline and chunky pixel-art game style. Side view facing right, one head, two arms, two legs, eyes on the phone. {action} Full body visible from head to sneakers, flat solid magenta background."""
+[shots.walk_contact_a]
+prompt = "Walking: a long step with the left leg far forward and the right leg far behind, heel of the front foot just touching the ground."
+[shots.walk_passing_a]
+prompt = "Walking: passing pose, one leg straight under the body, the other leg bent with the foot lifted, body slightly higher."
+[shots.walk_contact_b]
+prompt = "Walking: a long step with the right leg far forward and the left leg far behind, heel of the front foot just touching the ground."
+[shots.walk_passing_b]
+prompt = "Walking: passing pose, the other leg straight under the body, the first leg bent with the foot lifted, body slightly higher."
+[shots.idle_a]
+prompt = "Standing still, both feet flat on the ground, slouching, both thumbs typing on the glowing phone, bored face lit by the screen."
+[shots.idle_b]
+prompt = "Standing still, both feet flat on the ground, slouching, head tilted a little lower and the phone raised, a tiny smirk, thumbs typing."

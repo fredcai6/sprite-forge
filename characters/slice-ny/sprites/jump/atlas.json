@@ -1,0 +1,27 @@
+{
+ "frame": {
+  "w": 124,
+  "h": 124
+ },
+ "count": 6,
+ "frame_ms": 120,
+ "loop": false,
+ "rev": {
+  "sha": "b5e368d7d167701408de65f34499b5f74e25cab2",
+  "dirty": true,
+  "comfy": "v0.44.0"
+ },
+ "source": {
+  "run": "keys",
+  "model": "klein",
+  "cell": 7.4,
+  "poses": [
+   "jump_rise/2",
+   "jump_rise/2",
+   "jump_rise/2",
+   "jump_fall/2",
+   "jump_fall/2",
+   "jump_fall/2"
+  ]
+ }
+}

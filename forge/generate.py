@@ -106,13 +106,14 @@ def main():
         meta = rev()
         for n, (model, shot, s, seed, out) in enumerate(todo, 1):
             out.parent.mkdir(parents=True, exist_ok=True)
+            w, h = s.get("width", spec["width"]), s.get("height", spec["height"])
             refs = [prepare_ref(r, (w, h)) for r in s.get("refs", spec.get("refs", []))]
             prompt = spec["template"].format(description=char["description"], action=s["prompt"])
             t = time.time()
-            graph = MODELS[model](prompt, refs, seed, w, h, "forge")
+            graph = MODELS[model](prompt, refs, seed, w, h, "forge", **({"steps": s["steps"]} if "steps" in s else {}))
             run_prompt(graph, out)
             secs = round(time.time() - t, 1)
-            out.with_suffix(".json").write_text(json.dumps({"model": model, "shot": shot, "seed": seed, "prompt": prompt, "refs": s.get("refs", spec.get("refs", [])), "size": [w, h], "secs": secs, "rev": meta}, indent=1))
+            out.with_suffix(".json").write_text(json.dumps({"model": model, "shot": shot, "seed": seed, "prompt": prompt, "refs": s.get("refs", spec.get("refs", [])), "size": [w, h], "steps": s.get("steps"), "secs": secs, "rev": meta}, indent=1))
             print(f"chunk {n}/{len(todo)} {model} {shot} {seed} {secs}s", flush=True)
     finally:
         subprocess.run(["docker", "stop", "-t", "5", "sprite-forge-comfy"], capture_output=True)

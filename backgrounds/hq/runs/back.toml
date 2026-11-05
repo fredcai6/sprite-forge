@@ -1,0 +1,11 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4, 5, 6]
+width = 1280
+height = 720
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+
+[shots.back]
+prompt = "Background art for a late-1990s 2D side-view platformer cutscene, hand-painted, chunky shading, bold dark purple outlines, slightly gritty. Straight-on flat view of the back wall of a dim cramped pizza shop back room, like a stage set: a flat stained red brick wall filling the upper two thirds with a large empty bare brick area in the right half, a single bare bulb hanging on a cord from the ceiling in the left-centre casting a warm orange pool of light on the wall and floor, wooden shelves on the far left filled with flour sacks, tomato tins and stacks of pizza boxes, a pipe running down the wall, a grimy concrete floor in the bottom third with scuffs and puddles, deep violet shadows in the corners. No people, no bulletin board, no furniture in the centre. Moody, a little mysterious, a little goofy."
+[shots.back2]
+prompt = "Background art for a late-1990s 2D side-view platformer cutscene, hand-painted pixel-art look, bold dark outlines, gritty. Flat straight-on view of the back wall of a dim pizza shop storeroom, brick wall, a hanging bare light bulb at the centre left with a warm glow, tall shelving units along the left side with flour sacks, cans, and stacked pizza boxes, a big empty stretch of brick wall on the right half, dirty concrete floor, a mop bucket. Dark violet shadows and orange lamplight. No characters, no cork board."

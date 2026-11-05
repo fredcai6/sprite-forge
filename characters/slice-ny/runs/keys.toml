@@ -1,0 +1,34 @@
+models = ["klein", "qwen-edit"]
+seeds = [1, 2, 3, 4]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+refs = ["characters/slice-ny/references/master.png"]
+template = """Redraw this exact same cartoon pizza slice character ({description}), same proportions, colours, thick dark outline and chunky pixel-art game style. Exactly two arms and two legs. {action} Full body visible from head to sneakers, flat solid magenta background."""
+
+[shots.idle_a]
+prompt = "Idle pose: standing facing right in three-quarter view, weight on one leg, knees slightly bent, fists loosely at his sides, a confident smirk, body at its lowest in a breath."
+[shots.idle_b]
+prompt = "Idle pose: standing facing right in three-quarter view, chest lifted and slightly taller than a relaxed stance, one hand on his hip and the other waving casually, a confident smirk, eyes looking at the viewer."
+[shots.run_contact_a]
+prompt = "Running side view, facing right, body leaning forward, a wide stride with the front leg stretched far forward and the back leg stretched far behind, arms pumping opposite to the legs, determined grin, mid-air between steps."
+[shots.run_passing_a]
+prompt = "Running side view, facing right, body leaning forward, one foot planted on the ground under the body and the other knee lifted high, arms swinging, determined grin."
+[shots.run_contact_b]
+prompt = "Running side view, facing right, body leaning forward, a wide stride with the front leg stretched far forward and the back leg stretched far behind (opposite leg forward compared to the previous step), arms pumping, determined grin, mid-air."
+[shots.run_passing_b]
+prompt = "Running side view, facing right, body leaning forward, one foot planted and the other knee lifted high (opposite leg from the previous pose), arms swinging, determined grin."
+[shots.jump_crouch]
+prompt = "Jump anticipation: facing right, crouched low with knees deeply bent and body squashed down, arms swung back behind him, eyes wide with determination."
+[shots.jump_rise]
+prompt = "Jumping upward: facing right, legs straight and stretched down and apart, both arms thrown straight up above his head, mouth open in a joyful yell, stretched tall."
+[shots.jump_fall]
+prompt = "Falling at the top of a jump: facing right, knees tucked up, arms out wide for balance, eyes wide and mouth open in surprise, floating."
+[shots.fold_open]
+prompt = "He bends his slice body: facing right, grabbing his own tip and starting to fold the slice in half like a taco, the crust and tip bending toward each other, a strained but proud face."
+[shots.fold_closed]
+prompt = "He is completely folded in half lengthwise like a New York slice, a narrow folded taco shape with the crust edge on top and the cheese inside, only his small sneakers sticking out the bottom and his face squished at the folded edge, fists up, tough look."
+[shots.cold_a]
+prompt = "He has gone cold: the cheese is stiff, pale and greyish-blue, the grease has hardened, pepperoni is dull and dark, frost-blue tint, he hugs himself with both arms shivering, teeth chattering, sad eyes, standing hunched facing right."
+[shots.cold_b]
+prompt = "He has gone cold and stale: pale greyish-blue stiff cheese, dull dark pepperoni, he lies slumped on the ground facing the viewer, eyes closed, a small frozen sad frown, arms at sides, legs out in front."

@@ -1,0 +1,17 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+refs = ["characters/turtle/references/master.png"]
+template = """Redraw this exact same old tortoise ({description}), same proportions, colours, thick dark outline and chunky pixel-art game style. Side view facing right, four legs, one head. {action} Full body visible, flat solid magenta background."""
+[shots.walk_a]
+prompt = "Walking slowly: front right leg and back left leg reaching forward, the other two legs back, head extended forward a little."
+[shots.walk_b]
+prompt = "Walking slowly: front left leg and back right leg reaching forward, the other two legs back, head drawn back a little."
+[shots.walk_c]
+prompt = "Walking slowly: all four feet close together under the shell mid-step, body lifted slightly, head level."
+[shots.idle_a]
+prompt = "Standing still, all four feet flat on the ground, head raised calmly, eyes half closed behind the spectacles."
+[shots.idle_b]
+prompt = "Standing still, all four feet flat on the ground, head pulled slightly into the shell, eyes closed in a slow blink."
