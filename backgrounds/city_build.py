@@ -32,7 +32,7 @@ cfg = CITIES[city]
 out.mkdir(parents=True, exist_ok=True)
 sources = {}
 for name in ("far", "mid", "near"):
-    im, meta = load(f"{city}/layers", "klein", name, cfg["seeds"][name])
+    im, meta = load(cfg.get("mid_run", f"{city}/layers") if name == "mid" else f"{city}/layers", "klein", name, cfg["seeds"][name])
     rgb = np.asarray(im)
     if name == "mid" and cfg.get("erase"):
         rgb = erase(rgb, cfg["erase"])

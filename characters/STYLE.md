@@ -71,3 +71,10 @@ interactive props are never softened.
 `forge.compose.keyout` takes everything key-coloured (including between limbs), plus the key-tinted gradient and ground
 shadow only where it connects to the image border, then fills every enclosed hole. A dark shell or boot is never
 mistaken for background. Check every sprite sheet over bright magenta before it ships.
+
+## Cities
+Each city has its own hue family so none is mistaken for another: New York dusk lavender and brick, Chicago cold blue-grey steel
+and red brick, DC cream marble and sage green, Naples terracotta, ochre and teal shutters at warm dusk, California sand gold and
+turquoise. Barrels take the city's hue (blue, teal, rust, crimson); flames stay orange so the heat pickup reads everywhere.
+Platforms are hand-built 64x28 tiles (`backgrounds/props/city_props.py`), never generated, because generated girders were noisy.
+Per-city build parameters live in `backgrounds/cities.py` (ground row, seeds, haze) and every pick is logged in `sources.json`.
