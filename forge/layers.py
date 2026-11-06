@@ -52,7 +52,7 @@ def quantize(rgba, n=48, seed=0, shade=None):
     cols = np.zeros((n, 3))
     allrgb = rgb.reshape(-1, 3).astype(float)
     for k in range(n):
-        sel = idx == k
+        sel = (idx == k) & a.reshape(-1)   # opaque pixels only: the RGB under transparent ones is key colour
         cols[k] = allrgb[sel].mean(0) if sel.any() else 0
     out[..., :3] = cols[idx].reshape(rgb.shape).round().astype(np.uint8)
     out[..., 3] = np.where(a, 255, 0)
@@ -116,3 +116,17 @@ def pink_to_brick(rgba, hue_to=25.0, red_rows=None):
     res = rgba.copy()
     res[sel, :3] = np.round(out * 255).astype(np.uint8)
     return res
+
+
+def soften(rgba, contrast=1.0, lift=0.0, haze=(0, 0, 0), haze_amt=0.0, median=0):
+    """Push a layer back: less contrast around mid-grey, lifted blacks, a wash of atmosphere colour, and
+    optionally a median filter to drop fine cracks and speckle. Alpha is untouched."""
+    from scipy import ndimage as ndi
+    rgb = rgba[..., :3].astype(float)
+    if median:
+        rgb = np.stack([ndi.median_filter(rgb[..., i], size=median) for i in range(3)], -1)
+    rgb = 140 + (rgb - 140) * contrast + lift
+    rgb = rgb * (1 - haze_amt) + np.array(haze, float) * haze_amt
+    out = rgba.copy()
+    out[..., :3] = np.clip(rgb, 0, 255).astype(np.uint8)
+    return out

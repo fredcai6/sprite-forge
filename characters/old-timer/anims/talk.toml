@@ -1,8 +1,8 @@
 # Talk: mouth flaps between open and shut with the finger raised, with a small lean on the stress.
 run = "keys"
 model = "qwen-edit"
-cell = 7.0
-canvas = [128, 130]
+cell = 7.2
+canvas = [136, 130]
 preview_scale = 4
 frame_ms = 110
 [[frames]]

@@ -3,6 +3,7 @@ description = "an old wrinkled tortoise with a big mossy domed olive-brown shell
 [sprite]
 height = 80
 accent = 1.3
+outline = 2
 [palette]
 sources = ["keys/klein/*/*.png"]
 [palette.families.neutral]

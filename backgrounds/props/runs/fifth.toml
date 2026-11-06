@@ -1,0 +1,12 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4, 5, 6]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+[shots.table]
+width = 2560
+height = 512
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, warm light from the upper left, deep violet shadows, gritty and a little funny. Flat solid magenta background. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no labels, no stickers, no graffiti lettering. Every sign and billboard is blank or shows only a simple abstract shape. An extremely long and low plain wooden pizza-shop prep counter seen from the front at eye level, six times wider than it is tall: a thick scarred wooden tabletop slab whose top face is visible only as a thin foreshortened strip with flour dust and a few grease stains, a front apron board, thick wooden legs down to the bottom edge of the picture, a lower shelf with plain blank flat cardboard boxes. Nothing on top, no stickers."
+[shots.box]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, warm light from the upper left, deep violet shadows, gritty and a little funny. Flat solid magenta background. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no labels, no stickers, no graffiti lettering. Every sign and billboard is blank or shows only a simple abstract shape. An open flat plain cardboard pizza box seen from steeply above, the lid folded back flat behind the box so only a thin strip of it shows, the box interior is big, empty, plain, flat tan cardboard, a little grease on the outside rim, slightly squashed corners, no logo."

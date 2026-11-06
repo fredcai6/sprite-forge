@@ -1,8 +1,8 @@
 # Idle: a slow weary sigh between two Qwen poses.
 run = "keys"
 model = "qwen-edit"
-cell = 7.0
-canvas = [128, 130]
+cell = 7.2
+canvas = [136, 130]
 preview_scale = 4
 frame_ms = 260
 [[frames]]

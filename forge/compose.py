@@ -21,26 +21,40 @@ from .pixelize import despeckle, to_sprite, upscale
 
 
 def keyout(rgb):
-    """Foreground mask for art on a magenta-ish key: background is whatever magenta-looking region
-    touches the image border (gradients and ground shadows included). Largest piece kept."""
+    """Foreground mask for art on a magenta-ish key.
+
+    Background is (1) any strong key-colour pixel anywhere, even trapped between limbs, plus (2) the
+    key-tinted gradient and the generated ground shadow, but only where they are connected to the
+    image border. Dark pixels of the art that merely resemble the shadow (a turtle's shaded shell)
+    are therefore never removed. Enclosed regions that are not key colour are filled, so a sprite has
+    no holes. The largest piece is kept."""
     r, g, b = [rgb[..., i].astype(int) for i in range(3)]
-    bg = (np.minimum(r, b) - g > 38) & (r + b > 150)
     lab3 = srgb_to_oklab(rgb)
-    hue = np.degrees(np.arctan2(lab3[..., 2], lab3[..., 1])) % 360
-    bg |= (np.minimum(r, b) - g > 75) & (r > 150) & (b > 85)   # key colour trapped between limbs and body
     chroma = np.hypot(lab3[..., 1], lab3[..., 2])
+    hue = np.degrees(np.arctan2(lab3[..., 2], lab3[..., 1])) % 360
+    strict = (np.minimum(r, b) - g > 75) & (r > 150) & (b > 85)
+    loose = (np.minimum(r, b) - g > 38) & (r + b > 150)
     stray = (hue > 300) & (hue < 352) & (chroma > 0.12)
-    stray |= (hue > 290) & (hue < 350) & (chroma > 0.065) & (lab3[..., 0] < 0.6)   # the generated ground shadow
-    lab, _ = ndimage.label(bg)
+    shadow = (hue > 290) & (hue < 350) & (chroma > 0.065) & (lab3[..., 0] < 0.6)
+    cand = loose | strict | stray | shadow
+    lab, _ = ndimage.label(cand)
     edge = np.unique(np.r_[lab[0], lab[-1], lab[:, 0], lab[:, -1]])
-    bg = np.isin(lab, edge[edge > 0])
-    fg = ndimage.binary_opening(~bg & ~stray, iterations=1)
+    bg = np.isin(lab, edge[edge > 0]) | strict
+    fg = ndimage.binary_opening(~bg, iterations=1)
+    # interior holes: fill unless they are mostly key colour
+    holes, n = ndimage.label(~fg)
+    border = np.unique(np.r_[holes[0], holes[-1], holes[:, 0], holes[:, -1]])
+    for i in range(1, n + 1):
+        if i in border:
+            continue
+        m = holes == i
+        if strict[m].mean() < 0.5:
+            fg |= m
     lab, n = ndimage.label(fg)
     if n == 0:
         return fg
     sizes = ndimage.sum(fg, lab, range(1, n + 1))
-    keep = np.isin(lab, 1 + np.flatnonzero(sizes > 0.02 * sizes.max()))
-    return keep & ~bg & ~stray
+    return np.isin(lab, 1 + np.flatnonzero(sizes > 0.02 * sizes.max()))
 
 
 def pose_path(run_dir, pose):
@@ -81,9 +95,24 @@ def build(name):
     print({k: len(v) for k, v in pal.items()})
 
 
-def frame_for(spec, pal, run_dir, f, accent):
+def thicken(sprite, ow, colour):
+    """Grow the outer silhouette by `ow` pixels in the outline colour (round brush)."""
+    a = sprite[..., 3] > 0
+    r = ow
+    yy, xx = np.mgrid[-r:r + 1, -r:r + 1]
+    brush = xx * xx + yy * yy <= r * r + 1
+    grown = ndimage.binary_dilation(a, structure=brush)
+    out = sprite.copy()
+    new = grown & ~a
+    out[new, :3] = colour
+    out[new, 3] = 255
+    return out
+
+
+def frame_for(spec, pal, run_dir, f, accent, outline=0):
     w, h = spec["canvas"]
     cell = f.get("cell", spec["cell"]) * f.get("scale", 1.0)
+    cell *= 1 + 2 * outline / (h * 0.95)   # the outline is added on top, so paint the figure smaller to keep the frame
     rgb = np.asarray(Image.open(pose_path(run_dir, f["pose"])).convert("RGB"))
     alpha = keyout(rgb)
     if f.get("flip"):
@@ -95,8 +124,12 @@ def frame_for(spec, pal, run_dir, f, accent):
     cx = xs.mean() + f.get("cx", 0) * cell
     bottom = ys.max() + 1
     ox = cx - (w / 2 + f.get("dx", 0)) * cell
-    oy = bottom - (h - spec.get("margin_bottom", 2) - f.get("dy", 0)) * cell
-    return to_sprite(rgb, alpha, pal[0], pal[1], cell, (ox, oy), (w, h), accent)
+    oy = bottom - (h - spec.get("margin_bottom", 2 + outline) - f.get("dy", 0)) * cell
+    sprite = to_sprite(rgb, alpha, pal[0], pal[1], cell, (ox, oy), (w, h), accent)
+    if outline:
+        dark = pal[0][np.argmin(pal[1][:, 0])]
+        sprite = thicken(despeckle(sprite), outline, dark)
+    return sprite
 
 
 def anim(path):
@@ -110,7 +143,7 @@ def anim(path):
     for f in spec["frames"]:
         key = json.dumps(f, sort_keys=True)
         if key not in cache:
-            cache[key] = despeckle(frame_for(spec, pal, run_dir, f, cfg["sprite"]["accent"]))
+            cache[key] = despeckle(frame_for(spec, pal, run_dir, f, cfg["sprite"]["accent"], cfg["sprite"].get("outline", 0)))
         for _ in range(f.get("hold", 1)):
             frames.append(cache[key])
             used.append(f["pose"])

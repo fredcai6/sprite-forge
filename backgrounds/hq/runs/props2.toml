@@ -1,0 +1,12 @@
+models = ["klein"]
+seeds = [1, 2, 3]
+width = 1280
+height = 720
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+[shots.boxes]
+prompt = "Game asset sheet in late-1990s 2D platformer hand-painted pixel-art style with soft outlines: a tall wobbly stack of plain blank flat cardboard pizza boxes, a mop bucket with a mop, and two plain flour sacks, arranged side by side in a row standing on the ground, seen straight-on, warm light from above. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no labels, no stickers, no graffiti lettering. Every sign and billboard is blank or shows only a simple abstract shape. Flat solid magenta background."
+[shots.table]
+prompt = "Game asset sheet in late-1990s 2D platformer hand-painted pixel-art style with soft outlines: a battered wooden prep table with a stack of plain blank pizza boxes on it and a rolling pin, a wooden stool, and a steel dough mixer, arranged side by side in a row standing on the ground, seen straight-on, warm light from above. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no labels, no stickers, no graffiti lettering. Every sign and billboard is blank or shows only a simple abstract shape. Flat solid magenta background."
+[shots.shelf]
+prompt = "Game asset: one tall dark wooden storage shelf unit seen straight-on, cluttered with plain unlabelled tins, plain flour sacks, dusty jars and blank cardboard boxes, strongly backlit so it is mostly a dark violet silhouette with a faint warm rim light, late-1990s 2D platformer hand-painted pixel-art style. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no labels, no stickers, no graffiti lettering. Every sign and billboard is blank or shows only a simple abstract shape. Flat solid magenta background."

@@ -1,0 +1,8 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4, 5, 6, 7, 8]
+width = 2816
+height = 720
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+[shots.mid]
+prompt = "Wide side-scrolling platformer background strip, hand-painted pixel-art, bold dark outlines, gritty and funny: a row of grungy collapsed New York brownstone storefronts and a pizza shop with a broken blank unlit sign, fire escapes, a wrecked yellow taxi sunk in rubble, an overturned hot dog cart, a flickering streetlamp, stuffed garbage bags, seen straight-on from the side, all standing on one flat straight horizontal street line near the bottom. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no labels, no stickers, no graffiti lettering. Every sign, awning and billboard is completely blank or shows only a simple abstract shape. Flat solid saturated pure magenta background everywhere above and between the buildings, the sky is plain pure magenta."

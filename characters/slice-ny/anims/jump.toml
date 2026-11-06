@@ -1,8 +1,8 @@
 # Takeoff stretch, then the tuck; the last frame holds.
 run = "keys"
 model = "klein"
-cell = 7.4
-canvas = [124, 124]
+cell = 7.7
+canvas = [132, 124]
 frame_ms = 120
 loop = false
 preview_scale = 4

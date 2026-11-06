@@ -14,7 +14,7 @@ from forge.generate import DATA
 from forge.layers import key_alpha, quantize, tile_seam, write_sources
 
 out = Path(sys.argv[1])
-RUNS = {"fourth": DATA / "runs/props/fourth/klein", "second": DATA / "runs/props/second/klein", "third": DATA / "runs/props/third/klein"}
+RUNS = {"fifth": DATA / "runs/props/fifth/klein", "fourth": DATA / "runs/props/fourth/klein", "second": DATA / "runs/props/second/klein", "third": DATA / "runs/props/third/klein"}
 src = {}
 
 
@@ -52,7 +52,7 @@ def save(img, path):
 
 
 # HQ table: 1080 wide, the top slab's upper edge at y=470, drawn on a 1280x720 stage
-t = get("third", "table", 2)
+t = get("fifth", "table", 2)
 s = 1080 / t.width
 t = t.resize((1080, round(t.height * s)), Image.LANCZOS)
 stage = Image.new("RGBA", (1280, 720), (0, 0, 0, 0))
@@ -61,7 +61,7 @@ save(Image.fromarray(quantize(np.asarray(stage), n=40), "RGBA"), out / "hq/table
 TABLE_H = t.height
 
 # HQ box: 150 wide, bottom edge on the canvas bottom (the game anchors bottom-centre at y=504)
-save(fit(get("third", "box", 4), 150, 150, n=24), out / "hq/box.png")
+save(fit(get("fifth", "box", 4), 150, 150, n=24), out / "hq/box.png")
 
 # platform: a 64 px period cut where the girder's left and right edges agree
 p = get("second", "platform", 2, shadow=False)

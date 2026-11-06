@@ -1,0 +1,13 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4, 5, 6]
+width = 2816
+height = 720
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+
+[shots.far]
+prompt = "Wide panoramic background for a late-1990s 2D platformer, hand-painted pixel-art look, soft thin outlines. A ruined post-apocalyptic New York City skyline at hazy lavender and peach sunset, crumbling pale skyscrapers fading into haze, water towers, a leaning tower with a faded giant pizza slice picture on a billboard, soft smoggy sky, very distant, low contrast, light and airy values, minimal fine detail, no foreground, horizontal panorama. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no labels, no stickers, no graffiti lettering. Every sign and billboard is blank or shows only a simple abstract shape."
+[shots.mid]
+prompt = "Wide side-scrolling platformer background strip, hand-painted pixel-art, pale hazy faded pastel colours, light values, low contrast, soft thin outlines, broad simple shapes with very little fine cracking or texture, atmospheric and funny: a row of grungy collapsed New York brownstone storefronts and a pizza shop with a broken blank neon sign, fire escapes, a wrecked yellow taxi sunk in rubble, an overturned hot dog cart, a flickering streetlamp, garbage bags, seen straight-on from the side, all standing on one flat straight horizontal street line near the bottom. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no labels, no stickers, no graffiti lettering. Every sign and billboard is blank or shows only a simple abstract shape. Flat solid magenta background everywhere above and between the buildings."
+[shots.near]
+prompt = "Wide side-scrolling platformer foreground strip, hand-painted pixel-art, dark silhouettes: sparse dark foreground clutter along the very bottom edge only: tipped garbage cans, a lamppost base, a fire hydrant, steaming manhole, scattered crumpled brown paper bags, tangled hanging power lines at the top edge, with large empty space in the middle. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no labels, no stickers, no graffiti lettering. Every sign and billboard is blank or shows only a simple abstract shape. Flat solid magenta background everywhere else."

@@ -1,0 +1,8 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4, 5, 6, 7, 8]
+width = 1920
+height = 1080
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+[shots.back]
+prompt = "Background art for a late-1990s 2D side-view platformer cutscene, hand-painted pixel-art look, soft thin outlines, readable and not too dark. Flat straight-on view of the back wall of a cosy cramped pizza shop back room like a stage set. The top 60 percent of the picture is a flat red-brown brick wall, the bottom 40 percent is a worn concrete floor with a few scuffs and a drain, the wall meets the floor along a clear horizontal baseboard line. One bare light bulb hangs on a cord from the top in the left-centre casting a warm orange pool of light, wooden shelves on the far left with plain cream flour sacks, plain unlabelled tins and stacked blank cardboard pizza boxes, a pipe down the wall, a large empty bare brick area on the right half of the wall. Violet shadows in the corners. No people, no cork board, nothing in the middle of the floor. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no labels, no stickers, no graffiti lettering. Every sign and billboard is blank or shows only a simple abstract shape."

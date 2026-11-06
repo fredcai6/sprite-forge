@@ -13,8 +13,12 @@ The game draws a sprite frame at its native size when the frame height equals th
 - Cutscene zooms must use whole-number scales so pixels stay square.
 
 ## Outline
-Every character and prop has a 2 px outline in near-black violet (about #1e1030), never pure black. Backgrounds
-carry the same outline on buildings and furniture; distant layers (`far`) soften it by drawing it lighter.
+- Player and enemies (`slice-ny`, `old-timer`, `teen`, `turtle`) carry a heavy outer silhouette of about 4 px in near-black
+  violet (the palette's darkest colour), added in `forge.compose` (`outline = 2` in `character.toml` grows the
+  generated 2 px edge to 4) on every frame, with the figure painted slightly smaller so the frame height is unchanged.
+  Interior lines stay as generated.
+- Backgrounds use a thin soft outline, never heavier than the characters, so the characters always win the eye.
+- Interactive props (platform, barricade, barrel, door) keep a bold outline and full saturation so they stand clear.
 
 ## Palette
 Each character has its own `palette.json`, built from its key poses in hue families (neutral, red, orange,
@@ -46,3 +50,24 @@ outline weight and shading but are not pizzas, and carry no masks or weapons.
 ## Records
 Each `atlas.json` records the sprite-forge revision, the generating run and model, and the shot/seed of every
 frame. Each background folder has a `sources.json` with the same for its layers.
+
+## No fake text
+Image models write lookalike letters. None may reach a game asset.
+- Every generation prompt states that there is no text, letters, logos, numbers, labels, stickers or graffiti
+  lettering, and that signs are blank or abstract. This reduces gibberish but does not remove it.
+- Before an asset is kept, inspect it at 2x region by region (about 640x380 source regions) for letter-like marks on
+  signs, awnings, windows, boxes, tins, sacks and walls. Remove what is found: pick another seed, or fill the box with
+  the sign's own median colour (`ERASE_MID` in `backgrounds/newyork/build.py`).
+- The only text allowed is lettering a person reads as correct, such as the door's DELIVER.
+
+## Background weight
+Backgrounds sit behind the characters: lighter values, lower contrast, little fine detail, a touch of atmosphere.
+`forge.layers.soften` does it (lifted values, flatter contrast, an atmosphere wash, a 3x3 median to drop cracks).
+Current settings: street `far` contrast 0.9, `mid` 0.72 with a 22% haze, `near` flat dark silhouettes; HQ 0.92 with
+a small lift, kept dim but readable. Mid layers carry the most weight, so they are softened the most. Characters and
+interactive props are never softened.
+
+## Keying sprites
+`forge.compose.keyout` takes everything key-coloured (including between limbs), plus the key-tinted gradient and ground
+shadow only where it connects to the image border, then fills every enclosed hole. A dark shell or boot is never
+mistaken for background. Check every sprite sheet over bright magenta before it ships.

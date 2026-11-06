@@ -3,6 +3,7 @@ description = """a cute cartoon New York pizza slice character: wide triangular 
 [sprite]
 height = 124
 accent = 1.3
+outline = 2
 [palette]
 sources = ["keys/klein/*/*.png", "keys2/qwen-edit/*/*.png"]
 [palette.families.neutral]

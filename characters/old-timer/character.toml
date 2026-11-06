@@ -3,6 +3,7 @@ description = "a stale, dried-out slice of pizza elder: cracked leathery cheese,
 [sprite]
 height = 130
 accent = 1.3
+outline = 2
 [palette]
 sources = ["keys/qwen-edit/*/*.png"]
 [palette.families.neutral]

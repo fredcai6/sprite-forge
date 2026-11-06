@@ -11,7 +11,7 @@ from scipy import ndimage
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from forge.generate import DATA
-from forge.layers import key_alpha, quantize, write_sources
+from forge.layers import key_alpha, quantize, soften, write_sources
 
 out = Path(sys.argv[1])
 out.mkdir(parents=True, exist_ok=True)
@@ -53,15 +53,15 @@ def paste_feet(canvas, c, x, feet):
 
 
 # ---- back: room, floor line raised to FLOOR, blank corkboard painted on the wall
-room = img("back2", "back", 3).resize((W, H), Image.LANCZOS)
+room = img("back3", "back", 3).resize((W, H), Image.LANCZOS)
 a = np.asarray(room)
-old = 576  # the generated baseboard
+old = 582  # the generated baseboard
 rows = np.empty((H, W, 3), np.uint8)
 for y in range(H):
     sy = y * old / FLOOR if y < FLOOR else old + (y - FLOOR) * (H - old) / (H - FLOOR)
     rows[y] = a[min(int(sy), H - 1)]
 rgba = np.dstack([rows, np.full((H, W), 255, np.uint8)])
-back = quantize(rgba, n=52)
+back = quantize(soften(rgba, contrast=0.92, lift=10, median=3), n=44)
 
 bx, by, bw, bh = BOARD
 rng = np.random.default_rng(7)
@@ -93,23 +93,23 @@ Image.fromarray(back[..., :3], "RGB").save(out / "back.png", optimize=True)
 # ---- mid: props standing along the wall, feet at y=540 (nearer than the baseboard)
 FEET = 540
 mid = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-boxes = cutouts(img("props", "boxes", 2))     # stack, bucket+mop, sacks
-table = cutouts(img("props", "table", 2))     # table, stool, mixer
+boxes = cutouts(img("props2", "boxes", 3))    # stack, bucket+mop, sack
+table = cutouts(img("props2", "table", 2))    # table, stool, mixer
 paste_feet(mid, scaled(boxes[0], 0.36), 24, FEET)
 paste_feet(mid, scaled(boxes[1], 0.38), 190, FEET + 6)
 paste_feet(mid, scaled(boxes[2], 0.34), 300, FEET - 4)
 paste_feet(mid, scaled(table[0], 0.30), 755, FEET + 4)
 paste_feet(mid, scaled(table[2], 0.30), 985, FEET)
 paste_feet(mid, scaled(table[1], 0.34), 1120, FEET + 8)
-m = quantize(np.asarray(mid), n=40)
+m = quantize(soften(np.asarray(mid), contrast=0.92, lift=8, median=3), n=36)
 Image.fromarray(m, "RGBA").save(out / "mid.png", optimize=True)
 
 # ---- front: near-black silhouettes at the stage edges, cropped by the frame
 front = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-shelf = cutouts(img("props", "shelf", 1))[0]
+shelf = cutouts(img("props2", "shelf", 2))[0]
 sh = scaled(shelf, 0.95)
-front.alpha_composite(sh, (-215, H - sh.height + 90))
-stack = scaled(cutouts(img("props", "boxes", 1))[0], 0.62)
+front.alpha_composite(sh, (-310, H - sh.height + 90))
+stack = scaled(cutouts(img("props2", "boxes", 1))[0], 0.62)
 front.alpha_composite(stack, (W - stack.width + 90, H - stack.height + 60))
 d = ImageDraw.Draw(front)
 ink = (14, 8, 24, 255)
