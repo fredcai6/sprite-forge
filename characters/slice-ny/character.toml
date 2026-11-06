@@ -5,7 +5,7 @@ height = 124
 accent = 1.3
 outline = 2
 [palette]
-sources = ["keys/klein/*/*.png", "keys2/qwen-edit/*/*.png"]
+sources = ["keys3/qwen-edit/*/*.png"]
 [palette.families.neutral]
 max_chroma = 0.045
 n = 14

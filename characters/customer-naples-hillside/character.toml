@@ -1,0 +1,6 @@
+name = "customer-naples-hillside"
+description = "customer"
+[sprite]
+height = 150
+accent = 1.3
+outline = 2

@@ -83,3 +83,24 @@ for top in ["pepperoni", "jalapeno", "garlic", "mushroom", "basil", "pineapple",
     save(fit(get("shot_" + top), 28, 28, 16, bottom=False), f"shot-{top}.png")
 (out / "sources.json").write_text(json.dumps({"rev": rev(), "run": "shared/props", "seeds": src}, indent=1))
 print("ok")
+
+# ---- shots (second pass): chunky 36x36 projectile discs from runs/shared/shots, heavy outline added on the silhouette
+SHOTS = Path(DATA / "runs/shared/shots/klein")
+if SHOTS.exists():
+    from forge.compose import keyout
+    PICK_SHOT = json.loads((Path(__file__).parent / "shot_picks.json").read_text()) if (Path(__file__).parent / "shot_picks.json").exists() else {}
+    for top in ["pepperoni", "jalapeno", "garlic", "mushroom", "basil", "pineapple", "sausage"]:
+        sd = PICK_SHOT.get(top, 1)
+        rgb = np.asarray(Image.open(SHOTS / f"shot_{top}/{sd}.png").convert("RGB"))
+        a = keyout(rgb)
+        ys, xs = np.where(a)
+        im = Image.fromarray(np.dstack([rgb, a * 255]).astype(np.uint8), "RGBA").crop((xs.min(), ys.min(), xs.max() + 1, ys.max() + 1))
+        s = 30 / max(im.size)
+        im = im.resize((max(1, round(im.width * s)), max(1, round(im.height * s))), Image.LANCZOS)
+        c = Image.new("RGBA", (36, 36), (0, 0, 0, 0))
+        c.alpha_composite(im, ((36 - im.width) // 2, (36 - im.height) // 2))
+        arr = quantize(np.asarray(c), n=14)
+        al = arr[..., 3] > 0
+        ring = ndimage.binary_dilation(al, structure=np.ones((3, 3), bool), iterations=1) & ~al
+        arr[ring] = (22, 12, 34, 255)
+        Image.fromarray(arr, "RGBA").save(out / f"shot-{top}.png", optimize=True)

@@ -1,0 +1,8 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+[shots.idle_a]
+prompt = "Chunky pixel-art style game character, late-1990s platformer, bold dark violet outline, saturated colours, cel shading, cartoony and affectionate. Full body, head to feet, standing facing the viewer in three-quarter view, feet on the ground: a hipster man with a big beard, beanie, flannel shirt and a canvas tote bag on his shoulder, holding a tiny dog on a leash, smug expression. Broad cartoony proportions, slightly big head. No text, no logos, no lettering on clothing. Flat solid magenta background."

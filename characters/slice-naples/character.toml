@@ -1,12 +1,12 @@
 name = "slice-naples"
 description = "slice-naples"
 [sprite]
-height = 124
+height = 104
 accent = 1.3
 outline = 2
 
 [palette]
-sources = ["keys/qwen-edit/*/*.png"]
+sources = ["keys3/qwen-edit/*/*.png"]
 
 [palette.families.neutral]
 max_chroma = 0.045
