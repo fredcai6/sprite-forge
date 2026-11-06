@@ -1,0 +1,16 @@
+run = "keys2"
+model = "qwen-edit"
+fit_pose = "idle_a/1"
+fit_h = 112
+canvas = [170, 120]
+frame_ms = 90
+loop = false
+preview_scale = 3
+
+[[frames]]
+pose = "bite_a/1"
+hold = 2
+
+[[frames]]
+pose = "bite_b/1"
+hold = 4

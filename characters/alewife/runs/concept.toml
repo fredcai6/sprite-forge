@@ -1,0 +1,9 @@
+models = ["qwen-edit"]
+seeds = [1, 2, 3]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+refs = ["characters/alewife/references/avatar-crop.png"]
+template = "{action}"
+[shots.full]
+prompt = "Redraw this exact character, the DJ with long wavy pink-red hair, light blue headband, warm tan skin, brown eyes, freckle blush, tiny gold nose stud, pearl earring, gold heart necklace, navy tank top, as a FULL BODY game sprite standing facing the viewer in three-quarter view, head to feet, holding up a frothy beer stein in one hand and winking with a big happy smile. Navy shorts or jeans and white sneakers. Same chunky pixel-art style and thick dark outline as the reference, cute proportions with a slightly big head. No text, no logos. Flat solid magenta background."

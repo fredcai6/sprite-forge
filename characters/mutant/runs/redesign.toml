@@ -1,0 +1,10 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4, 5, 6]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+[shots.a]
+prompt = "Chunky pixel-art style game character, late-1990s platformer, bold dark violet outline, saturated colours, cel shading. Full body, head to feet, standing hunched facing right, feet on the ground. An original underground sewer-scavenger human mutant, sad and hungry, comic not scary: a hunched lanky person in ragged patched clothes scavenged from junk (a tattered patchwork vest sewn from old pizza boxes and rags, mismatched oversized boots, a dangling rubber glove as a belt), greenish-grey skin, two mismatched eyes of different sizes, one oversized droopy ear, a third small stubby arm sprouting from the ribs, a dripping nose, stringy wet hair. No text, no logos. Flat solid magenta background."
+[shots.b]
+prompt = "Chunky pixel-art style game character, late-1990s platformer, bold dark violet outline, saturated colours, cel shading. Full body, head to feet, running low and hunched facing right on the ground. A comic sewer-dwelling mutant scavenger, sad and hungry: lanky greenish skin, patched ragged clothes made of junk and old rags, mismatched eyes, a small extra arm, a long tongue lolling out, big wet feet. No text, no logos. Flat solid magenta background."

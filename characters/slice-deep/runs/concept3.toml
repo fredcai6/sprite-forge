@@ -1,0 +1,9 @@
+models = ["qwen-edit"]
+seeds = [1, 2, 3, 4]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+refs = ["characters/slice-ny/references/master.png"]
+template = "{action}"
+[shots.c]
+prompt = "Redraw this pizza slice character as a different member of the same family, same chunky pixel-art style, same thick dark violet outline and big expressive cartoon eyes and white gloves, but this one is a Chicago DEEP DISH pizza slice: a truly enormous, massively thick and heavy tall wedge like a block of pie, the crust wall very deep and tall, the top packed with chunky tomato sauce, thick melted cheese and sausage chunks seen from slightly above, a very heavy tough grumpy face, big thick arms in white gloves, short thick legs in huge black boots, wide planted heavy stance, looks like it weighs a ton. Exactly two arms and two legs. Full body from head to feet, standing facing right in three-quarter view. No text. Flat solid magenta background."

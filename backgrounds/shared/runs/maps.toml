@@ -1,0 +1,16 @@
+models = ["klein"]
+seeds = [1, 2, 3]
+width = 1280
+height = 720
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+[shots.newyork]
+prompt = "A top-down aged old parchment paper map texture, folded creases, stained edges, soft paper grain, soft warm tan and blue watercolour tint, with a blue-grey harbour and river inlet at the lower left and a long narrow island shape, painted as flat soft colour shapes only. Absolutely no roads, no streets, no grid lines, no text, no letters, no labels, no numbers, no compass, no symbols. Empty and plain."
+[shots.chicago]
+prompt = "A top-down aged old parchment paper map texture, folded creases, stained edges, soft paper grain, tan and cold blue watercolour tint, with a large blue-grey lake covering the entire right side with a curving shoreline, painted as flat soft colour shapes only. Absolutely no roads, no streets, no grid lines, no text, no letters, no labels, no numbers, no compass, no symbols. Empty and plain."
+[shots.dc]
+prompt = "A top-down aged old parchment paper map texture, folded creases, stained edges, soft paper grain, tan and sage green watercolour tint, with a winding river shape across the bottom with a small pale green park shape, painted as flat soft colour shapes only. Absolutely no roads, no streets, no grid lines, no text, no letters, no labels, no numbers, no compass, no symbols. Empty and plain."
+[shots.naples]
+prompt = "A top-down aged old parchment paper map texture, folded creases, stained edges, soft paper grain, warm ochre and teal watercolour tint, with a curved blue bay along the bottom edge and a small dark volcano shape at the right, painted as flat soft colour shapes only. Absolutely no roads, no streets, no grid lines, no text, no letters, no labels, no numbers, no compass, no symbols. Empty and plain."
+[shots.california]
+prompt = "A top-down aged old parchment paper map texture, folded creases, stained edges, soft paper grain, sand tan and turquoise watercolour tint, with the blue ocean along the whole left edge with a gentle curved coastline and two small island shapes, painted as flat soft colour shapes only. Absolutely no roads, no streets, no grid lines, no text, no letters, no labels, no numbers, no compass, no symbols. Empty and plain."

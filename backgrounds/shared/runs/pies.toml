@@ -1,0 +1,14 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+[shots.ny]
+prompt = "Hand-painted late-1990s 2D game art, chunky pixel-art look, bold near-black violet outline. A whole round pizza seen exactly top-down, centred, completely round and complete, a New York style pizza: wide thin crust, plain melted cheese only, pale cold and slightly dull, no toppings. No text, no logos. Flat solid magenta background."
+[shots.deep]
+prompt = "Hand-painted late-1990s 2D game art, chunky pixel-art look, bold near-black violet outline. A whole round pizza seen exactly top-down, centred, completely round and complete, a Chicago deep dish pizza in a tall dark pan: tall straight golden crust walls, plain cheese layer on top, cold and dull, no toppings. No text, no logos. Flat solid magenta background."
+[shots.jumbo]
+prompt = "Hand-painted late-1990s 2D game art, chunky pixel-art look, bold near-black violet outline. A whole round pizza seen exactly top-down, centred, completely round and complete, an enormous jumbo cheese pizza, plain melted cheese, thin floppy wide crust, cold and dull, no toppings. No text, no logos. Flat solid magenta background."
+[shots.naples]
+prompt = "Hand-painted late-1990s 2D game art, chunky pixel-art look, bold near-black violet outline. A whole round pizza seen exactly top-down, centred, completely round and complete, a Neapolitan pizza: puffy charred leopard-spotted blistered crust rim, thin pale base with plain white mozzarella and a little red sauce, cold, no toppings. No text, no logos. Flat solid magenta background."

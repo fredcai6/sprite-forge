@@ -1,0 +1,22 @@
+models = ["qwen-edit"]
+seeds = [1, 2]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+refs = ["characters/alewife/references/master.png"]
+template = """Redraw this exact same DJ character, same pink-red wavy hair, light blue headband, tan skin, navy tank top, jeans, white sneakers, thick dark outline and chunky pixel-art game style. Exactly two arms and two legs. No text. {action} Full body visible from head to feet, flat solid magenta background."""
+
+[shots.idle_a]
+prompt = "Idle: standing relaxed holding up the frothy beer stein, winking, smiling."
+
+[shots.idle_b]
+prompt = "Idle: standing, swaying slightly to music with the stein raised a little higher, eyes open, smiling widely."
+
+[shots.idle_c]
+prompt = "Idle: standing, hips swung a little to the side, stein raised, laughing with eyes closed."
+
+[shots.wave_a]
+prompt = "Waving: the free hand raised high and open in a friendly wave, the other hand holding the beer stein, winking, big smile."
+
+[shots.wave_b]
+prompt = "Waving: the free hand swung out to the side open in a wave, the stein held up, smiling widely, head tilted."

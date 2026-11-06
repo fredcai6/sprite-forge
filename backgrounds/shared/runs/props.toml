@@ -1,0 +1,46 @@
+models = ["klein"]
+seeds = [1, 2, 3]
+width = 768
+height = 768
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+[shots.box]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, saturated colours, warm light from upper left. No text, no letters, no logos. Flat solid magenta background. A single sturdy wooden shipping crate seen straight-on, pizza-box-brown light wood with visible plank slats and corner brackets, clearly smashable, square."
+[shots.box_pile]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, saturated colours, warm light from upper left. No text, no letters, no logos. Flat solid magenta background. A tall messy pile of stacked wooden crates and cardboard boxes blocking a narrow alley, seen straight-on, wider than tall, pizza-box brown."
+[shots.box_broken]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, saturated colours, warm light from upper left. No text, no letters, no logos. Flat solid magenta background. A flat low heap of splintered broken wooden planks and cardboard scraps lying on the ground, very low and wide, seen from the side."
+[shots.drain]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, saturated colours, warm light from upper left. No text, no letters, no logos. Flat solid magenta background. A street storm drain grate set into the pavement seen from the front at a shallow angle, a long low wide dark iron grille with bars, very wide and very flat."
+[shots.sign]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, saturated colours, warm light from upper left. No text, no letters, no logos. Flat solid magenta background. A tall blank street sign on a steel post: a tall grey pole with a wide plain empty blank rectangular signboard arm near the top, completely blank face, seen straight-on."
+[shots.star]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, saturated colours, warm light from upper left. No text, no letters, no logos. Flat solid magenta background. A single silver four-pointed ninja throwing star shuriken seen from the front, shiny, bold outline."
+[shots.pickup_pepperoni]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, saturated colours, warm light from upper left. No text, no letters, no logos. Flat solid magenta background. A glowing collectible game token: a round red pepperoni slice drawn large and centred inside a round glowing golden ring with soft sparkles, bright and appealing."
+[shots.shot_pepperoni]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, saturated colours, warm light from upper left. No text, no letters, no logos. Flat solid magenta background. Just a round red pepperoni slice drawn large and centred as a small thrown projectile with a tiny motion blur, nothing else."
+[shots.pickup_jalapeno]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, saturated colours, warm light from upper left. No text, no letters, no logos. Flat solid magenta background. A glowing collectible game token: a green jalapeno pepper drawn large and centred inside a round glowing golden ring with soft sparkles, bright and appealing."
+[shots.shot_jalapeno]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, saturated colours, warm light from upper left. No text, no letters, no logos. Flat solid magenta background. Just a green jalapeno pepper drawn large and centred as a small thrown projectile with a tiny motion blur, nothing else."
+[shots.pickup_garlic]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, saturated colours, warm light from upper left. No text, no letters, no logos. Flat solid magenta background. A glowing collectible game token: a white garlic bulb drawn large and centred inside a round glowing golden ring with soft sparkles, bright and appealing."
+[shots.shot_garlic]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, saturated colours, warm light from upper left. No text, no letters, no logos. Flat solid magenta background. Just a white garlic bulb drawn large and centred as a small thrown projectile with a tiny motion blur, nothing else."
+[shots.pickup_mushroom]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, saturated colours, warm light from upper left. No text, no letters, no logos. Flat solid magenta background. A glowing collectible game token: a tan button mushroom drawn large and centred inside a round glowing golden ring with soft sparkles, bright and appealing."
+[shots.shot_mushroom]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, saturated colours, warm light from upper left. No text, no letters, no logos. Flat solid magenta background. Just a tan button mushroom drawn large and centred as a small thrown projectile with a tiny motion blur, nothing else."
+[shots.pickup_basil]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, saturated colours, warm light from upper left. No text, no letters, no logos. Flat solid magenta background. A glowing collectible game token: a green basil leaf drawn large and centred inside a round glowing golden ring with soft sparkles, bright and appealing."
+[shots.shot_basil]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, saturated colours, warm light from upper left. No text, no letters, no logos. Flat solid magenta background. Just a green basil leaf drawn large and centred as a small thrown projectile with a tiny motion blur, nothing else."
+[shots.pickup_pineapple]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, saturated colours, warm light from upper left. No text, no letters, no logos. Flat solid magenta background. A glowing collectible game token: a yellow pineapple chunk drawn large and centred inside a round glowing golden ring with soft sparkles, bright and appealing."
+[shots.shot_pineapple]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, saturated colours, warm light from upper left. No text, no letters, no logos. Flat solid magenta background. Just a yellow pineapple chunk drawn large and centred as a small thrown projectile with a tiny motion blur, nothing else."
+[shots.pickup_sausage]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, saturated colours, warm light from upper left. No text, no letters, no logos. Flat solid magenta background. A glowing collectible game token: a brown sausage crumble chunk drawn large and centred inside a round glowing golden ring with soft sparkles, bright and appealing."
+[shots.shot_sausage]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, saturated colours, warm light from upper left. No text, no letters, no logos. Flat solid magenta background. Just a brown sausage crumble chunk drawn large and centred as a small thrown projectile with a tiny motion blur, nothing else."

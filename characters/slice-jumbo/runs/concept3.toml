@@ -1,0 +1,9 @@
+models = ["qwen-edit"]
+seeds = [1, 2, 3, 4]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+refs = ["characters/slice-ny/references/master.png"]
+template = "{action}"
+[shots.c]
+prompt = "Redraw this pizza slice character as a different member of the same family, same chunky pixel-art style, same thick dark violet outline and big expressive cartoon eyes and white gloves, but this one is an ABSURDLY OVERSIZED New York style slice, a giant floppy droopy triangle with the tip sagging down, the whole slice far too big for its body: it is enormous with a big wavy folded crust, shiny cheese and big pepperoni, an embarrassed silly sheepish face, but very tiny thin stick legs in small red sneakers and tiny arms in white gloves, comically out of proportion. Exactly two arms and two legs. Full body from head to feet, standing facing right in three-quarter view. No text. Flat solid magenta background."
