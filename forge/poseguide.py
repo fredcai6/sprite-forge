@@ -157,7 +157,8 @@ def gen(args):
     frames = [int(x) for x in args.frames.split(",")] if args.frames else list(range(fig.n))
     for t in frames:   # the pose images, saved for the review sheet
         getattr(fig, tr["pose"])(t, SIZE).save(out / f"pose_{t}.png")
-    todo = [(t, i) for t in frames for i in range(len(tr["stages"])) if not (out / f"{stage_name(track, i)}_{t}_{args.seed}.png").exists()]
+    seeds = [int(x) for x in args.seeds.split(",")] if args.seeds else [args.seed]
+    todo = [(t, i, sd) for sd in seeds for t in frames for i in range(len(tr["stages"])) if not (out / f"{stage_name(track, i)}_{t}_{sd}.png").exists()]
     print(f"{len(todo)} images to make", flush=True)
     if not todo:
         return
@@ -172,9 +173,9 @@ def gen(args):
         wait_up(proc)
         mname = master_input(char)
         meta = rev()
-        for n, (t, i) in enumerate(todo, 1):
+        for n, (t, i, sd) in enumerate(todo, 1):
             st = tr["stages"][i]
-            dest = out / f"{stage_name(track, i)}_{t}_{args.seed}.png"
+            dest = out / f"{stage_name(track, i)}_{t}_{sd}.png"
             refs = []
             for r in st["refs"]:
                 if r == "master":
@@ -182,7 +183,7 @@ def gen(args):
                 elif r == "pose":
                     refs.append(to_input(Image.open(out / f"pose_{t}.png")))
                 else:  # previous stage output
-                    refs.append(to_input(Image.open(out / f"{stage_name(track, i - 1)}_{t}_{args.seed}.png")))
+                    refs.append(to_input(Image.open(out / f"{stage_name(track, i - 1)}_{t}_{sd}.png")))
             t0 = time.time()
             kw = dict(st.get("kw", {}))
             if st.get("control"):
@@ -190,10 +191,10 @@ def gen(args):
             prompt = st["prompt"].replace("{desc}", desc.rstrip("."))
             for k, v in fill.items():
                 prompt = prompt.replace("{" + k + "}", v)
-            graph = MODELS[st["model"]](prompt, refs, args.seed, SIZE, SIZE, "pg", **kw)
+            graph = MODELS[st["model"]](prompt, refs, sd, SIZE, SIZE, "pg", **kw)
             G.run_prompt(graph, dest)
             secs = round(time.time() - t0, 1)
-            dest.with_suffix(".json").write_text(json.dumps({"track": track, "stage": i, "frame": t, "seed": args.seed, "prompt": prompt, "secs": secs, "rev": meta}, indent=1))
+            dest.with_suffix(".json").write_text(json.dumps({"track": track, "stage": i, "frame": t, "seed": sd, "prompt": prompt, "secs": secs, "rev": meta}, indent=1))
             print(f"chunk {n}/{len(todo)} {track} f{t} s{i} {secs}s", flush=True)
     finally:
         subprocess.run(["docker", "stop", "-t", "5", CONTAINER], capture_output=True)
@@ -285,17 +286,28 @@ def land(args):
     subprocess.run([sys.executable, str(imp), char, f"pg-{motion}", name, anim], check=True)
 
 
+CUR = ""
+
+
 def review(char, motion, track, seed, frames, names, fig, d, last):
     out = Path("/mnt/data/sprite-forge/review/pose-options")
     out.mkdir(parents=True, exist_ok=True)
-    tr = TRACKS[track]
     z = 3
     track = track
     cw, chh = frames[0].shape[1] * z, frames[0].shape[0] * z
     ims = [upscale(f, z, (40, 34, 52)).convert("RGB") for f in frames]
     pose_row = [Image.open(d / f"pose_{t}.png").convert("RGB").resize((cw, chh), Image.LANCZOS) for t in names]
     raw_row = [Image.open(d / f"{last}_{t}_{seed}.png").convert("RGB").resize((cw, chh), Image.LANCZOS) for t in names]
-    sheet = Image.new("RGB", (cw * len(names), chh * 3), (40, 34, 52))
+    cur = None
+    if CUR and Path(CUR).exists():     # the version in the game now, same size, for the side-by-side
+        c = Image.open(CUR).convert("RGBA")
+        n = len(names)
+        fw = c.width // n
+        cur = upscale(np.asarray(c), z, (40, 34, 52)).convert("RGB")
+        fw3 = fw * z
+    sheet = Image.new("RGB", (max(cw * len(names), cur.width if cur else 0), chh * (4 if cur else 3)), (40, 34, 52))
+    if cur:
+        sheet.paste(cur, (0, 3 * chh))
     for k in range(len(names)):
         sheet.paste(pose_row[k], (k * cw, 0))
         sheet.paste(raw_row[k], (k * cw, chh))
@@ -316,8 +328,11 @@ if __name__ == "__main__":
     ap.add_argument("--hands", default="free", help="pose.toml hands_<name> text, e.g. phone")
     ap.add_argument("--note", default="")
     ap.add_argument("--tag", default="")
+    ap.add_argument("--seeds", default="", help="gen: comma list of seeds in one ComfyUI session")
     ap.add_argument("--canvas", default="", help="W,H of the sprite frame, default pose.toml canvas")
     ap.add_argument("--name", default="", help="land: GAME_NAME GAME_ANIM as NAME/ANIM")
     a = ap.parse_args()
     TAG = ("-" + a.tag) if a.tag else ""
+    if a.name:
+        CUR = str(Path.home() / "projects/probable-octo-funicular/assets/sprites" / a.name / "sheet.png")
     {"gen": gen, "sprite": sprite, "land": land}[a.cmd](a)
