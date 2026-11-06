@@ -1,0 +1,27 @@
+{
+ "frame": {
+  "w": 236,
+  "h": 149
+ },
+ "count": 6,
+ "frame_ms": 120,
+ "loop": false,
+ "rev": {
+  "sha": "4dea945420019a518ec2b5bd79e870ee09d54f1d",
+  "dirty": true,
+  "comfy": "v0.44.0"
+ },
+ "source": {
+  "run": "keys",
+  "model": "qwen-edit",
+  "cell": 6.642335766423358,
+  "poses": [
+   "jump_rise/1",
+   "jump_rise/1",
+   "jump_rise/1",
+   "jump_fall/1",
+   "jump_fall/1",
+   "jump_fall/1"
+  ]
+ }
+}

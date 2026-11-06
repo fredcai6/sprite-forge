@@ -1,0 +1,30 @@
+{
+ "frame": {
+  "w": 150,
+  "h": 124
+ },
+ "count": 9,
+ "frame_ms": 110,
+ "loop": false,
+ "rev": {
+  "sha": "4dea945420019a518ec2b5bd79e870ee09d54f1d",
+  "dirty": true,
+  "comfy": "v0.44.0"
+ },
+ "source": {
+  "run": "keys",
+  "model": "qwen-edit",
+  "cell": 7.767857142857143,
+  "poses": [
+   "special_a/1",
+   "special_a/1",
+   "special_a/1",
+   "special_b/1",
+   "special_b/1",
+   "special_b/1",
+   "special_b/1",
+   "special_b/1",
+   "special_b/1"
+  ]
+ }
+}

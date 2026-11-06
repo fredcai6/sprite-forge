@@ -63,21 +63,37 @@ TABLE_H = t.height
 # HQ box: 150 wide, bottom edge on the canvas bottom (the game anchors bottom-centre at y=504)
 save(fit(get("fifth", "box", 4), 150, 150, n=24), out / "hq/box.png")
 
-# platform: a 64 px period cut where the girder's left and right edges agree
-p = get("second", "platform", 2, shadow=False)
-p = p.crop((0, 0, p.width, int(p.height * 0.62)))
-# keep the girder body (top plate and the truss under it); scale so it is 28 px tall
-s = 28 / p.height
-p = p.resize((round(p.width * s), 28), Image.LANCZOS)
-arr = np.asarray(p)
-arr = np.concatenate([arr, arr[:, :80]], axis=1)  # room for the crossfade
-tile = tile_seam(np.ascontiguousarray(arr[:, : p.width + 80]), p.width - 64 if False else 64 + 0, blend=8) if False else None
-best = min(range(0, p.width - 64 - 8), key=lambda x: np.abs(arr[:, x + 64 - 3:x + 64].astype(float) - arr[:, x:x + 3]).mean())
-strip = arr[:, best:best + 64].astype(float).copy()
-over = arr[:, best + 64:best + 72].astype(float)
-a = np.linspace(0, 1, 8)[None, :, None]
-strip[:, :8] = (1 - a) * over + a * strip[:, :8]
-tile = Image.fromarray(quantize(strip.round().astype(np.uint8), n=24), "RGBA")
+# platform: a clean hand-built 64x28 steel walkway tile (the generated girders came out too noisy for a light street).
+def platform_tile(h=28, w=64, tones=None):
+    """Walkable top row is the lightest; riveted plate, a dark gap, then a truss with diagonal struts. Tiles exactly."""
+    top, plate, plate_dk, line, rust, under = tones or ((206, 196, 214), (150, 140, 164), (118, 108, 134), (46, 34, 62), (156, 96, 78), (84, 74, 104))
+    t = np.zeros((h, w, 4), np.uint8)
+    t[..., 3] = 255
+    t[:, :, :3] = under
+    t[0, :, :3] = line                      # outline above the lip
+    t[1:3, :, :3] = top                     # walkable surface at the very top row (row 1-2)
+    t[3:11, :, :3] = plate
+    t[9:11, :, :3] = plate_dk
+    t[11, :, :3] = line
+    for x in range(4, w, 16):               # rivets
+        t[5, x:x + 2, :3] = top; t[6, x:x + 2, :3] = plate_dk
+    t[3:11, 0, :3] = plate_dk               # plate seam at the tile joint
+    # truss: a zigzag of 2px struts, period 16 so it tiles
+    for x in range(w):
+        y = 13 + int(abs((x % 16) - 8) * 1.6)
+        t[y:y + 2, x, :3] = line
+        t[y + 2:y + 3, x, :3] = plate_dk
+    t[h - 3:h - 1, :, :3] = plate_dk
+    t[h - 1, :, :3] = line
+    t[12:h - 3, :, :3] = np.where((t[12:h - 3, :, :3] == under).all(-1)[..., None], under, t[12:h - 3, :, :3])
+    # a few rust flecks, deterministic
+    for x, y in [(9, 7), (10, 7), (33, 8), (34, 8), (35, 8), (52, 6), (21, 20), (22, 20), (47, 22)]:
+        t[y, x, :3] = rust
+    return Image.fromarray(t, "RGBA")
+
+
+tile = platform_tile()
+src["platform"] = "hand-built tile (forge backgrounds/props/build.py: platform_tile)"
 save(tile, out / "newyork/platform.png")
 
 # barricade: bottom of the tall crate stack, 80x100

@@ -27,3 +27,10 @@ n = 6
 [palette.families.purple]
 hue = [290, 360]
 n = 6
+
+# The generated olive cap bleeds into the crust; turn the cap a dull navy so the two read apart.
+[[recolor]]
+rows = [0, 48]
+hue = [80, 175]
+rotate = 140
+lift = 0.03

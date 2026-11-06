@@ -1,0 +1,16 @@
+run = "keys"
+model = "qwen-edit"
+fit_pose = "idle_a/1"
+fit_h = 106
+canvas = [128, 118]
+frame_ms = 110
+loop = false
+preview_scale = 4
+
+[[frames]]
+pose = "throw_a/1"
+hold = 3
+
+[[frames]]
+pose = "throw_b/1"
+hold = 4

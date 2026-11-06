@@ -1,0 +1,12 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4, 5, 6]
+width = 2816
+height = 720
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+[shots.far]
+prompt = "Wide panoramic background for a late-1990s 2D platformer, hand-painted pixel-art look, soft thin outlines. A ruined post-apocalyptic Chicago skyline of tall dark steel and glass skyscrapers with antennas, a grey-blue lake and horizon on the far side, cold pale blue and silver morning light, hazy wind-blown clouds, very distant, low contrast, light airy values, minimal detail, no foreground, horizontal panorama. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no labels, no graffiti lettering. Every sign and billboard is completely blank or shows only a simple abstract shape."
+[shots.mid]
+prompt = "Wide side-scrolling platformer background strip, hand-painted pixel-art, bold dark outlines, gritty and funny, cold blue-grey palette: a row of Chicago street scenes: an elevated steel L-train track on iron pillars, brick and steel warehouses, a flat-iron style corner building, torn banners flapping in the wind, wrecked parked car, a deep-dish-pizza-shaped round blank sign, blown litter, seen straight-on from the side, all standing on one flat straight horizontal street line near the bottom. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no labels, no graffiti lettering. Every sign and billboard is completely blank or shows only a simple abstract shape. Flat solid saturated pure magenta background everywhere above and between the buildings, the sky is plain pure magenta."
+[shots.near]
+prompt = "Wide side-scrolling platformer foreground strip, hand-painted pixel-art, dark silhouettes: sparse dark foreground clutter along the very bottom edge only: tipped metal bins, a steel bollard, a fire hydrant, steaming manhole, wind-blown crumpled paper, chain-link fence pieces and tangled hanging power lines at the top edge, large empty space in the middle. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no labels, no graffiti lettering. Every sign and billboard is completely blank or shows only a simple abstract shape. Flat solid magenta background everywhere else."

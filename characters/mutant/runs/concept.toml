@@ -1,0 +1,8 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4, 5, 6]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+[shots.a]
+prompt = "Chunky pixel-art style game character, late-1990s platformer, bold dark violet outline, saturated colours, cel shading with a warm rim light. Full body, floating in the air facing right with no feet touching the ground. A sad, once-ordinary creature, mutated and hovering: a pale green-grey lumpy blob body like a melted ordinary person in a damp beige cardigan, two mismatched eyes at different heights, one too many tiny hands dangling, drooping gloomy mouth, a faint puddle drip below. Unsettling but funny and sad, an original character. No text, no letters, no logos anywhere. Flat solid magenta background."

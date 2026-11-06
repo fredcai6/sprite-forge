@@ -1,0 +1,19 @@
+models = ["qwen-edit"]
+seeds = [1, 2]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+refs = ["characters/mutant/references/master.png"]
+template = """Redraw this exact same sad mutated floating creature, same pale green-grey lumpy body, beige cardigan, mismatched eyes, thick dark outline and chunky pixel-art game style. It floats with no feet touching the ground. No text. {action} Full body visible, flat solid magenta background."""
+
+[shots.idle_a]
+prompt = "Idle: floating a little above the ground facing right, arms dangling, a gloomy droopy face, body slightly low."
+
+[shots.idle_b]
+prompt = "Idle: floating a little higher above the ground facing right, arms dangling, a sighing droopy face with eyes half closed, body slightly stretched."
+
+[shots.walk_a]
+prompt = "Drifting forward: floating above the ground facing right, body tilted forward, small hands trailing behind, the lower body tapering into a drip."
+
+[shots.walk_b]
+prompt = "Drifting forward: floating higher above the ground facing right, body tilted back a little, hands up, the drip longer, a puzzled sad face."

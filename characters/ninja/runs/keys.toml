@@ -1,0 +1,31 @@
+models = ["qwen-edit"]
+seeds = [1, 2]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+refs = ["characters/ninja/references/master.png"]
+template = """Redraw this exact same plain generic ninja, same black outfit, mask, proportions, thick dark outline and chunky pixel-art game style. Exactly two arms and two legs. Unarmed, no weapons, no logos, no text. {action} Full body visible from head to feet, flat solid magenta background."""
+
+[shots.idle_a]
+prompt = "Idle: standing in a calm ready stance facing right, weight on one leg, one hand slightly raised."
+
+[shots.idle_b]
+prompt = "Idle: standing in a calm ready stance facing right, knees slightly bent and lower, both hands loose at the sides, head tilted a little."
+
+[shots.walk_contact_a]
+prompt = "Walking stealthily, side view facing right, a long low step, left leg forward and right leg back, body crouched a bit."
+
+[shots.walk_passing_a]
+prompt = "Walking stealthily, side view facing right, passing pose with one leg straight and the other foot lifted, body crouched a bit."
+
+[shots.walk_contact_b]
+prompt = "Walking stealthily, side view facing right, a long low step, right leg forward and left leg back, body crouched a bit."
+
+[shots.walk_passing_b]
+prompt = "Walking stealthily, side view facing right, passing pose, the other leg straight and the first foot lifted."
+
+[shots.throw_a]
+prompt = "Throwing wind-up: facing right, throwing arm cocked far back behind the head holding a small round black pebble, other arm forward for balance, body twisted, weight on the back leg."
+
+[shots.throw_b]
+prompt = "Throwing release: facing right, throwing arm swung fully forward with the hand open, body leaning forward on the front leg, back leg trailing, follow-through."

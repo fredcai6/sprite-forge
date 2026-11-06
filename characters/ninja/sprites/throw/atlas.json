@@ -1,0 +1,28 @@
+{
+ "frame": {
+  "w": 128,
+  "h": 118
+ },
+ "count": 7,
+ "frame_ms": 110,
+ "loop": false,
+ "rev": {
+  "sha": "4dea945420019a518ec2b5bd79e870ee09d54f1d",
+  "dirty": true,
+  "comfy": "v0.44.0"
+ },
+ "source": {
+  "run": "keys",
+  "model": "qwen-edit",
+  "cell": 8.641509433962264,
+  "poses": [
+   "throw_a/1",
+   "throw_a/1",
+   "throw_a/1",
+   "throw_b/1",
+   "throw_b/1",
+   "throw_b/1",
+   "throw_b/1"
+  ]
+ }
+}

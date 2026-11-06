@@ -1,0 +1,9 @@
+models = ["qwen-edit"]
+seeds = [1, 2, 3, 4]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+refs = ["characters/slice-ny/references/master.png"]
+template = "{action}"
+[shots.b]
+prompt = "Redraw this pizza slice character as an ABSURDLY OVERSIZED jumbo slice: the slice body is enormous, almost filling the whole picture, a huge floppy droopy triangle whose tip flops over and hangs down, a big wavy floppy crust, a huge amount of cheese and very big pepperoni, a goofy cheerful face, but the arms and legs are tiny and short in white gloves and small red shoes in comparison to the huge body. Same chunky pixel-art style and thick dark outline. Exactly two arms and two legs. Full body, facing right, no text. Flat solid magenta background."

@@ -1,0 +1,8 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4, 5, 6]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+[shots.a]
+prompt = "Chunky pixel-art style game character, late-1990s platformer, bold dark violet outline, saturated colours, cel shading with a warm rim light. Full body, head to feet, standing ready facing right. A plain generic ninja: all-black hooded outfit with a face mask leaving only narrow eyes, dark grey wrapped sash and wrist wraps, soft black shoes, slim and agile, one hand slightly raised, calm and a bit smug. Unarmed, no weapons, no logos, no headband emblem. No text, no letters, no logos anywhere. Flat solid magenta background."

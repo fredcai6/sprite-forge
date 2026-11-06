@@ -1,0 +1,8 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4, 5, 6]
+width = 2816
+height = 720
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+[shots.mid]
+prompt = "Wide side-scrolling platformer background strip, hand-painted pixel-art, bold dark outlines, gritty and funny, warm terracotta, ochre and teal shutter palette: a row of NARROW old Italian houses of different heights, two to three storeys with clay tile roofs, peeling plaster, teal shutters, laundry lines hanging between them, balconies with potted plants, an old brick pizza oven in an archway, a wrecked small scooter, seen straight-on from the side, with clear gaps between the houses and a plain flat magenta sky above every roof so the tops of the buildings are visible, the houses reach only about two thirds of the way up the picture, all standing on one flat straight cobblestone street line near the bottom. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no signs. Flat solid saturated pure magenta background everywhere above and between the buildings."

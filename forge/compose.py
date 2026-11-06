@@ -109,7 +109,37 @@ def thicken(sprite, ow, colour):
     return out
 
 
-def frame_for(spec, pal, run_dir, f, accent, outline=0):
+def oklab_to_srgb(lab):
+    L, a, b = lab[..., 0], lab[..., 1], lab[..., 2]
+    l_, m_, s_ = L + 0.3963377774 * a + 0.2158037573 * b, L - 0.1055613458 * a - 0.0638541728 * b, L - 0.0894841775 * a - 1.2914855480 * b
+    l, m, s = l_ ** 3, m_ ** 3, s_ ** 3
+    lin = np.stack([4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s, -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
+                    -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s], -1)
+    lin = np.clip(lin, 0, 1)
+    return np.round(np.where(lin <= 0.0031308, lin * 12.92, 1.055 * lin ** (1 / 2.4) - 0.055) * 255).astype(np.uint8)
+
+
+def recolor(sprite, rule):
+    """Rotate the hue of palette colours inside a row band: rows=[y0,y1], hue=[lo,hi], rotate=degrees, lift=OKLab L add.
+    Used to separate two parts that the generator painted in neighbouring colours (a cap from its crust)."""
+    y0, y1 = rule["rows"]
+    lab = srgb_to_oklab(sprite[..., :3])
+    hue = np.degrees(np.arctan2(lab[..., 2], lab[..., 1])) % 360
+    sel = (sprite[..., 3] > 0) & (hue >= rule["hue"][0]) & (hue < rule["hue"][1])
+    sel[:y0] = False
+    sel[y1:] = False
+    a = np.radians(rule["rotate"])
+    ca, sa = np.cos(a), np.sin(a)
+    new = lab.copy()
+    new[..., 1] = lab[..., 1] * ca - lab[..., 2] * sa
+    new[..., 2] = lab[..., 1] * sa + lab[..., 2] * ca
+    new[..., 0] = lab[..., 0] + rule.get("lift", 0)
+    out = sprite.copy()
+    out[sel, :3] = oklab_to_srgb(new)[sel]
+    return out
+
+
+def frame_for(spec, pal, run_dir, f, accent, outline=0, recolors=()):
     w, h = spec["canvas"]
     cell = f.get("cell", spec["cell"]) * f.get("scale", 1.0)
     cell *= 1 + 2 * outline / (h * 0.95)   # the outline is added on top, so paint the figure smaller to keep the frame
@@ -127,6 +157,8 @@ def frame_for(spec, pal, run_dir, f, accent, outline=0):
     oy = bottom - (h - spec.get("margin_bottom", 2 + outline) - f.get("dy", 0)) * cell
     sprite = to_sprite(rgb, alpha, pal[0], pal[1], cell, (ox, oy), (w, h), accent)
     if outline:
+        for r in recolors:
+            sprite = recolor(sprite, r)
         dark = pal[0][np.argmin(pal[1][:, 0])]
         sprite = thicken(despeckle(sprite), outline, dark)
     return sprite
@@ -139,11 +171,17 @@ def anim(path):
     cfg = tomllib.loads((char_dir / "character.toml").read_text())
     run_dir = DATA / "runs" / char_dir.name / spec["run"] / spec["model"]
     pal = load_palette(char_dir / "palette.json")
+    if "fit_pose" in spec:
+        # one scale for the whole character: the reference pose's height becomes fit_h sprite pixels
+        a = keyout(np.asarray(Image.open(pose_path(run_dir, spec["fit_pose"])).convert("RGB")))
+        ys = np.where(a.any(1))[0]
+        spec["cell"] = (ys.max() + 1 - ys.min()) / spec["fit_h"]
+        print("cell", round(spec["cell"], 2))
     frames, used, cache = [], [], {}
     for f in spec["frames"]:
         key = json.dumps(f, sort_keys=True)
         if key not in cache:
-            cache[key] = despeckle(frame_for(spec, pal, run_dir, f, cfg["sprite"]["accent"], cfg["sprite"].get("outline", 0)))
+            cache[key] = despeckle(frame_for(spec, pal, run_dir, f, cfg["sprite"]["accent"], cfg["sprite"].get("outline", 0), cfg.get("recolor", [])))
         for _ in range(f.get("hold", 1)):
             frames.append(cache[key])
             used.append(f["pose"])

@@ -1,0 +1,40 @@
+models = ["qwen-edit"]
+seeds = [1, 2]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+refs = ["characters/slice-deep/references/master.png"]
+template = """Redraw this exact same cartoon pizza slice character, same proportions, colours, thick dark outline and chunky pixel-art game style. Exactly two arms and two legs. {action} Full body visible from head to feet, no text, flat solid magenta background."""
+
+[shots.idle_a]
+prompt = "Idle: standing facing the viewer in three-quarter view, relaxed, arms hanging loose, a mild smile."
+
+[shots.idle_b]
+prompt = "Idle: standing facing the viewer, chest lifted a little taller, one hand on the hip, a confident smirk, leaning slightly to one side."
+
+[shots.jump_rise]
+prompt = "Jumping upward: facing right, legs straight and stretched apart, both arms thrown straight up above the head, mouth open in a joyful yell."
+
+[shots.jump_fall]
+prompt = "Falling at the top of a jump: facing right, knees tucked up, arms out wide for balance, eyes wide, mouth open in surprise."
+
+[shots.cold_a]
+prompt = "He has gone cold and stale: the whole body is pale grey-blue and stiff, hardened grease, dull dark toppings, frost-blue tint, he hugs himself with both arms shivering, teeth chattering, sad eyes, hunched, facing right."
+
+[shots.run_contact_a]
+prompt = "Running, side view facing right, body leaning forward, a wide stride with the front leg stretched far forward and the back leg far behind, arms pumping opposite to the legs, determined grin, mid-air between steps."
+
+[shots.run_passing_a]
+prompt = "Running, side view facing right, leaning forward, one foot planted under the body and the other knee lifted high, arms swinging, determined grin."
+
+[shots.run_contact_b]
+prompt = "Running, side view facing right, leaning forward, a wide stride with the OTHER leg stretched far forward and the first leg far behind, arms pumping, determined grin, mid-air."
+
+[shots.run_passing_b]
+prompt = "Running, side view facing right, leaning forward, one foot planted and the other knee lifted high (opposite leg to the previous pose), arms swinging, determined grin."
+
+[shots.special_a]
+prompt = "Ground pound wind-up: facing right, leaping high in the air with both gloved fists clenched together above his head, legs tucked, face roaring with effort."
+
+[shots.special_b]
+prompt = "Ground pound landing: facing right, crouched hard on the ground with one gloved fist slammed into the floor, cracks radiating in the ground, dust puffs either side, heavy, face roaring."

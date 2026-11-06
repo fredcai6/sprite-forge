@@ -1,0 +1,9 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4, 5, 6]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+refs = ["characters/slice-ny/references/master.png"]
+[shots.a]
+prompt = "Redraw this pizza slice character as a different member of the same pizza-slice family, same chunky pixel-art style, same thick dark violet outline, same big expressive cartoon eyes and white gloves, but this one is a Washington DC jumbo pizza slice character: absurdly oversized, enormous and floppy, a huge droopy triangle slice that bends at the tip, big floppy crust, lots of cheese and big pepperoni, a goofy cheerful face, tiny arms in white gloves and tiny legs in small shoes relative to the huge body. Full body from head to feet, standing facing right in three-quarter view, exactly two arms and two legs. No text, no letters. Flat solid magenta background."

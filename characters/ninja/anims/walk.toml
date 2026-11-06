@@ -1,0 +1,21 @@
+run = "keys"
+model = "qwen-edit"
+fit_pose = "idle_a/1"
+fit_h = 106
+canvas = [128, 118]
+frame_ms = 140
+preview_scale = 4
+
+[[frames]]
+pose = "walk_contact_a/1"
+
+[[frames]]
+pose = "walk_passing_a/1"
+dy = 1
+
+[[frames]]
+pose = "walk_contact_b/1"
+
+[[frames]]
+pose = "walk_passing_b/1"
+dy = 1

@@ -1,0 +1,26 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+[shots.platform]
+width = 2048
+height = 512
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, warm light from the upper left, gritty and a little funny. Flat solid magenta background. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no labels, no graffiti lettering. Every sign and billboard is completely blank or shows only a simple abstract shape. A horizontal strip of riveted steel girder bridge deck seen from the side, flat straight top edge, pale blue-grey painted steel with a little rust at the rivets, diagonal struts beneath, repeating pattern."
+[shots.barricade]
+width = 832
+height = 1024
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, warm light from the upper left, gritty and a little funny. Flat solid magenta background. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no labels, no graffiti lettering. Every sign and billboard is completely blank or shows only a simple abstract shape. A chunky street barricade of stacked blue-grey steel I-beams and a concrete jersey barrier with a bold yellow-and-black hazard stripe board across the front and two sandbags on top, seen straight-on from the side, a little taller than wide, strong clear shapes, heavy and solid, flat top."
+[shots.barrel]
+width = 768
+height = 1024
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, warm light from the upper left, gritty and a little funny. Flat solid magenta background. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no labels, no graffiti lettering. Every sign and billboard is completely blank or shows only a simple abstract shape. A dented oil drum seen from the side with bright orange and yellow flames roaring out of the open top, glowing hot orange light, a few sparks. Tall upright drum."
+[shots.barrel_out]
+width = 768
+height = 1024
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, warm light from the upper left, gritty and a little funny. Flat solid magenta background. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no labels, no graffiti lettering. Every sign and billboard is completely blank or shows only a simple abstract shape. A dented oil drum seen from the side, cold and burnt out, the open top full of black charred wood with a thin curl of grey smoke rising, no flames, dull and grey. Tall upright drum."
+[shots.door]
+width = 768
+height = 1088
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, warm light from the upper left, gritty and a little funny. Flat solid magenta background. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no labels, no graffiti lettering. Every sign and billboard is completely blank or shows only a simple abstract shape. A warm-lit front door of a brick house seen straight-on, cold blue evening around it but the door glows warm yellow, a big hand-painted wooden sign above the door whose entire face reads the word DELIVER in huge clear bold capital letters in yellow on dark green, tall wooden door with glowing window, a porch lamp, a small step."
