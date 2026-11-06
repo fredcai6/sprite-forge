@@ -7,23 +7,13 @@
  "frame_ms": 70,
  "loop": true,
  "rev": {
-  "sha": "723320edcb76f97cae533e33aa3f1d35cd649c2d",
+  "sha": "64367b3909b53e05380b3445089cb2232ca5b650",
   "dirty": true,
   "comfy": "v0.44.0"
  },
  "source": {
-  "run": "keys3",
-  "model": "qwen-edit",
-  "cell": 7.155172413793103,
-  "poses": [
-   "run_contact_a/1",
-   "run_down_a/1",
-   "run_pass_a/1",
-   "run_up_a/1",
-   "run_contact_b/1",
-   "run_down_b/1",
-   "run_pass_b/1",
-   "run_up_b/1"
-  ]
+  "rig": "characters/slice-ny/rig/run.toml",
+  "body": "characters/slice-ny/sprites/idle/sheet.png",
+  "gait": "run"
  }
 }
