@@ -11,8 +11,13 @@ pose = "idle_a/1"
 [[frames]]
 pose = "idle_b/1"
 [[frames]]
-pose = "idle_c/1"
+pose = "idle_a/1"
 [[frames]]
 pose = "idle_b/1"
+dy = -1
 [[frames]]
 pose = "idle_a/1"
+dy = -1
+[[frames]]
+pose = "idle_b/1"
+dy = -1
