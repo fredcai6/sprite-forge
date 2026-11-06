@@ -77,6 +77,13 @@ TRACKS = {
             "Image 1 is a character in a running pose. Image 2 is the exact character it must be. Redraw image 1 as the character from image 2, keeping every arm and leg "
             "of image 1 exactly where it is, with the same bends and crossing, and the same body position, but with the face, colours, gloves, sneakers and style of image 2. "
             + COMMON + " " + BG + "."))]),
+    # as cn-then-edit, but the re-skin gets no master (which drags the stance back to the master's): the description carries identity
+    "cn-restyle": dict(pose="openpose", stages=[
+        dict(model="qwen-edit", refs=[], control=True, name="body", kw=dict(cn_strength=1.0), prompt=(
+            "{desc}. Side view facing right, running, in the pose given. Chunky pixel-art game style with a thick dark outline. " + COMMON + " " + BG + ".")),
+        dict(model="qwen-edit", refs=["prev"], prompt=(
+            "Redraw this running cartoon character in exactly the same pose, keeping every arm and leg where it is, as: {desc}. Painted in the style of a glossy "
+            "pixel-art game sprite with a thick dark outline, rich saturated colours, shaded cheese. " + COMMON + " " + BG + "."))]),
     "qwen-cn-lines": dict(pose="lines", stages=[dict(model="qwen-edit", refs=["master"], control=True, kw=dict(cn_strength=0.9), prompt=(
         "Redraw this exact same character, same colours, proportions, thick dark outline and chunky pixel-art game style, following the line drawing for the pose. "
         + COMMON + " " + BG + "."))]),
