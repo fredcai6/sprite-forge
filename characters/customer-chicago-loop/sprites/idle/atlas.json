@@ -1,0 +1,26 @@
+{
+ "frame": {
+  "w": 120,
+  "h": 150
+ },
+ "count": 5,
+ "frame_ms": 240,
+ "loop": true,
+ "rev": {
+  "sha": "28602d92b26127757059f4ed0f9d3ff2cea0ec6a",
+  "dirty": true,
+  "comfy": "v0.44.0"
+ },
+ "source": {
+  "run": "keys",
+  "model": "klein",
+  "cell": 6.690140845070423,
+  "poses": [
+   "idle_a/1",
+   "idle_a/1",
+   "idle_a/1",
+   "idle_a/1",
+   "idle_a/1"
+  ]
+ }
+}

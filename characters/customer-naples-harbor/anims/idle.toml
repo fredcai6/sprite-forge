@@ -1,0 +1,15 @@
+# Idle: one painted pose with a slow breath (1 px lift).
+run = "keys"
+model = "klein"
+fit_pose = "idle_a/4"
+fit_h = 142
+canvas = [120, 150]
+frame_ms = 240
+preview_scale = 3
+[[frames]]
+pose = "idle_a/4"
+hold = 3
+[[frames]]
+pose = "idle_a/4"
+dy = 1
+hold = 2

@@ -17,3 +17,5 @@
 - turtle munch (4f) and stun (4f) landed at 150x92. WEAK: stun does not tuck head/legs (model refused), it is a dazed face; stars clipped by canvas top. The new pose is more upright than walk.
 - ninja leap (7f), crouch (6f, perched: a single crouch pose with a 1px breath; ledge removed), hurt (8f) landed at 128x118. WEAK: crouch has no second pose (generator drew a ledge, one version cleaned).
 - shot-TOPPING.png x7 redone: 36x36 chunky discs with 4px-class near-black outline, bold flat colours (the game centres; spin it). Size 36x36.
+- customers landed so far (idle 120x150 frames, art height 150, 5f breathing loop): california-beach, california-downtown, chicago-lincolnpark, chicago-loop, chicago-wickerpark, dc-federal, dc-georgetown, dc-mall, naples-center. Others follow.
+- all 14 customers landed (customer-CITY-AREA idle, 120x150, art height 150).
