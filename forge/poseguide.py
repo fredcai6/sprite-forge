@@ -281,6 +281,9 @@ def sprite(args):
             imgs[t] = (rgb, deshadow(rgb, keyout(rgb)))
     hs = [np.ptp(np.nonzero(a.any(1))[0]) + 1 for _, a in imgs.values()]
     grid_k, grid_o = (lineart.render(rframes[0], SIZE)[1:] if rigline else (None, None))
+    # the ground row is where the stance frames' feet land (their lowest pixel, 97th percentile over frames); a frame whose feet
+    # sit higher than that is in the air, and stays there
+    ground_src = float(np.percentile([np.nonzero(a.any(1))[0].max() + 1 for _, a in imgs.values()], 97))
     cell = grid_k if rigline else (float(np.median(hs)) / (H * 0.93) * infl if args.place != "fixed" else s * infl)
     frames, names = [], []
     for t, (rgb, alpha) in imgs.items():
