@@ -19,3 +19,4 @@
 - shot-TOPPING.png x7 redone: 36x36 chunky discs with 4px-class near-black outline, bold flat colours (the game centres; spin it). Size 36x36.
 - customers landed so far (idle 120x150 frames, art height 150, 5f breathing loop): california-beach, california-downtown, chicago-lincolnpark, chicago-loop, chicago-wickerpark, dc-federal, dc-georgetown, dc-mall, naples-center. Others follow.
 - all 14 customers landed (customer-CITY-AREA idle, 120x150, art height 150).
+- slice-ny idle (6f), jump, fall (distinct), cold all rebuilt from keys3 at 140x124 (same pixel scale as run). Old fold (124x124, slightly different scale) left as is. Cold_b keeps red shoes/pepperoni (weak).

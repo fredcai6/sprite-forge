@@ -1,27 +1,23 @@
 {
  "frame": {
-  "w": 132,
+  "w": 140,
   "h": 124
  },
- "count": 6,
- "frame_ms": 120,
+ "count": 2,
+ "frame_ms": 90,
  "loop": false,
  "rev": {
-  "sha": "dba610b1dabc92df070e60c3ea1e9d126b8d46d5",
+  "sha": "4d5dab1f2b8112e5de50b033def4d5e0d765014c",
   "dirty": true,
   "comfy": "v0.44.0"
  },
  "source": {
-  "run": "keys",
-  "model": "klein",
-  "cell": 7.7,
+  "run": "keys3",
+  "model": "qwen-edit",
+  "cell": 7.16,
   "poses": [
-   "jump_rise/2",
-   "jump_rise/2",
-   "jump_rise/2",
-   "jump_fall/2",
-   "jump_fall/2",
-   "jump_fall/2"
+   "jump_rise/1",
+   "jump_rise/1"
   ]
  }
 }

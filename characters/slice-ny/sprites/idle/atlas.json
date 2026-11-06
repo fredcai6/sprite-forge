@@ -1,27 +1,27 @@
 {
  "frame": {
-  "w": 124,
+  "w": 140,
   "h": 124
  },
  "count": 6,
- "frame_ms": 220,
+ "frame_ms": 200,
  "loop": true,
  "rev": {
-  "sha": "dba610b1dabc92df070e60c3ea1e9d126b8d46d5",
+  "sha": "4d5dab1f2b8112e5de50b033def4d5e0d765014c",
   "dirty": true,
   "comfy": "v0.44.0"
  },
  "source": {
-  "run": "keys2",
+  "run": "keys3",
   "model": "qwen-edit",
-  "cell": 7.4,
+  "cell": 7.16,
   "poses": [
+   "idle_a/1",
+   "idle_a/1",
    "idle_b/1",
    "idle_b/1",
-   "idle_b/1",
-   "idle_b/2",
-   "idle_b/2",
-   "idle_b/2"
+   "idle_c/1",
+   "idle_b/1"
   ]
  }
 }
