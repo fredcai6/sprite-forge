@@ -1,0 +1,54 @@
+anim = "walk"
+canvas = [112, 118]
+frame_ms = 100
+dark = [0, 0, 0]
+outline = 4
+inner_outline = 2
+src_outline = 4
+
+[body]
+src = "characters/teen/sprites/walk/sheet.png"
+frame = 0
+frame_w = 112
+erase = [
+  [[5,76],[110,76],[110,125],[5,125]],
+]
+
+[limb]
+leg = [[116,128,196],[83,92,157],[51,21,102]]
+arm = [[116,128,196],[83,92,157],[51,21,102]]
+
+[foot]
+src = "characters/teen/sprites/walk/sheet.png"
+frame = 0
+frame_w = 112
+box = [64, 97, 91, 115]
+anchor = [71, 102]
+
+[hand]
+src = "characters/teen/sprites/walk/sheet.png"
+frame = 0
+frame_w = 112
+box = [64, 97, 91, 115]
+anchor = [71, 102]
+
+[arm]
+shoulder_near = [60, 45]
+shoulder_far = [50, 45]
+len = 10
+w = 3
+swing = 0.0
+draw = false
+
+[gait]
+kind = "walk"
+leg = 27
+thigh = 0.5
+leg_w = 10
+lean = 0
+stride = 1.35
+clear = 1.0
+bob = 1.0
+ground = 113
+hip = [54, 76]
+far_dark = 0.55

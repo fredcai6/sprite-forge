@@ -7,7 +7,7 @@
  "frame_ms": 70,
  "loop": true,
  "rev": {
-  "sha": "594ee00d05b729c55789967acc2dca1f04d84b6f",
+  "sha": "25f7bb128e14f102d8d40a47ef3ffe06f6e1e51e",
   "dirty": true,
   "comfy": "v0.44.0"
  },

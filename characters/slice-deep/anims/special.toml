@@ -1,6 +1,6 @@
-run = "keys2"
+run = "keys3"
 model = "qwen-edit"
-fit_pose = "idle_a/1"
+fit_pose = "idle_a/2"
 fit_h = 160
 canvas = [230, 170]
 frame_ms = 110
@@ -9,8 +9,9 @@ preview_scale = 3
 
 [[frames]]
 pose = "special_a/1"
+scale = 1.12
 hold = 3
 
 [[frames]]
-pose = "special_b/1"
+pose = "special_b/3"
 hold = 6

@@ -3,23 +3,17 @@
   "w": 112,
   "h": 118
  },
- "count": 4,
- "frame_ms": 130,
+ "count": 8,
+ "frame_ms": 100,
  "loop": true,
  "rev": {
-  "sha": "dba610b1dabc92df070e60c3ea1e9d126b8d46d5",
+  "sha": "3c817c6d02524b9193201ca5e4b3f977e41ef84c",
   "dirty": true,
   "comfy": "v0.44.0"
  },
  "source": {
-  "run": "keys",
-  "model": "qwen-edit",
-  "cell": 8.0,
-  "poses": [
-   "walk_contact_a/2",
-   "walk_passing_a/1",
-   "walk_contact_b/3",
-   "walk_passing_b/3"
-  ]
+  "rig": "characters/teen/rig/walk.toml",
+  "body": "characters/teen/sprites/walk/sheet.png",
+  "gait": "walk"
  }
 }

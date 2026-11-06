@@ -7,21 +7,21 @@
  "frame_ms": 200,
  "loop": true,
  "rev": {
-  "sha": "37a6cf7995d18801bbf096d00e6074acc57974a7",
+  "sha": "2e295b36cbefcdbf45c6aa4eef03638dd57f6fac",
   "dirty": true,
   "comfy": "v0.44.0"
  },
  "source": {
-  "run": "keys2",
+  "run": "keys3",
   "model": "qwen-edit",
-  "cell": 5.6375,
+  "cell": 4.44375,
   "poses": [
-   "idle_a/1",
-   "idle_a/1",
-   "idle_b/1",
-   "idle_b/1",
-   "idle_c/1",
-   "idle_b/1"
+   "idle_a/2",
+   "idle_a/2",
+   "idle_b/2",
+   "idle_b/2",
+   "idle_c/2",
+   "idle_b/2"
   ]
  }
 }

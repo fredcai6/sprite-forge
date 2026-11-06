@@ -1,0 +1,58 @@
+anim = "run"
+canvas = [170, 120]
+frame_ms = 70
+dark = [1, 0, 1]
+outline = 4
+inner_outline = 2
+src_outline = 4
+
+[body]
+src = "characters/mutant/sprites/run/sheet.png"
+frame = 0
+frame_w = 170
+erase = [
+  [[25,20],[64,20],[64,72],[25,72]],
+  [[95,49],[145,49],[145,75],[95,75]],
+  [[121,36],[145,36],[145,50],[121,50]],
+  [[25,86],[145,86],[145,125],[25,125]],
+  [[88,70],[145,70],[145,125],[88,125]],
+  [[25,72],[56,72],[56,125],[25,125]],
+]
+
+[limb]
+leg = [[186,207,168],[144,171,124],[90,81,112]]
+arm = [[186,207,168],[144,171,124],[90,81,112]]
+
+[foot]
+src = "characters/mutant/sprites/run/sheet.png"
+frame = 0
+frame_w = 170
+box = [96, 91, 132, 116]
+anchor = [104, 99]
+
+[hand]
+src = "characters/mutant/sprites/run/sheet.png"
+frame = 0
+frame_w = 170
+box = [119, 38, 138, 56]
+anchor = [123, 52]
+
+[arm]
+shoulder_near = [96, 44]
+shoulder_far = [70, 40]
+len = 30
+w = 7
+swing = 1.0
+hand_angle = 90
+
+[gait]
+kind = "run"
+leg = 28
+thigh = 0.5
+leg_w = 8
+lean = 0
+stride = 1.2
+clear = 1.1
+bob = 1.0
+ground = 113
+hip = [78, 80]

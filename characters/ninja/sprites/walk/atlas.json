@@ -3,23 +3,17 @@
   "w": 128,
   "h": 118
  },
- "count": 4,
- "frame_ms": 140,
+ "count": 8,
+ "frame_ms": 70,
  "loop": true,
  "rev": {
-  "sha": "4dea945420019a518ec2b5bd79e870ee09d54f1d",
+  "sha": "5b713dda92853d30020968af136580a235bc6cfd",
   "dirty": true,
   "comfy": "v0.44.0"
  },
  "source": {
-  "run": "keys",
-  "model": "qwen-edit",
-  "cell": 8.641509433962264,
-  "poses": [
-   "walk_contact_a/1",
-   "walk_passing_a/1",
-   "walk_contact_b/1",
-   "walk_passing_b/1"
-  ]
+  "rig": "characters/ninja/rig/walk.toml",
+  "body": "characters/ninja/sprites/walk/sheet.png",
+  "gait": "run"
  }
 }

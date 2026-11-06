@@ -1,0 +1,59 @@
+anim = "walk"
+canvas = [128, 118]
+frame_ms = 70
+dark = [1, 1, 0]
+outline = 4
+inner_outline = 2
+src_outline = 4
+
+[body]
+src = "characters/ninja/sprites/walk/sheet.png"
+frame = 0
+frame_w = 128
+erase = [
+  [[30,52],[50,52],[52,70],[52,86],[30,86]],
+  [[82,58],[105,58],[105,86],[82,86]],
+  [[25,86],[110,86],[110,125],[25,125]],
+]
+
+[limb]
+leg = [[78,84,98],[52,55,64],[34,34,36]]
+arm = [[78,84,98],[52,55,64],[34,34,36]]
+
+[foot]
+src = "characters/ninja/sprites/walk/sheet.png"
+frame = 0
+frame_w = 128
+box = [78, 99, 100, 114]
+anchor = [84, 103]
+lift_dark = [46, 48, 58]
+lift_below = 100
+
+[hand]
+src = "characters/ninja/sprites/walk/sheet.png"
+frame = 0
+frame_w = 128
+box = [41, 71, 52, 84]
+anchor = [45, 72]
+
+[arm]
+shoulder_near = [78, 58]
+shoulder_far = [54, 58]
+len = 20
+w = 6
+swing = 1.0
+
+[gait]
+kind = "run"
+leg = 28
+far_dark = 0.8
+far_dark_foot = 0.85
+thigh = 0.5
+leg_w = 7
+lean = 5
+lean_down = 2
+stride = 1.45
+clear = 1.1
+bob = 1.0
+ground = 112
+hip = [66, 84]

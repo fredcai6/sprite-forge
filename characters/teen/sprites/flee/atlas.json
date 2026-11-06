@@ -3,23 +3,17 @@
   "w": 150,
   "h": 118
  },
- "count": 4,
- "frame_ms": 80,
+ "count": 8,
+ "frame_ms": 70,
  "loop": true,
  "rev": {
-  "sha": "184b424b4e6f46a1289bf61bcdfc6ebdff881f08",
+  "sha": "3c817c6d02524b9193201ca5e4b3f977e41ef84c",
   "dirty": true,
   "comfy": "v0.44.0"
  },
  "source": {
-  "run": "keys3",
-  "model": "qwen-edit",
-  "cell": 8.3,
-  "poses": [
-   "flee_a/1",
-   "flee_d/1",
-   "flee_b/1",
-   "flee_c/1"
-  ]
+  "rig": "characters/teen/rig/flee.toml",
+  "body": "characters/teen/sprites/flee/sheet.png",
+  "gait": "run"
  }
 }
