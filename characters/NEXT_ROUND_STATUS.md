@@ -16,3 +16,4 @@
 - teen film (120x118, 4f) and flee (150x118, 4f @80ms, crying run) landed; walk/idle unchanged.
 - turtle munch (4f) and stun (4f) landed at 150x92. WEAK: stun does not tuck head/legs (model refused), it is a dazed face; stars clipped by canvas top. The new pose is more upright than walk.
 - ninja leap (7f), crouch (6f, perched: a single crouch pose with a 1px breath; ledge removed), hurt (8f) landed at 128x118. WEAK: crouch has no second pose (generator drew a ledge, one version cleaned).
+- shot-TOPPING.png x7 redone: 36x36 chunky discs with 4px-class near-black outline, bold flat colours (the game centres; spin it). Size 36x36.
