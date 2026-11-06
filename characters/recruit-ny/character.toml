@@ -1,0 +1,29 @@
+name = "recruit-ny"
+description = "plain ny pizza recruit"
+[sprite]
+height = 124
+accent = 1.3
+outline = 2
+[palette]
+sources = ["keys/qwen-edit/*/*.png"]
+[palette.families.neutral]
+max_chroma = 0.045
+n = 14
+[palette.families.red]
+hue = [0, 40]
+n = 8
+[palette.families.orange]
+hue = [40, 75]
+n = 12
+[palette.families.yellow]
+hue = [75, 115]
+n = 10
+[palette.families.green]
+hue = [115, 200]
+n = 6
+[palette.families.blue]
+hue = [200, 290]
+n = 6
+[palette.families.purple]
+hue = [290, 360]
+n = 6

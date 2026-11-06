@@ -1,0 +1,14 @@
+models = ["qwen-edit"]
+seeds = [1, 2]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+refs = ["characters/recruit-jumbo/references/current.png"]
+template = """Redraw this same cartoon pizza character (a huge floppy oversized jumbo slice) as a plain recruit with NO TOPPINGS: remove every pepperoni and any other topping, leaving only smooth glossy melted cheese on the slice. Nothing on the cheese but plain melted cheese (and the face). Keep the same body shape, proportions, colours, thick dark violet outline, white gloves, shoes and chunky pixel-art style, and keep its own style distinct. Standing STILL on the ground facing the viewer front-on, both feet planted, looking nervous and hopeful: big worried-but-hopeful eyes, a small anxious smile. Exactly two arms and two legs. {action} Full body visible from head to feet, no text, flat solid magenta background."""
+
+[shots.idle_a]
+prompt = "Hands clasped together in front of the belly, shoulders slightly hunched, eyes looking up hopefully."
+[shots.idle_b]
+prompt = "Weight shifted slightly, one gloved hand rubbing the other arm nervously, eyes glancing to the side, tiny smile."
+[shots.idle_c]
+prompt = "Standing a little taller with chin up, hands clasped higher against the chest, eyes wide and hopeful, a small beaming smile."
