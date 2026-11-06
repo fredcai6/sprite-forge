@@ -65,6 +65,9 @@ TRACKS = {
     "qwen-cn-pose-hi": dict(pose="openpose", stages=[dict(model="qwen-edit", refs=["master"], control=True, kw=dict(cn_strength=1.2), prompt=(
         "Redraw this exact same character, same colours, proportions, thick dark outline and chunky pixel-art game style, running in the pose given. "
         + COMMON + " " + BG + "."))]),
+    "qwen-cn-pose-max": dict(pose="openpose", stages=[dict(model="qwen-edit", refs=["master"], control=True, kw=dict(cn_strength=2.0), prompt=(
+        "Redraw this exact same character, same colours, proportions, thick dark outline and chunky pixel-art game style, running in the pose given. "
+        + COMMON + " " + BG + "."))]),
     "qwen-cn-lines": dict(pose="lines", stages=[dict(model="qwen-edit", refs=["master"], control=True, kw=dict(cn_strength=0.9), prompt=(
         "Redraw this exact same character, same colours, proportions, thick dark outline and chunky pixel-art game style, following the line drawing for the pose. "
         + COMMON + " " + BG + "."))]),
