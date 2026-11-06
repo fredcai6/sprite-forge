@@ -41,10 +41,10 @@ TRACKS = {
         "exactly where the skeleton's limbs go, both legs from the same hip, with the crossing and bending the skeleton shows. " + COMMON + " " + BG + "."))]),
     # human bodies: the skeleton reads as a body, so say what the limbs do
     "qwen-pose-run": dict(pose="openpose", stages=[dict(model="qwen-edit", refs=["master", "pose"], prompt=(
-        "Image 1 is the character. Image 2 is a pose skeleton for a side view of a runner. Redraw the exact same character from image 1, same clothes, colours, "
-        "proportions, thick dark outline and chunky pixel-art game style, running in the pose of the skeleton in image 2: head, arms and legs exactly where the skeleton's "
-        "limbs go. Both arms swing freely in a running arm swing, the hands hold nothing, no phone. Both legs from the same hip, crossing and bending as the skeleton shows. "
-        "Head up, looking ahead. " + COMMON + " " + BG + ", no ground shadow."))]),
+        "Image 1 is the character. Image 2 is a pose skeleton for a side view. Redraw the exact same character from image 1, same clothes, colours, "
+        "proportions, thick dark outline and chunky pixel-art game style, {verb} in the pose of the skeleton in image 2: head, arms and legs exactly where the skeleton's "
+        "limbs go. {hands} Both legs from the same hip, crossing and bending as the skeleton shows. {note} "
+        + COMMON + " " + BG + ", no ground shadow."))]),
     "qwen-mannequin": dict(pose="mannequin", stages=[dict(model="qwen-edit", refs=["master", "pose"], prompt=(
         "Image 1 is the character. Image 2 shows black limb shapes: the arms and legs of the pose wanted. Redraw the exact same character from image 1, "
         "same colours, proportions, thick dark outline and chunky pixel-art game style, with its arms and legs exactly on the black limb shapes of "
@@ -111,17 +111,23 @@ TRACKS = {
 }
 
 
+def pose_cfg(char):
+    return tomllib.loads((ROOT / "characters" / char / "pose.toml").read_text())
+
+
 def master_path(char):
-    return ROOT / "characters" / char / "references" / "master.png"
+    return ROOT / "characters" / char / pose_cfg(char).get("master", "references/master.png")
 
 
 def stage_name(track, i):
     return TRACKS[track]["stages"][i].get("name", f"s{i}")
 
 
+TAG = ""
+
+
 def paths(char, motion, track):
-    d = DATA / "pose-options" / char / motion / track
-    return d
+    return DATA / "pose-options" / char / motion / (track + TAG)
 
 
 def to_input(img):
@@ -143,6 +149,9 @@ def gen(args):
     tr = TRACKS[track]
     fig = Figure(char, motion)
     desc = tomllib.loads((ROOT / "characters" / char / "character.toml").read_text())["description"]
+    pc = pose_cfg(char)
+    fill = dict(verb=fig.motion.get("verb", "running"), hands=pc.get("hands_" + args.hands, pc.get("hands", "Both arms swing.")) if args.hands != "free" else pc.get("hands", "Both arms swing."),
+                note=" ".join(x for x in (pc.get("note", ""), args.note) if x))
     out = paths(char, motion, track)
     out.mkdir(parents=True, exist_ok=True)
     frames = [int(x) for x in args.frames.split(",")] if args.frames else list(range(fig.n))
@@ -178,26 +187,57 @@ def gen(args):
             kw = dict(st.get("kw", {}))
             if st.get("control"):
                 kw["control"] = to_input(Image.open(out / f"pose_{t}.png"))
-            graph = MODELS[st["model"]](st["prompt"].replace("{desc}", desc.rstrip(".")), refs, args.seed, SIZE, SIZE, "pg", **kw)
+            prompt = st["prompt"].replace("{desc}", desc.rstrip("."))
+            for k, v in fill.items():
+                prompt = prompt.replace("{" + k + "}", v)
+            graph = MODELS[st["model"]](prompt, refs, args.seed, SIZE, SIZE, "pg", **kw)
             G.run_prompt(graph, dest)
             secs = round(time.time() - t0, 1)
-            dest.with_suffix(".json").write_text(json.dumps({"track": track, "stage": i, "frame": t, "seed": args.seed, "prompt": st["prompt"], "secs": secs, "rev": meta}, indent=1))
+            dest.with_suffix(".json").write_text(json.dumps({"track": track, "stage": i, "frame": t, "seed": args.seed, "prompt": prompt, "secs": secs, "rev": meta}, indent=1))
             print(f"chunk {n}/{len(todo)} {track} f{t} s{i} {secs}s", flush=True)
     finally:
         subprocess.run(["docker", "stop", "-t", "5", CONTAINER], capture_output=True)
 
 
+def deshadow(rgb, alpha):
+    """Drop the soft ground shadow some generations add under the feet: a flat, wide, bottom-lying blob that is a darker
+    version of the key background (same hue, similar chroma, lower lightness). Black outlines have no chroma and stay."""
+    from scipy import ndimage
+    from .color import srgb_to_oklab
+    lab = srgb_to_oklab(rgb)
+    border = np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]])
+    bg = np.median(border, 0)
+    chroma = np.hypot(lab[..., 1], lab[..., 2])
+    hue = np.degrees(np.arctan2(lab[..., 2], lab[..., 1]))
+    bh = np.degrees(np.arctan2(bg[2], bg[1]))
+    dh = np.abs((hue - bh + 180) % 360 - 180)
+    cand = alpha & (dh < 22) & (chroma > 0.5 * np.hypot(bg[1], bg[2])) & (lab[..., 0] < bg[0] - 0.04)
+    cand = ndimage.binary_opening(cand, iterations=2)
+    lb, n = ndimage.label(cand)
+    ys_all = np.nonzero(alpha)[0]
+    top, bot = ys_all.min(), ys_all.max()
+    out = alpha.copy()
+    for i, sl in enumerate(ndimage.find_objects(lb), 1):
+        h, w = sl[0].stop - sl[0].start, sl[1].stop - sl[1].start
+        area = (lb[sl] == i).sum()
+        if area > 150 and w > 2.2 * h and sl[0].start > top + 0.7 * (bot - top):
+            out &= ~(lb == i)
+    return out
+
+
 def sprite(args):
     char, motion, track = args.char, args.motion, args.track
     cfg = tomllib.loads((ROOT / "characters" / char / "character.toml").read_text())
-    pose = tomllib.loads((ROOT / "characters" / char / "pose.toml").read_text())
+    pose = pose_cfg(char)
     pal = load_palette(ROOT / "characters" / char / "palette.json")
     fig = Figure(char, motion)
     d = paths(char, motion, track)
     last = stage_name(track, len(TRACKS[track]["stages"]) - 1)
-    W, H = pose["canvas"]
-    s = min(0.9 * SIZE / W, 0.9 * SIZE / H)          # source px per sprite px, same transform as the pose render
-    ox, oy = (SIZE - W * s) / 2, (SIZE - H * s) / 2
+    pw, ph = pose["canvas"]
+    W, H = [int(x) for x in args.canvas.split(",")] if args.canvas else (pw, ph)
+    s = min(0.9 * SIZE / pw, 0.9 * SIZE / ph)          # source px per sprite px of the pose render
+    ox, oy = (SIZE - pw * s) / 2, (SIZE - ph * s) / 2
+    ground_src = oy + pose["ground"] * s               # image row of the skeleton's ground
     ow = cfg["sprite"].get("outline", 0)
     infl = 1 + 2 * ow / (H * 0.95)               # the outline is added on top, so paint the figure smaller
     imgs = {}
@@ -205,21 +245,18 @@ def sprite(args):
         f = d / f"{last}_{t}_{args.seed}.png"
         if f.exists():
             rgb = np.asarray(Image.open(f).convert("RGB"))
-            imgs[t] = (rgb, keyout(rgb))
-    if args.place == "fit":
-        # same rule as forge.compose: one cell for the whole run (median figure height -> fit_h), each frame placed by
-        # ground contact and horizontal centroid
-        hs = [np.ptp(np.nonzero(a.any(1))[0]) + 1 for _, a in imgs.values()]
-        cell = float(np.median(hs)) / (H * 0.93) * infl
-    else:
-        cell = s * infl
+            imgs[t] = (rgb, deshadow(rgb, keyout(rgb)))
+    hs = [np.ptp(np.nonzero(a.any(1))[0]) + 1 for _, a in imgs.values()]
+    cell = float(np.median(hs)) / (H * 0.93) * infl if args.place != "fixed" else s * infl
     frames, names = [], []
     for t, (rgb, alpha) in imgs.items():
         ys, xs = np.nonzero(alpha)
-        if args.place == "fit":
+        if args.place == "fit":      # ground contact: every frame sits on the floor
             origin = (xs.mean() - W / 2 * cell, ys.max() + 1 - (H - 2 - ow) * cell)
+        elif args.place == "skel":   # the skeleton's own ground row: flight frames leave the ground
+            origin = (xs.mean() - W / 2 * cell, ground_src - (H - 2 - ow) * cell)
         else:
-            origin = (ox + (W * s) * (1 - 1 / infl) / 2, oy + (H * s) * (1 - 1 / infl) / 2)
+            origin = (ox + (pw * s) * (1 - 1 / infl) / 2, oy + (ph * s) * (1 - 1 / infl) / 2)
         sp = despeckle(to_sprite(rgb, alpha, pal[0], pal[1], cell, origin, (W, H), cfg["sprite"]["accent"]))
         if ow:
             sp = thicken(sp, ow, pal[0][np.argmin(pal[1][:, 0])])
@@ -229,7 +266,23 @@ def sprite(args):
         sys.exit("no frames")
     sheet = np.concatenate(frames, axis=1)
     Image.fromarray(sheet, "RGBA").save(d / f"sheet_{args.seed}.png")
-    review(char, motion, track, args.seed, frames, names, fig, d, last)
+    (d / f"atlas_{args.seed}.json").write_text(json.dumps({
+        "frame": {"w": W, "h": H}, "count": len(frames), "frame_ms": fig.motion.get("frame_ms", 70), "loop": True, "rev": rev(),
+        "source": {"poseguide": track + TAG, "motion": motion, "seed": args.seed, "place": args.place, "frames": names}}, indent=1))
+    review(char, motion, track + TAG, args.seed, frames, names, fig, d, last)
+
+
+def land(args):
+    """Copy a finished sheet into the forge character's sprites/pg-MOTION and import it into the game with scripts/import-sprites.py."""
+    char, motion, track = args.char, args.motion, args.track
+    d = paths(char, motion, track)
+    out = ROOT / "characters" / char / "sprites" / f"pg-{motion}"
+    out.mkdir(parents=True, exist_ok=True)
+    shutil.copy(d / f"sheet_{args.seed}.png", out / "sheet.png")
+    shutil.copy(d / f"atlas_{args.seed}.json", out / "atlas.json")
+    name, anim = args.name.split("/")
+    imp = Path.home() / "projects/probable-octo-funicular/scripts/import-sprites.py"
+    subprocess.run([sys.executable, str(imp), char, f"pg-{motion}", name, anim], check=True)
 
 
 def review(char, motion, track, seed, frames, names, fig, d, last):
@@ -237,6 +290,7 @@ def review(char, motion, track, seed, frames, names, fig, d, last):
     out.mkdir(parents=True, exist_ok=True)
     tr = TRACKS[track]
     z = 3
+    track = track
     cw, chh = frames[0].shape[1] * z, frames[0].shape[0] * z
     ims = [upscale(f, z, (40, 34, 52)).convert("RGB") for f in frames]
     pose_row = [Image.open(d / f"pose_{t}.png").convert("RGB").resize((cw, chh), Image.LANCZOS) for t in names]
@@ -254,10 +308,16 @@ def review(char, motion, track, seed, frames, names, fig, d, last):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["gen", "sprite"])
+    ap.add_argument("cmd", choices=["gen", "sprite", "land"])
     ap.add_argument("char"); ap.add_argument("motion"); ap.add_argument("track")
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--frames", default="")
-    ap.add_argument("--place", default="fit", choices=["fit", "fixed"])
+    ap.add_argument("--place", default="skel", choices=["skel", "fit", "fixed"])
+    ap.add_argument("--hands", default="free", help="pose.toml hands_<name> text, e.g. phone")
+    ap.add_argument("--note", default="")
+    ap.add_argument("--tag", default="")
+    ap.add_argument("--canvas", default="", help="W,H of the sprite frame, default pose.toml canvas")
+    ap.add_argument("--name", default="", help="land: GAME_NAME GAME_ANIM as NAME/ANIM")
     a = ap.parse_args()
-    {"gen": gen, "sprite": sprite}[a.cmd](a)
+    TAG = ("-" + a.tag) if a.tag else ""
+    {"gen": gen, "sprite": sprite, "land": land}[a.cmd](a)

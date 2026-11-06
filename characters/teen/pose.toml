@@ -17,3 +17,5 @@ head = [10, -48, 10]
 head_shape = "circle"
 body = [[-6, 2], [-9, -14], [-8, -33], [0, -37], [11, -34], [11, -14], [9, 2]]
 neck = [7, -35]
+hands = "Both arms swing freely in a running arm swing, the hands hold nothing, no phone."
+hands_phone = "Both hands hold the glowing phone in front of the chest, head bowed over it."

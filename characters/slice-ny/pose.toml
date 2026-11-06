@@ -19,3 +19,4 @@ head_shape = "face"
 # torso outline relative to the hip, clockwise: a pizza slice, tip at the hip
 body = [[1, 3], [-27, -54], [-14, -66], [14, -70], [36, -64], [38, -48]]
 neck = [2, -52]
+hands = "Both arms swing."
