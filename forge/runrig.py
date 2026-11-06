@@ -321,8 +321,9 @@ class Rig:
         half = n // 2
         near_leg = leg(t, False)
         far_leg = leg(t + half, True)
-        near_arm = arm(t + half, False)
-        far_arm = arm(t, True)
+        blank = np.zeros((Hc, W, 4), np.uint8)
+        near_arm = arm(t + half, False) if c["arm"].get("draw", True) else blank
+        far_arm = arm(t, True) if c["arm"].get("draw", True) else blank
         body = np.zeros((Hc, W, 4), np.uint8)
         lean = g.get("lean", 0) + g.get("lean_down", 0) * (1 if kind == "run" and (t % n) in (1, 5) else 0)
         if lean:

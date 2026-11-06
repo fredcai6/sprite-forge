@@ -1,0 +1,58 @@
+anim = "flee"
+canvas = [150, 118]
+frame_ms = 70
+dark = [0, 0, 0]
+outline = 4
+inner_outline = 2
+src_outline = 4
+
+[body]
+src = "characters/teen/sprites/flee/sheet.png"
+frame = 1
+frame_w = 150
+erase = [
+  [[84,54],[135,54],[135,70],[84,70]],
+  [[99,40],[140,40],[140,54],[99,54]],
+  [[25,44],[57,44],[57,80],[25,80]],
+  [[10,81],[145,81],[145,125],[10,125]],
+]
+
+[limb]
+leg = [[116,128,196],[83,92,157],[51,21,102]]
+arm = [[255,148,66],[251,107,25],[226,81,33]]
+
+[foot]
+src = "characters/teen/sprites/flee/sheet.png"
+frame = 1
+frame_w = 150
+box = [91, 98, 116, 114]
+anchor = [95, 102]
+
+[hand]
+src = "characters/teen/sprites/flee/sheet.png"
+frame = 1
+frame_w = 150
+box = [102, 47, 121, 63]
+anchor = [104, 58]
+
+[arm]
+shoulder_near = [82, 56]
+shoulder_far = [58, 56]
+len = 26
+w = 8
+swing = 1.2
+hand_angle = 90
+
+[gait]
+kind = "run"
+leg = 24
+thigh = 0.5
+leg_w = 10
+lean = 5
+lean_down = 2
+stride = 1.35
+clear = 1.15
+bob = 1.0
+ground = 113
+hip = [78, 80]
+far_dark = 0.55
