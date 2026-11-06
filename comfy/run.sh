@@ -9,7 +9,7 @@ exec docker run --rm --name "${FORGE_CONTAINER:-sprite-forge-comfy}" \
   ${GPU_JOB_LABEL:+--label "$GPU_JOB_LABEL"} \
   --device /dev/kfd --device /dev/dri --group-add 44 --group-add 992 \
   --security-opt seccomp=unconfined --ipc host --user "$(id -u):$(id -g)" \
-  -p 127.0.0.1:8188:8188 \
+  -p 127.0.0.1:${FORGE_PORT:-8188}:8188 \
   -e ROCR_VISIBLE_DEVICES=0 -e MIOPEN_USER_DB_PATH=/miopen -e MIOPEN_CUSTOM_CACHE_DIR=/miopen -e HOME=/tmp \
   -v "$DATA/ComfyUI:/comfy" -v "$DATA/out:/out" -v "$DATA/in:/in" -v "$DATA/miopen:/miopen" \
   -v /mnt/data/models/comfy:/models:ro -v "$here/extra_model_paths.yaml:/extra.yaml:ro" \
