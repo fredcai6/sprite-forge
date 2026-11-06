@@ -14,6 +14,7 @@ def clean(a):
         w, h = o[1].stop - o[1].start, o[0].stop - o[0].start
         m = lbl == i
         if w > 150 and h < 140: a[m] = False
+        elif o[0].start < 330 and w >= 80: a[m] = False   # a tall wide mass is a tree/banner floating over the street, not furniture
         elif m.sum() < 60 or o[0].stop < 540: a[m] = False   # furniture stands on the ground line; nothing floats or hangs
     return ndimage.binary_opening(a, iterations=1)
 

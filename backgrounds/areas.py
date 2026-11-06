@@ -8,3 +8,6 @@ def _a(far, mid, near, ground, door, ground_row, tint, haze, amt=0.2, c=0.74, l=
 AREAS["newyork/wallstreet"] = _a(2, 5, 4, 1, 2, 650, (40, 46, 66), (190, 205, 228))
 AREAS["newyork/centralpark"] = _a(3, 2, 4, 1, 2, 645, (40, 60, 44), (214, 232, 222), 0.14, 0.78, 14)
 AREAS["newyork/brooklyn"] = _a(2, 3, 4, 1, 1, 650, (60, 40, 40), (240, 214, 196), 0.16, 0.76, 16)
+AREAS["chicago/loop"] = _a(1, 2, 4, 1, 3, 660, (36, 42, 66), (190, 205, 232), 0.2, 0.74, 20)
+AREAS["chicago/lincolnpark"] = _a(1, 2, 4, 1, 2, 640, (36, 60, 60), (214, 232, 236), 0.14, 0.78, 14)
+AREAS["chicago/wickerpark"] = _a(3, 4, 2, 1, 2, 650, (60, 36, 36), (236, 214, 200), 0.16, 0.76, 16)
