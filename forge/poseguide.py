@@ -22,6 +22,7 @@ from .compose import keyout, thicken
 from .generate import DATA, ROOT, KEY, get, post, publish, rev, wait_up
 from . import generate as G
 from .pixelize import despeckle, to_sprite, upscale
+from . import lineart
 from .posekit import Figure
 from .workflows import MODELS
 
@@ -90,6 +91,11 @@ TRACKS = {
         dict(model="qwen-edit", refs=["prev"], prompt=(
             "Redraw this running cartoon character in exactly the same pose, keeping every arm and leg where it is, as: {desc}. Painted in the style of a glossy "
             "pixel-art game sprite with a thick dark outline, rich saturated colours, shaded cheese. " + COMMON + " " + BG + "."))]),
+    # a code rig (forge/runrig.py) fixed the pose; deterministic edge lines carry it, a model only paints
+    "rig-paint": dict(pose="rigline", stages=[dict(model="qwen-edit", refs=["pose", "master"], prompt=(
+        "Image 1 is a black line drawing of a character. Image 2 is the finished character. Colour image 1 to match image 2: keep every line of "
+        "image 1 exactly where it is, same pose, same legs and arms, and paint it in the colours, shading and chunky pixel-art style of image 2, "
+        "with a thick dark outline. {note} " + COMMON + " " + BG + ", no ground shadow."))]),
     "qwen-cn-lines": dict(pose="lines", stages=[dict(model="qwen-edit", refs=["master"], control=True, kw=dict(cn_strength=0.9), prompt=(
         "Redraw this exact same character, same colours, proportions, thick dark outline and chunky pixel-art game style, following the line drawing for the pose. "
         + COMMON + " " + BG + "."))]),
@@ -144,10 +150,24 @@ def master_input(char):
     return to_input(img.resize((SIZE, SIZE), Image.LANCZOS))
 
 
+def rig_source(char, anim):
+    """Frames of a finished rig animation under characters/CHAR/sprites/ANIM: (list of RGBA arrays, atlas)."""
+    d = ROOT / "characters" / char / "sprites" / anim
+    atlas = json.loads((d / "atlas.json").read_text())
+    sheet = np.asarray(Image.open(d / "sheet.png").convert("RGBA"))
+    w = atlas["frame"]["w"]
+    return [sheet[:, i * w:(i + 1) * w] for i in range(atlas["count"])], atlas
+
+
 def gen(args):
     char, motion, track = args.char, args.motion, args.track
     tr = TRACKS[track]
-    fig = Figure(char, motion)
+    rigline = tr["pose"] == "rigline"
+    if rigline:
+        rframes, ratlas = rig_source(char, args.src)
+        fig = type("F", (), {"n": len(rframes), "motion": {"verb": "running", "frame_ms": ratlas["frame_ms"]}})()
+    else:
+        fig = Figure(char, motion)
     desc = tomllib.loads((ROOT / "characters" / char / "character.toml").read_text())["description"]
     pc = pose_cfg(char)
     fill = dict(verb=fig.motion.get("verb", "running"), hands=pc.get("hands_" + args.hands, pc.get("hands", "Both arms swing.")) if args.hands != "free" else pc.get("hands", "Both arms swing."),
@@ -156,7 +176,10 @@ def gen(args):
     out.mkdir(parents=True, exist_ok=True)
     frames = [int(x) for x in args.frames.split(",")] if args.frames else list(range(fig.n))
     for t in frames:   # the pose images, saved for the review sheet
-        getattr(fig, tr["pose"])(t, SIZE).save(out / f"pose_{t}.png")
+        if rigline:
+            lineart.render(rframes[t], SIZE)[0].save(out / f"pose_{t}.png")
+        else:
+            getattr(fig, tr["pose"])(t, SIZE).save(out / f"pose_{t}.png")
     seeds = [int(x) for x in args.seeds.split(",")] if args.seeds else [args.seed]
     todo = [(t, i, sd) for sd in seeds for t in frames for i in range(len(tr["stages"])) if not (out / f"{stage_name(track, i)}_{t}_{sd}.png").exists()]
     print(f"{len(todo)} images to make", flush=True)
@@ -231,15 +254,24 @@ def sprite(args):
     cfg = tomllib.loads((ROOT / "characters" / char / "character.toml").read_text())
     pose = pose_cfg(char)
     pal = load_palette(ROOT / "characters" / char / "palette.json")
-    fig = Figure(char, motion)
+    rigline = TRACKS[track]["pose"] == "rigline"
     d = paths(char, motion, track)
+    if rigline:
+        rframes, ratlas = rig_source(char, args.src)
+        fig = type("F", (), {"n": len(rframes), "motion": {"frame_ms": ratlas["frame_ms"]}})()
+        args.place = "grid"
+    else:
+        fig = Figure(char, motion)
     last = stage_name(track, len(TRACKS[track]["stages"]) - 1)
-    pw, ph = pose["canvas"]
+    if rigline:
+        pw, ph = ratlas["frame"]["w"], ratlas["frame"]["h"]
+    else:
+        pw, ph = pose["canvas"]
     W, H = [int(x) for x in args.canvas.split(",")] if args.canvas else (pw, ph)
     s = min(0.9 * SIZE / pw, 0.9 * SIZE / ph)          # source px per sprite px of the pose render
     ox, oy = (SIZE - pw * s) / 2, (SIZE - ph * s) / 2
     ground_src = oy + pose["ground"] * s               # image row of the skeleton's ground
-    ow = cfg["sprite"].get("outline", 0)
+    ow = 0 if rigline else cfg["sprite"].get("outline", 0)    # a rig frame's outline is already in its lines
     infl = 1 + 2 * ow / (H * 0.95)               # the outline is added on top, so paint the figure smaller
     imgs = {}
     for t in range(fig.n):
@@ -248,11 +280,14 @@ def sprite(args):
             rgb = np.asarray(Image.open(f).convert("RGB"))
             imgs[t] = (rgb, deshadow(rgb, keyout(rgb)))
     hs = [np.ptp(np.nonzero(a.any(1))[0]) + 1 for _, a in imgs.values()]
-    cell = float(np.median(hs)) / (H * 0.93) * infl if args.place != "fixed" else s * infl
+    grid_k, grid_o = (lineart.render(rframes[0], SIZE)[1:] if rigline else (None, None))
+    cell = grid_k if rigline else (float(np.median(hs)) / (H * 0.93) * infl if args.place != "fixed" else s * infl)
     frames, names = [], []
     for t, (rgb, alpha) in imgs.items():
         ys, xs = np.nonzero(alpha)
-        if args.place == "fit":      # ground contact: every frame sits on the floor
+        if rigline:                  # the line art sat on a whole-number grid: sample it back exactly
+            origin = grid_o
+        elif args.place == "fit":      # ground contact: every frame sits on the floor
             origin = (xs.mean() - W / 2 * cell, ys.max() + 1 - (H - 2 - ow) * cell)
         elif args.place == "skel":   # the skeleton's own ground row: flight frames leave the ground
             origin = (xs.mean() - W / 2 * cell, ground_src - (H - 2 - ow) * cell)
@@ -328,6 +363,7 @@ if __name__ == "__main__":
     ap.add_argument("--hands", default="free", help="pose.toml hands_<name> text, e.g. phone")
     ap.add_argument("--note", default="")
     ap.add_argument("--tag", default="")
+    ap.add_argument("--src", default="run", help="rig-paint: the finished rig animation under characters/CHAR/sprites/")
     ap.add_argument("--seeds", default="", help="gen: comma list of seeds in one ComfyUI session")
     ap.add_argument("--canvas", default="", help="W,H of the sprite frame, default pose.toml canvas")
     ap.add_argument("--name", default="", help="land: GAME_NAME GAME_ANIM as NAME/ANIM")
