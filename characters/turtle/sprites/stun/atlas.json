@@ -1,0 +1,25 @@
+{
+ "frame": {
+  "w": 150,
+  "h": 92
+ },
+ "count": 4,
+ "frame_ms": 160,
+ "loop": true,
+ "rev": {
+  "sha": "a5b7f7bc4f5d2fbcea5542172b86f4a692302cbc",
+  "dirty": true,
+  "comfy": "v0.44.0"
+ },
+ "source": {
+  "run": "keys3",
+  "model": "qwen-edit",
+  "cell": 9.19767441860465,
+  "poses": [
+   "stun_a/1",
+   "stun_a/1",
+   "stun_b/1",
+   "stun_b/1"
+  ]
+ }
+}

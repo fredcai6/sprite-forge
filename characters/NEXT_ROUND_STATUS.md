@@ -14,3 +14,4 @@
 - slice-ny run: new 8-frame cycle (contact/down/pass/up, both legs, arms in opposition) @70ms, frame 140x124. Other slice-ny anims (idle/jump/fall/cold) still old until keys3 finishes (a GPU memory fault killed the first keys job; resubmitted).
 - slice-naples redone at 104: frames 130x104, run 8f @70ms, idle 6, jump, fall, cold, special = forward dash pose (8 frames).
 - teen film (120x118, 4f) and flee (150x118, 4f @80ms, crying run) landed; walk/idle unchanged.
+- turtle munch (4f) and stun (4f) landed at 150x92. WEAK: stun does not tuck head/legs (model refused), it is a dazed face; stars clipped by canvas top. The new pose is more upright than walk.
