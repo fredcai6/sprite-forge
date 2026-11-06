@@ -39,6 +39,12 @@ TRACKS = {
         "Image 1 is the character. Image 2 is a pose skeleton for a side view. Redraw the exact same character from image 1, same colours, "
         "proportions, thick dark outline and chunky pixel-art game style, in the pose of the skeleton in image 2: put the head, arms and legs "
         "exactly where the skeleton's limbs go, both legs from the same hip, with the crossing and bending the skeleton shows. " + COMMON + " " + BG + "."))]),
+    # human bodies: the skeleton reads as a body, so say what the limbs do
+    "qwen-pose-run": dict(pose="openpose", stages=[dict(model="qwen-edit", refs=["master", "pose"], prompt=(
+        "Image 1 is the character. Image 2 is a pose skeleton for a side view of a runner. Redraw the exact same character from image 1, same clothes, colours, "
+        "proportions, thick dark outline and chunky pixel-art game style, running in the pose of the skeleton in image 2: head, arms and legs exactly where the skeleton's "
+        "limbs go. Both arms swing freely in a running arm swing, the hands hold nothing, no phone. Both legs from the same hip, crossing and bending as the skeleton shows. "
+        "Head up, looking ahead. " + COMMON + " " + BG + ", no ground shadow."))]),
     "qwen-mannequin": dict(pose="mannequin", stages=[dict(model="qwen-edit", refs=["master", "pose"], prompt=(
         "Image 1 is the character. Image 2 shows black limb shapes: the arms and legs of the pose wanted. Redraw the exact same character from image 1, "
         "same colours, proportions, thick dark outline and chunky pixel-art game style, with its arms and legs exactly on the black limb shapes of "
