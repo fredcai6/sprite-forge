@@ -43,6 +43,20 @@ TRACKS = {
         "Image 1 is the character. Image 2 shows black limb shapes: the arms and legs of the pose wanted. Redraw the exact same character from image 1, "
         "same colours, proportions, thick dark outline and chunky pixel-art game style, with its arms and legs exactly on the black limb shapes of "
         "image 2 and its body above the legs. " + COMMON + " " + BG + ".")])),
+    # Track 3: Qwen-Image-InstantX union ControlNet (pose) on Qwen-Image-Edit, character from the master
+    "qwen-cn-pose": dict(pose="openpose", stages=[dict(model="qwen-edit", refs=["master"], control=True, kw=dict(cn_strength=0.8), prompt=(
+        "Redraw this exact same character, same colours, proportions, thick dark outline and chunky pixel-art game style, running in the pose given. "
+        + COMMON + " " + BG + "."))]),
+    "qwen-cn-pose-hi": dict(pose="openpose", stages=[dict(model="qwen-edit", refs=["master"], control=True, kw=dict(cn_strength=1.2), prompt=(
+        "Redraw this exact same character, same colours, proportions, thick dark outline and chunky pixel-art game style, running in the pose given. "
+        + COMMON + " " + BG + "."))]),
+    "qwen-cn-lines": dict(pose="lines", stages=[dict(model="qwen-edit", refs=["master"], control=True, kw=dict(cn_strength=0.9), prompt=(
+        "Redraw this exact same character, same colours, proportions, thick dark outline and chunky pixel-art game style, following the line drawing for the pose. "
+        + COMMON + " " + BG + "."))]),
+    # FLUX.2 Klein takes reference images instead of an IP-Adapter: master + pose as two references
+    "klein-pose": dict(pose="openpose", stages=[dict(model="klein", refs=["master", "pose"], prompt=(
+        "Redraw the exact same cartoon character from the first image, same colours, proportions, thick dark outline and chunky pixel-art game style, "
+        "in the pose of the skeleton in the second image: head, arms and legs exactly where the skeleton's limbs are. " + COMMON + " " + BG + "."))]),
     # Track 2: line drawing first, then paint it
     "outline-paint": dict(pose="lines", stages=[
         dict(model="qwen-edit", refs=["master", "pose"], name="lineart", prompt=(
@@ -121,7 +135,10 @@ def gen(args):
                 else:  # previous stage output
                     refs.append(to_input(Image.open(out / f"{stage_name(track, i - 1)}_{t}_{args.seed}.png")))
             t0 = time.time()
-            graph = MODELS[st["model"]](st["prompt"], refs, args.seed, SIZE, SIZE, "pg")
+            kw = dict(st.get("kw", {}))
+            if st.get("control"):
+                kw["control"] = to_input(Image.open(out / f"pose_{t}.png"))
+            graph = MODELS[st["model"]](st["prompt"], refs, args.seed, SIZE, SIZE, "pg", **kw)
             G.run_prompt(graph, dest)
             secs = round(time.time() - t0, 1)
             dest.with_suffix(".json").write_text(json.dumps({"track": track, "stage": i, "frame": t, "seed": args.seed, "prompt": st["prompt"], "secs": secs, "rev": meta}, indent=1))
