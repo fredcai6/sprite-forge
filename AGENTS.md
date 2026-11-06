@@ -42,3 +42,13 @@ For a character whose body reads as a human skeleton, `forge/poseguide.py` draws
 One command through the queue: `gpu submit --vram 30G --name pg-NAME -- .venv/bin/python -m forge.poseguide make NAME MOTION qwen-pose-run --seeds 1,2 --name GAME/ANIM`
 writes review sheets to `/mnt/data/sprite-forge/review/pose-options/`; `poseguide land NAME MOTION qwen-pose-run --seed N --name GAME/ANIM` imports the pick.
 It does not work on bodies a skeleton does not describe (pizza slices, turtles): the master's stance wins. Keep `forge.runrig` for those.
+
+## Dressing a sprite at runtime
+
+When something on a character changes during play (toppings, armor, a logo), paint it out of the finished sheets and let the game put it back. Mark it once in `characters/NAME/decals.toml` on one reference frame, then:
+
+`FORGE_PROJECT=PROJECT/art .venv/bin/python -m forge.decals characters/NAME/decals.toml`
+
+Each frame is registered to the reference, so the marks land correctly on redrawn poses too. It writes `sprites/ANIM-plain/` with the cleaned sheet, a mask of the surface decals may show on, and `seats` in the atlas: where each decal sits on each frame. Drawn through the mask, decals follow the body and pass behind hands. It takes minutes per animation at 330 px wide, because it searches rotation and scale. Check the result by eye: over-wide marks eat faces.
+
+`forge.blink` adds a closed-eye frame to a held idle: `python -m forge.blink characters/NAME/sprites/idle-plain cx,cy,rx,ry ...`, with the ellipses large enough to cover the whole eye and clear of the brows.
