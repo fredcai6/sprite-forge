@@ -1,5 +1,11 @@
 # sprite-forge
 
+A tool for any project, not a home for one project's art. Characters, backgrounds, style rules and build scripts
+belong to the project that uses them, in a folder of its own with `characters/` and a `forge.toml` naming its
+`importer` and `assets` paths. Pizza Runner's are in `art/` of its repo. `characters/derek` stays here as the worked example.
+Run from that project folder with this repo on the path, or set `FORGE_PROJECT`:
+`cd PROJECT/art && PYTHONPATH=~/projects/sprite-forge ~/projects/sprite-forge/.venv/bin/python -m forge.runrig characters/NAME/rig/run.toml`
+
 Sketches and references in, consistent animated pixel sprites out. Each sprite's `atlas.json` records
 the code revision and the key pose it was built from.
 
@@ -12,7 +18,7 @@ as `sprite-forge-comfy:latest`.
 ## The loop
 
 1. `characters/NAME/character.toml` holds the description, sprite height and palette families;
-   put references in `references/` and run `PYTHONPATH=. .venv/bin/python characters/palette_build.py NAME`.
+   put references in `references/` and run `python -m forge.palette_build NAME`.
 2. Write key poses in `characters/NAME/runs/X.toml`, then generate through the GPU queue:
    `~/projects/gpu-manager/gpu submit --vram 30G --name sprite-NAME -- .venv/bin/python -m forge.generate characters/NAME/runs/X.toml qwen-edit`
 3. Look at `python -m forge.contact RUN_DIR OUT.png` and choose keys.
@@ -27,3 +33,12 @@ as `sprite-forge-comfy:latest`.
 - Neither model nods on request. Head motion comes from `forge/animate.py`.
 - Derek's native scale is about 6.1 source pixels per sprite pixel; at 185px tall he keeps his detail.
 - Outputs and comfy.log live in `/mnt/data/sprite-forge`, weights in `/mnt/data/models/comfy`.
+
+## Pose-guided runs (humans)
+
+For a character whose body reads as a human skeleton, `forge/poseguide.py` draws a run or walk from a skeleton:
+`characters/NAME/pose.toml` (body plan, master, prompt notes) plus `forge/motions/MOTION.toml` (gait table) feed
+`forge/posekit.py`, which renders the OpenPose skeleton that Qwen-Image-Edit paints the master onto (track `qwen-pose-run`).
+One command through the queue: `gpu submit --vram 30G --name pg-NAME -- .venv/bin/python -m forge.poseguide make NAME MOTION qwen-pose-run --seeds 1,2 --name GAME/ANIM`
+writes review sheets to `/mnt/data/sprite-forge/review/pose-options/`; `poseguide land NAME MOTION qwen-pose-run --seed N --name GAME/ANIM` imports the pick.
+It does not work on bodies a skeleton does not describe (pizza slices, turtles): the master's stance wins. Keep `forge.runrig` for those.

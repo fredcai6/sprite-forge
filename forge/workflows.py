@@ -32,7 +32,10 @@ def klein(prompt, refs, seed, width, height, prefix, steps=4):
     return g
 
 
-def qwen_edit(prompt, refs, seed, width, height, prefix, steps=4):
+def qwen_edit(prompt, refs, seed, width, height, prefix, steps=4, control=None, cn_strength=0.8, cn_end=1.0,
+              cn_name="Qwen-Image-InstantX-ControlNet-Union.safetensors"):
+    """Qwen-Image-Edit 2511; with `control` (an input image name) a ControlNet (union: pose/canny/line) steers the
+    layout while `refs` carry the character."""
     imgs = {}
     g = {
         "unet": {"class_type": "UNETLoader", "inputs": {"unet_name": "qwen_image_edit_2511_fp8mixed.safetensors", "weight_dtype": "default"}},
@@ -55,6 +58,15 @@ def qwen_edit(prompt, refs, seed, width, height, prefix, steps=4):
         "decode": {"class_type": "VAEDecode", "inputs": {"samples": ["sample", 0], "vae": ["vae", 0]}},
         "save": {"class_type": "SaveImage", "inputs": {"images": ["decode", 0], "filename_prefix": prefix}},
     }
+    if control:
+        g |= {
+            "cn": {"class_type": "ControlNetLoader", "inputs": {"control_net_name": cn_name}},
+            "ctl": {"class_type": "LoadImage", "inputs": {"image": control}},
+            "apply": {"class_type": "ControlNetApplyAdvanced", "inputs": {"positive": ["posm", 0], "negative": ["negm", 0], "control_net": ["cn", 0], "image": ["ctl", 0],
+                                                                         "strength": cn_strength, "start_percent": 0.0, "end_percent": cn_end, "vae": ["vae", 0]}},
+        }
+        g["sample"]["inputs"]["positive"] = ["apply", 0]
+        g["sample"]["inputs"]["negative"] = ["apply", 1]
     return g
 
 

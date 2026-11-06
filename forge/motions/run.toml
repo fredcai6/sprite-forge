@@ -1,0 +1,12 @@
+# Gait tables from forge/runrig.py (Muybridge Animal Locomotion plate 60; Williams contact/down/pass/up).
+verb = "running"
+frame_ms = 70
+# kind "gait": the table is indexed by a leg's own phase p; the far leg is p + n/2, the opposite arm swings with it.
+kind = "gait"
+# leg: [ankle forward of hip, sole clearance above ground, foot angle] in leg-lengths / degrees
+leg = [[0.46, 0.00, -18], [0.22, 0.00, 0], [-0.06, 0.00, 6], [-0.50, 0.16, 48],
+       [-0.46, 0.44, 72], [-0.12, 0.46, 62], [0.12, 0.40, 28], [0.44, 0.20, -12]]
+hip = [0.90, 0.80, 0.90, 0.99, 0.90, 0.80, 0.90, 0.99]
+# arm: hand target relative to shoulder in arm-lengths, by the same-side leg phase
+arm = [[-0.45, 0.72], [-0.30, 0.82], [0.0, 0.88], [0.35, 0.78], [0.62, 0.50], [0.40, 0.74], [0.02, 0.88], [-0.30, 0.80]]
+lean_extra = [0, 2, 0, 0, 0, 2, 0, 0]

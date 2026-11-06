@@ -4,3 +4,5 @@ forge:
   text_encoders: text_encoders
   vae: vae
   loras: loras
+  controlnet: controlnet
+  model_patches: model_patches

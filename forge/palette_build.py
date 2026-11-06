@@ -1,3 +1,4 @@
+import os
 """Rebuilds characters/<name>/palette.json from its references: palette_build.py NAME"""
 import glob, json, sys, tomllib
 from pathlib import Path
@@ -7,7 +8,7 @@ from PIL import Image
 
 from forge.color import build_palette
 
-char = Path(__file__).parent / sys.argv[1]
+char = Path(os.environ.get("FORGE_PROJECT", Path.cwd())) / "characters" / sys.argv[1]
 cfg = tomllib.loads((char / "character.toml").read_text())
 px = []
 for f in sorted(glob.glob(str(char / "references/*.png"))):

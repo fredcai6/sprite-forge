@@ -58,6 +58,8 @@ def build_palette(rgb_pixels, families, seed=0):
         else:
             sel = chroma < f.get("max_chroma", 0.04)
         pts = rgb_pixels[sel].astype(np.float64)
+        if len(pts) < 4 * f["n"]:
+            continue   # this character has next to no colour in this family
         centres, _ = kmeans(pts, f["n"], rng)
         centres = centres[np.argsort(srgb_to_oklab(centres)[:, 0])]
         out[name] = [[int(round(v)) for v in c] for c in centres]

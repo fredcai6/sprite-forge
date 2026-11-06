@@ -6,3 +6,6 @@ vae https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files
 text_encoders https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors
 loras https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors
 diffusion_models https://huggingface.co/Comfy-Org/Qwen-Image-Edit_ComfyUI/resolve/main/split_files/diffusion_models/qwen_image_edit_2511_fp8mixed.safetensors
+# pose-guided tracks (forge/poseguide.py). Pinned revisions; Qwen-Image ControlNets, no gating.
+controlnet https://huggingface.co/Comfy-Org/Qwen-Image-InstantX-ControlNets/resolve/90cf72c3b0e4b11f9a0037727459dbdd03ae029b/split_files/controlnet/Qwen-Image-InstantX-ControlNet-Union.safetensors
+model_patches https://huggingface.co/Comfy-Org/Qwen-Image-DiffSynth-ControlNets/resolve/5ad28a1b22cd0d947b59226c4b569d293eb695ef/split_files/model_patches/qwen_image_canny_diffsynth_controlnet.safetensors
