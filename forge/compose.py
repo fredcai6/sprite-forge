@@ -145,6 +145,15 @@ def frame_for(spec, pal, run_dir, f, accent, outline=0, recolors=()):
     cell *= 1 + 2 * outline / (h * 0.95)   # the outline is added on top, so paint the figure smaller to keep the frame
     rgb = np.asarray(Image.open(pose_path(run_dir, f["pose"])).convert("RGB"))
     alpha = keyout(rgb)
+    for x0, y0, x1, y1 in f.get("drop_grey", []):
+        # props the generator drew with the figure (a ledge): grey, unsaturated pixels inside this box are not the character
+        lab_ = srgb_to_oklab(rgb[y0:y1, x0:x1])
+        g = (np.hypot(lab_[..., 1], lab_[..., 2]) < 0.035) & (lab_[..., 0] > 0.3)
+        alpha[y0:y1, x0:x1] &= ~g
+        alpha = ndimage.binary_opening(alpha, iterations=2)
+        lb, n_ = ndimage.label(alpha)
+        if n_ > 1:
+            sz = ndimage.sum(alpha, lb, range(1, n_ + 1)); alpha = lb == 1 + int(np.argmax(sz))
     if f.get("flip"):
         rgb, alpha = rgb[:, ::-1], alpha[:, ::-1]
     ys, xs = np.where(alpha)

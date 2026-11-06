@@ -1,0 +1,29 @@
+{
+ "frame": {
+  "w": 128,
+  "h": 118
+ },
+ "count": 8,
+ "frame_ms": 130,
+ "loop": false,
+ "rev": {
+  "sha": "e04413eb5831a5345cc741b8d40031128470d32e",
+  "dirty": true,
+  "comfy": "v0.44.0"
+ },
+ "source": {
+  "run": "keys3",
+  "model": "qwen-edit",
+  "cell": 8.49056603773585,
+  "poses": [
+   "hurt_a/1",
+   "hurt_a/1",
+   "hurt_a/1",
+   "hurt_b/1",
+   "hurt_b/1",
+   "hurt_b/1",
+   "hurt_b/1",
+   "hurt_b/1"
+  ]
+ }
+}

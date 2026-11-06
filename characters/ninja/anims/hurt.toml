@@ -1,0 +1,16 @@
+run = "keys3"
+model = "qwen-edit"
+fit_pose = "leap_a/1"
+fit_h = 106
+canvas = [128, 118]
+frame_ms = 130
+loop = false
+preview_scale = 3
+
+[[frames]]
+pose = "hurt_a/1"
+hold = 3
+
+[[frames]]
+pose = "hurt_b/1"
+hold = 5
