@@ -15,15 +15,17 @@ from forge.generate import DATA
 from forge.layers import key_alpha, quantize, write_sources
 
 city, out = sys.argv[1], Path(sys.argv[2]) / sys.argv[1]
+BASE = {"newyork": "props/second"}.get(sys.argv[1])
 out.mkdir(parents=True, exist_ok=True)
 # seed picks; barricade crop = fraction of the keyed height kept from the bottom (drops tall signs)
 PICKS = {
+    "newyork": dict(barricade=(1, 1.0), door=3, barrel=1, rot=None, tone=((206, 196, 214), (150, 140, 164), (118, 108, 134), (46, 34, 62), (156, 96, 78), (84, 74, 104)), style="truss"),
     "chicago": dict(barricade=(1, 0.42), door=4, barrel=2, rot=250, tone=((214, 224, 238), (150, 166, 190), (112, 126, 152), (34, 40, 66), (150, 98, 84), (84, 94, 120)), style="truss"),
     "dc": dict(barricade=(4, 0.6), door=3, barrel=2, rot=200, tone=((246, 240, 222), (214, 206, 186), (170, 164, 146), (52, 50, 56), (96, 138, 84), (190, 184, 166)), style="ledge"),
     "naples": dict(barricade=(1, 1.0), door=2, barrel=2, rot=60, tone=((200, 232, 218), (70, 150, 136), (44, 104, 98), (36, 40, 52), (196, 120, 80), (92, 62, 48)), style="plank"),
     "california": dict(barricade=(3, 0.5), door=3, barrel=2, rot=15, tone=((236, 216, 178), (200, 176, 134), (150, 124, 92), (66, 46, 50), (120, 178, 176), (116, 94, 76)), style="plank"),
 }[city]
-RUN = DATA / "runs" / city / "props/klein"
+RUN = DATA / "runs" / (BASE or f"{city}/props") / "klein"
 src = {"city": city}
 
 
@@ -62,6 +64,37 @@ def get(shot, seed, shadow=True):
     if n > 1:
         sizes = ndimage.sum(a, lab, range(1, n + 1))
         a = np.isin(lab, 1 + np.flatnonzero(sizes > (0.04 if shot.startswith('barrel') else 0.01) * sizes.max()))
+    if shot.startswith("barrel"):
+        # The drum is a vertical cylinder: below its rim nothing may stick out past its own width. This removes the
+        # ground-shadow wedge whatever its colour. Above the rim (flames, smoke) pixels are desaturated to
+        # flame/grey so no key-colour tint survives in smoke.
+        ys0, xs0 = np.where(a)
+        y0, y1 = ys0.min(), ys0.max() + 1
+        wid = np.array([a[y].sum() for y in range(a.shape[0])])
+        body = np.where(wid >= 0.8 * np.median(wid[int(y0 + 0.5 * (y1 - y0)):y1 - 3]))[0]
+        rim = int(body.min())
+        cols = np.where(a[rim + 4:int(rim + 0.5 * (y1 - rim))].any(0))[0]   # upper drum: no shadow there
+        rows_ = a[rim + 4:int(rim + 0.5 * (y1 - rim))]
+        xl = int(np.median([np.where(r)[0].min() for r in rows_ if r.any()]))      # median edges: a bung handle or
+        xr = int(np.median([np.where(r)[0].max() for r in rows_ if r.any()]))      # chime ring must not widen the drum
+        a[rim:, :xl - 1] = False
+        a[rim:, xr + 2:] = False
+        # the bottom rim is an ellipse: drop anything left of/right of it that is not drum-coloured shadow
+        # the base is an ellipse, so the two corners below it can only be ground shadow: clip to it
+        cx, rx = (xl + xr) / 2, (xr - xl) / 2 - 0.5
+        ry = 0.5 * (xr - xl) * 0.4            # the drum's bottom ellipse is about a third as tall as it is wide
+        ycen = y1 - ry
+        yy, xx = np.mgrid[0:a.shape[0], 0:a.shape[1]]
+        outside = (((xx - cx) / rx) ** 2 + ((yy - ycen) / ry) ** 2 > 1.0) & (yy > ycen - 2)
+        a &= ~outside
+        a[y1 - 6:, :] &= a[y1 - 7:y1 - 6, :]   # the bottom rows may not be wider than the row above them
+        lab1 = srgb_to_oklab(rgb)
+        hue1 = np.degrees(np.arctan2(lab1[..., 2], lab1[..., 1])) % 360
+        ch1 = np.hypot(lab1[..., 1], lab1[..., 2])
+        above = np.zeros(a.shape, bool); above[:rim] = True
+        tint = a & above & (ch1 > 0.02) & ~((hue1 > 20) & (hue1 < 115))
+        g = (lab1[..., 0] * 255 * 0.9 + 20).clip(0, 255).astype(np.uint8)
+        rgb = rgb.copy(); rgb[tint] = np.stack([g, g, g], -1)[tint]
     ys, xs = np.where(a)
     return Image.fromarray(np.dstack([rgb, a * 255]).astype(np.uint8), "RGBA").crop((xs.min(), ys.min(), xs.max() + 1, ys.max() + 1))
 
@@ -157,7 +190,7 @@ def rotate_body(a, hue_deg):
     return res
 
 
-save(fit(get("barrel", PICKS["barrel"]), 60, 110, 40, lambda a: rotate_body(a, PICKS["rot"])), "barrel.png")
+save(fit(get("barrel", PICKS["barrel"]), 60, 110, 40, (lambda a: rotate_body(a, PICKS["rot"])) if PICKS["rot"] is not None else None), "barrel.png")
 save(fit(get("barrel_out", PICKS["barrel"]), 60, 110, 32), "barrel-out.png")
 save(fit(get("door", PICKS["door"], shadow=False), 112, 165, 44), "door.png")
 write_sources(out / "props-sources.json", src)
