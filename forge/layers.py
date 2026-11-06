@@ -35,6 +35,8 @@ def quantize(rgba, n=48, seed=0, shade=None):
     """Snap to an n-colour palette (k-means in OKLab, chroma counted double) with hard alpha."""
     rgb, a = rgba[..., :3], rgba[..., 3] > 127
     px = rgb[a]
+    if len(px) < n * 4:   # nothing (or next to nothing) to quantize: return an empty layer
+        out = np.zeros_like(rgba); return out
     rng = np.random.default_rng(seed)
     if len(px) > 120_000:
         px = px[rng.choice(len(px), 120_000, replace=False)]
