@@ -317,8 +317,12 @@ def land(args):
     shutil.copy(d / f"sheet_{args.seed}.png", out / "sheet.png")
     shutil.copy(d / f"atlas_{args.seed}.json", out / "atlas.json")
     name, anim = args.name.split("/")
-    imp = Path.home() / "projects/probable-octo-funicular/scripts/import-sprites.py"
-    subprocess.run([sys.executable, str(imp), char, f"pg-{motion}", name, anim], check=True)
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("import_sprites", Path.home() / "projects/probable-octo-funicular/scripts/import-sprites.py")
+    imp = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(imp)
+    imp.FORGE = ROOT / "characters"          # read from this worktree, not the shared checkout
+    imp.main(char, f"pg-{motion}", name, anim)
 
 
 CUR = ""

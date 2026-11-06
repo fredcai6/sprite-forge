@@ -1,0 +1,30 @@
+{
+ "frame": {
+  "w": 112,
+  "h": 118
+ },
+ "count": 8,
+ "frame_ms": 100,
+ "loop": true,
+ "rev": {
+  "sha": "ea3ca2320d7c255c8705f9da901b22cf2d237a8f",
+  "dirty": false,
+  "comfy": "v0.44.0"
+ },
+ "source": {
+  "poseguide": "qwen-pose-run",
+  "motion": "walk-texting",
+  "seed": 2,
+  "place": "skel",
+  "frames": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7
+  ]
+ }
+}
