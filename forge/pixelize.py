@@ -35,25 +35,30 @@ def bbox(alpha):
 def to_sprite(rgb, alpha, pal_rgb, pal_lab, cell, origin, size, accent=3.0):
     """Sample onto a grid of `cell` source pixels. Each cell takes its most-voted palette colour,
     with saturated colours' votes multiplied by `accent`: a goggle glint covering 15% of a cell
-    is what a pixel artist would keep, and averaging would turn it to mud."""
+    is what a pixel artist would keep, and averaging would turn it to mud. Vectorised: every source
+    pixel votes into the cell it falls in."""
     w, h = size
+    H, W = alpha.shape
     idx = nearest(srgb_to_oklab(rgb), pal_lab)
     chroma = np.hypot(pal_lab[:, 1], pal_lab[:, 2])
     weights = 1 + (accent - 1) * np.clip((chroma - 0.05) / 0.1, 0, 1)
+    ys, xs = np.nonzero(alpha)
+    cy = np.floor((ys - origin[1]) / cell).astype(int)
+    cx = np.floor((xs - origin[0]) / cell).astype(int)
+    ok = (cy >= 0) & (cy < h) & (cx >= 0) & (cx < w)
+    ys, xs, cy, cx = ys[ok], xs[ok], cy[ok], cx[ok]
+    n = len(pal_rgb)
+    votes = np.zeros((h * w, n))
+    np.add.at(votes, (cy * w + cx, idx[ys, xs]), 1.0)
+    votes *= weights
+    # a cell is opaque when at least half of it is covered
+    covered = np.bincount(cy * w + cx, minlength=h * w) / max(cell * cell, 1.0)
     out = np.zeros((h, w, 4), np.uint8)
-    for y in range(h):
-        for x in range(w):
-            x0, y0 = int(origin[0] + x * cell), int(origin[1] + y * cell)
-            x1, y1 = int(origin[0] + (x + 1) * cell), int(origin[1] + (y + 1) * cell)
-            x0, y0 = max(x0, 0), max(y0, 0)
-            if x1 <= x0 or y1 <= y0:
-                continue
-            a = alpha[y0:y1, x0:x1]
-            if a.size == 0 or a.mean() < 0.5:
-                continue
-            votes = np.bincount(idx[y0:y1, x0:x1][a], minlength=len(pal_rgb)) * weights
-            out[y, x, :3] = pal_rgb[votes.argmax()]
-            out[y, x, 3] = 255
+    best = votes.argmax(1)
+    sel = (covered >= 0.5).reshape(h, w)
+    out[..., :3] = pal_rgb[best].reshape(h, w, 3)
+    out[..., 3] = np.where(sel, 255, 0)
+    out[~sel, :3] = 0
     return out
 
 

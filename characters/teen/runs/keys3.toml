@@ -1,0 +1,25 @@
+models = ["qwen-edit"]
+seeds = [1, 2]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+refs = ["characters/teen/references/master.png"]
+template = """Redraw this exact same cartoon teenager (orange hoodie, messy hair over one eye, baggy jeans, big sneakers), same proportions, colours, thick dark outline and chunky pixel-art game style. Unarmed, no mask, no weapons. No text. {action} Full body visible from head to feet, flat solid magenta background."""
+
+[shots.film_a]
+prompt = "Filming: standing facing right, holding the phone up at arm's length in front of the face with both hands, screen towards the viewer glowing, one eye squinting, slightly leaning back."
+
+[shots.film_b]
+prompt = "Filming: standing facing right, phone raised high at eye level in both hands, leaning forward a little to frame the shot, tongue stuck out, concentrating."
+
+[shots.flee_a]
+prompt = "Fleeing in tears: running side view facing right, contact pose with the long front leg far forward and back leg far behind, both fists at the eyes, mouth wide open wailing, big tears streaming."
+
+[shots.flee_b]
+prompt = "Fleeing in tears: running side view facing right, passing pose with one knee lifted high, arms flailing, mouth wide open wailing, tears flying."
+
+[shots.flee_c]
+prompt = "Fleeing in tears: running side view facing right, the other leg forward in a wide stride, fists at the face, wailing, tears flying."
+
+[shots.flee_d]
+prompt = "Fleeing in tears: running side view facing right, body at its highest in the air, both feet off the ground, arms flailing, wailing."

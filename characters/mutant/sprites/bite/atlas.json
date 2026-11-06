@@ -1,0 +1,27 @@
+{
+ "frame": {
+  "w": 170,
+  "h": 120
+ },
+ "count": 6,
+ "frame_ms": 90,
+ "loop": false,
+ "rev": {
+  "sha": "37a6cf7995d18801bbf096d00e6074acc57974a7",
+  "dirty": true,
+  "comfy": "v0.44.0"
+ },
+ "source": {
+  "run": "keys2",
+  "model": "qwen-edit",
+  "cell": 7.794642857142857,
+  "poses": [
+   "bite_a/1",
+   "bite_a/1",
+   "bite_b/1",
+   "bite_b/1",
+   "bite_b/1",
+   "bite_b/1"
+  ]
+ }
+}

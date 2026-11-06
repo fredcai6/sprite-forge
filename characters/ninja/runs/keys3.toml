@@ -1,0 +1,25 @@
+models = ["qwen-edit"]
+seeds = [1, 2]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+refs = ["characters/ninja/references/master.png"]
+template = """Redraw this exact same plain generic ninja, same black outfit, mask, proportions, thick dark outline and chunky pixel-art game style. Unarmed, no weapons, no logos, no text. {action} Full body visible from head to feet, flat solid magenta background."""
+
+[shots.leap_a]
+prompt = "Leaping: facing right, launching upward off the legs, body stretched, arms trailing behind, knees bent."
+
+[shots.leap_b]
+prompt = "Leaping: facing right, at the top of the jump, body curled, knees tucked, one arm forward, flying."
+
+[shots.crouch_a]
+prompt = "Perched crouching: facing right, balanced in a low crouch on both feet with one hand touching the ledge, watching, ready to pounce, as if sitting on a high rooftop edge."
+
+[shots.crouch_b]
+prompt = "Perched crouching: facing right, balanced low on one foot with the body leaning forward over the edge, one hand out, eyes narrow."
+
+[shots.hurt_a]
+prompt = "Hurt: facing right, recoiling backward, head thrown back, arms flung out, eyes squeezed shut in pain, off balance."
+
+[shots.hurt_b]
+prompt = "Hurt: facing right, doubled over holding the stomach, one knee bent, dizzy swirl of stars above the head."

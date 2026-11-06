@@ -1,0 +1,12 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4, 5, 6]
+width = 2816
+height = 720
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+[shots.far]
+prompt = "Wide panoramic distant background for a late-1990s 2D platformer, hand-painted pixel-art look, soft thin outlines, ochre and terracotta colours. distant tiled domes and bell towers of an old city centre rising over rooftops in warm hazy light. Very distant, low contrast, light and airy values, minimal fine detail, one slow recognizable landmark, no foreground, horizontal panorama. A living, well-kept, cheerful city: lit windows, awnings, healthy trees, clean streets. Not a ruin: no rubble, no boarded windows, no overgrowth, no fires. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no graffiti lettering. Every sign, flag and billboard is completely blank or shows only a simple abstract shape."
+[shots.mid]
+prompt = "Wide side-scrolling platformer background, hand-painted pixel-art, bold dark outlines, ochre and terracotta palette, cheerful and a little funny: narrow shop-lined lanes of old Naples: stone arches, laundry strung between balconies, shop fronts with blank awnings, tiled domes, terracotta and ochre plaster walls, lit windows. Seen straight-on from the side, buildings of varied heights with gaps between them, all standing on one flat straight horizontal street line near the bottom. A living, well-kept, cheerful city: lit windows, awnings, healthy trees, clean streets. Not a ruin: no rubble, no boarded windows, no overgrowth, no fires. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no graffiti lettering. Every sign, flag and billboard is completely blank or shows only a simple abstract shape. Flat solid saturated pure magenta background everywhere above and between the buildings, the sky is plain pure magenta."
+[shots.near]
+prompt = "Wide side-scrolling platformer background, hand-painted pixel-art, dark soft silhouettes: light foreground framing: hanging laundry at the top edge and potted plants and a scooter silhouette at the bottom. Sparse, with a large empty space in the middle. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no graffiti lettering. Every sign, flag and billboard is completely blank or shows only a simple abstract shape. Flat solid magenta background everywhere else."

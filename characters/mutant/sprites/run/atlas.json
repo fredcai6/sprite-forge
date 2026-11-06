@@ -1,0 +1,29 @@
+{
+ "frame": {
+  "w": 170,
+  "h": 120
+ },
+ "count": 8,
+ "frame_ms": 70,
+ "loop": true,
+ "rev": {
+  "sha": "37a6cf7995d18801bbf096d00e6074acc57974a7",
+  "dirty": true,
+  "comfy": "v0.44.0"
+ },
+ "source": {
+  "run": "keys2",
+  "model": "qwen-edit",
+  "cell": 7.794642857142857,
+  "poses": [
+   "run_contact_a/1",
+   "run_down_a/1",
+   "run_pass_a/1",
+   "run_up_a/1",
+   "run_contact_b/1",
+   "run_down_b/1",
+   "run_pass_b/1",
+   "run_up_b/1"
+  ]
+ }
+}

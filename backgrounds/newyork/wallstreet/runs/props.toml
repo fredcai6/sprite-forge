@@ -1,0 +1,12 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4]
+width = 768
+height = 1088
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+[shots.door]
+prompt = "Hand-painted late-1990s 2D platformer game prop, chunky pixel-art look, bold near-black violet outline, cel shading, warm light. A warm-lit front entrance seen straight-on, tall and inviting: a grand stone-pillared doorway with a polished wooden door and a brass lamp, glowing warm yellow window, with a big hand-painted wooden sign above it whose entire face reads the word DELIVER in huge clear bold capital letters in yellow on dark green, perfectly spelled. Flat solid magenta background."
+[shots.ground]
+width = 1024
+height = 512
+prompt = "A seamless flat texture swatch of grey stone city pavement slabs, seen straight-on from slightly above, evenly lit, fills the whole picture edge to edge, subtle detail, hand-painted pixel-art style. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no graffiti lettering. Every sign, flag and billboard is completely blank or shows only a simple abstract shape."

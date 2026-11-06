@@ -1,25 +1,29 @@
 {
  "frame": {
-  "w": 144,
-  "h": 124
+  "w": 230,
+  "h": 170
  },
- "count": 4,
- "frame_ms": 90,
+ "count": 8,
+ "frame_ms": 70,
  "loop": true,
  "rev": {
-  "sha": "4dea945420019a518ec2b5bd79e870ee09d54f1d",
+  "sha": "37a6cf7995d18801bbf096d00e6074acc57974a7",
   "dirty": true,
   "comfy": "v0.44.0"
  },
  "source": {
-  "run": "keys",
+  "run": "keys2",
   "model": "qwen-edit",
-  "cell": 8.071428571428571,
+  "cell": 5.6375,
   "poses": [
    "run_contact_a/1",
-   "run_passing_a/1",
+   "run_down_a/1",
+   "run_pass_a/1",
+   "run_up_a/1",
    "run_contact_b/1",
-   "run_passing_b/1"
+   "run_down_b/1",
+   "run_pass_b/1",
+   "run_up_b/1"
   ]
  }
 }

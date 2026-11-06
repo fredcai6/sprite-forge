@@ -1,0 +1,12 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4, 5, 6]
+width = 2816
+height = 720
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+[shots.far]
+prompt = "Wide panoramic distant background for a late-1990s 2D platformer, hand-painted pixel-art look, soft thin outlines, cream and grey colours. a distant row of white stone government buildings with a dome under a clear pale sky. Very distant, low contrast, light and airy values, minimal fine detail, one slow recognizable landmark, no foreground, horizontal panorama. A living, well-kept, cheerful city: lit windows, awnings, healthy trees, clean streets. Not a ruin: no rubble, no boarded windows, no overgrowth, no fires. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no graffiti lettering. Every sign, flag and billboard is completely blank or shows only a simple abstract shape."
+[shots.mid]
+prompt = "Wide side-scrolling platformer background, hand-painted pixel-art, bold dark outlines, cream and grey palette, cheerful and a little funny: a Federal Triangle street of formal repeating limestone buildings with tall columns and arches, grand stairs, flag poles with blank flags, lit windows, cream and grey palette. Seen straight-on from the side, buildings of varied heights with gaps between them, all standing on one flat straight horizontal street line near the bottom. A living, well-kept, cheerful city: lit windows, awnings, healthy trees, clean streets. Not a ruin: no rubble, no boarded windows, no overgrowth, no fires. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no graffiti lettering. Every sign, flag and billboard is completely blank or shows only a simple abstract shape. Flat solid saturated pure magenta background everywhere above and between the buildings, the sky is plain pure magenta."
+[shots.near]
+prompt = "Wide side-scrolling platformer background, hand-painted pixel-art, dark soft silhouettes: light foreground framing: stone balusters and a lamp post and a bollard. Sparse, with a large empty space in the middle. There is no text anywhere: no letters, no words, no writing, no logos, no numbers, no graffiti lettering. Every sign, flag and billboard is completely blank or shows only a simple abstract shape. Flat solid magenta background everywhere else."

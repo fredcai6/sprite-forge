@@ -1,0 +1,19 @@
+models = ["qwen-edit"]
+seeds = [1, 2]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+refs = ["characters/turtle/references/master.png"]
+template = """Redraw this exact same old tortoise (mossy domed olive-brown shell, spectacles, plaid scarf, wrinkly neck), same proportions, colours, thick dark outline and chunky pixel-art game style. No text. {action} Full body visible, flat solid magenta background."""
+
+[shots.munch_a]
+prompt = "Munching: side view facing right, head stretched forward chewing a leaf, mouth open, eyes half closed contentedly."
+
+[shots.munch_b]
+prompt = "Munching: side view facing right, head slightly lowered mouth closed chewing, cheeks full, a bit of leaf hanging from the lips."
+
+[shots.stun_a]
+prompt = "Stunned: the head and all four legs tucked completely inside the shell, only the shell visible, with small dizzy stars circling above it."
+
+[shots.stun_b]
+prompt = "Stunned: the shell tipped slightly, a tiny bit of the dazed face peeking out with spiral dizzy eyes, small stars circling above."

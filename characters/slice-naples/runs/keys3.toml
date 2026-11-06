@@ -1,0 +1,58 @@
+models = ["qwen-edit"]
+seeds = [1, 2]
+width = 1024
+height = 1024
+comfy_args = ["--reserve-vram", "1.5"]
+refs = ["characters/slice-naples/references/master.png"]
+template = """Redraw this exact same cartoon pizza slice character, same proportions, colours, thick dark outline and chunky pixel-art game style. Exactly two arms and two legs. {action} Full body visible from head to feet, no text, flat solid magenta background."""
+
+[shots.run_contact_a]
+prompt = "Running, side view facing right, mid-stride CONTACT pose: front leg stretched far forward with the heel about to touch down, back leg stretched far behind, body leaning forward, arms pumping opposite to the legs."
+
+[shots.run_down_a]
+prompt = "Running, side view facing right, DOWN pose: the front foot flat on the ground with the knee deeply bent, body at its lowest, leaning forward, arms swinging."
+
+[shots.run_pass_a]
+prompt = "Running, side view facing right, PASSING pose: one leg straight under the body bearing weight, the other knee lifted high and the foot tucked under, arms crossing the body."
+
+[shots.run_up_a]
+prompt = "Running, side view facing right, UP pose: pushing off the ground, body at its highest, the back leg extended behind and just leaving the floor, the front knee driving forward, arms pumping."
+
+[shots.run_contact_b]
+prompt = "Running, side view facing right, mid-stride CONTACT pose with the OTHER leg forward: that front leg stretched far forward with the heel about to touch down, the opposite leg stretched far behind, body leaning forward, arms pumping opposite."
+
+[shots.run_down_b]
+prompt = "Running, side view facing right, DOWN pose with the OTHER leg: front foot flat on the ground, knee deeply bent, body at its lowest, leaning forward."
+
+[shots.run_pass_b]
+prompt = "Running, side view facing right, PASSING pose with the other leg: that leg straight under the body bearing weight, the opposite knee lifted high, arms crossing the body."
+
+[shots.run_up_b]
+prompt = "Running, side view facing right, UP pose with the other leg: pushing off, body at its highest, back leg just leaving the floor, front knee driving forward."
+
+[shots.idle_a]
+prompt = "Idle: standing weight settled, arms hanging, a mild smile."
+
+[shots.idle_b]
+prompt = "Idle: standing, drawing a breath, slightly taller, one hand on the hip, smirking."
+
+[shots.idle_c]
+prompt = "Idle: standing, exhaling, slightly lower and relaxed, head tilted."
+
+[shots.jump_rise]
+prompt = "Jumping upward: legs stretched down and apart, both arms thrown up, mouth open yelling joyfully."
+
+[shots.fall]
+prompt = "Falling down through the air: legs dangling and kicking, arms flung up and out, eyes wide in surprise."
+
+[shots.cold_a]
+prompt = "Cold and stale: the whole body pale grey-blue and stiff with hardened grease and dull toppings, hugging itself shivering, sad, hunched."
+
+[shots.cold_b]
+prompt = "Cold and stale: pale grey-blue stiff body, hunched over shivering, teeth chattering."
+
+[shots.special_a]
+prompt = "Fast dash wind-up: leaning far forward at a sharp angle, one arm pulled back, knees bent, determined, speed lines behind."
+
+[shots.special_b]
+prompt = "Fast dash streak: stretched almost horizontal and low, one arm forward, legs trailing straight behind, long speed lines behind, a fierce passionate grin."

@@ -3,3 +3,7 @@
 - shared props (box, box-pile, box-broken, drain, sign, ledge, star, 7 pickup-*, 7 shot-*): landed in assets/backgrounds/props/ (sources.json beside). sign board is cream-blank; drain is a thin angled grille.
 - maps/{newyork,chicago,dc,naples,california}.png (1280x720 blank paper + coast/river shapes, no roads/text): landed in assets/backgrounds/maps/.
 - HQ pies pie-ny (104), pie-deep (96), pie-jumbo (150), pie-naples (96): landed in assets/backgrounds/hq/. Plain cold cheese, outlined discs; deep dish reads as a dark pan rim, not tall-walled (top-down limit).
+- slice-deep redone: 230x170 frames (art height 170), run 8 frames @70ms, idle 6, jump, fall, cold, special. Heavier wedge, but the run poses differ only modestly (model keeps similar side poses).
+- slice-jumbo redone: 330x240 frames (art height 240), run 8f @70ms, idle 6, jump, fall, cold, special (belly flop). Tip is left free; floppy sagging slice with tiny legs.
+- mutant redesigned (sewer scavenger, patchwork pizza-box vest, boots): 170x120 frames (height 120), run 8f @70ms, idle 6, bite 6. Old walk removed from manifest. Ground-level; the game clips for drains.
+- alewife: 150x170 frames (height 170), idle 6, wave 6 (wave has a few stray hair-wisp pixels). hq/alewife-polaroid.png 300x300 (head + stein, from the same sprite key pose, hard-edged).
