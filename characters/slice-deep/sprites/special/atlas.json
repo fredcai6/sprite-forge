@@ -7,24 +7,24 @@
  "frame_ms": 110,
  "loop": false,
  "rev": {
-  "sha": "37a6cf7995d18801bbf096d00e6074acc57974a7",
+  "sha": "2e295b36cbefcdbf45c6aa4eef03638dd57f6fac",
   "dirty": true,
   "comfy": "v0.44.0"
  },
  "source": {
-  "run": "keys2",
+  "run": "keys3",
   "model": "qwen-edit",
-  "cell": 5.6375,
+  "cell": 4.44375,
   "poses": [
    "special_a/1",
    "special_a/1",
    "special_a/1",
-   "special_b/1",
-   "special_b/1",
-   "special_b/1",
-   "special_b/1",
-   "special_b/1",
-   "special_b/1"
+   "special_b/3",
+   "special_b/3",
+   "special_b/3",
+   "special_b/3",
+   "special_b/3",
+   "special_b/3"
   ]
  }
 }
