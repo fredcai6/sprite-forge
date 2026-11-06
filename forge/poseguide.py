@@ -68,6 +68,15 @@ TRACKS = {
     "qwen-cn-pose-max": dict(pose="openpose", stages=[dict(model="qwen-edit", refs=["master"], control=True, kw=dict(cn_strength=2.0), prompt=(
         "Redraw this exact same character, same colours, proportions, thick dark outline and chunky pixel-art game style, running in the pose given. "
         + COMMON + " " + BG + "."))]),
+    # ControlNet draws the pose from the character's description alone (no master to anchor the stance), then an edit
+    # stage re-skins that figure as the exact character, keeping its limbs
+    "cn-then-edit": dict(pose="openpose", stages=[
+        dict(model="qwen-edit", refs=[], control=True, name="body", kw=dict(cn_strength=1.0), prompt=(
+            "{desc}. Side view facing right, running, in the pose given. Chunky pixel-art game style with a thick dark outline. " + COMMON + " " + BG + ".")),
+        dict(model="qwen-edit", refs=["prev", "master"], prompt=(
+            "Image 1 is a character in a running pose. Image 2 is the exact character it must be. Redraw image 1 as the character from image 2, keeping every arm and leg "
+            "of image 1 exactly where it is, with the same bends and crossing, and the same body position, but with the face, colours, gloves, sneakers and style of image 2. "
+            + COMMON + " " + BG + "."))]),
     "qwen-cn-lines": dict(pose="lines", stages=[dict(model="qwen-edit", refs=["master"], control=True, kw=dict(cn_strength=0.9), prompt=(
         "Redraw this exact same character, same colours, proportions, thick dark outline and chunky pixel-art game style, following the line drawing for the pose. "
         + COMMON + " " + BG + "."))]),
@@ -156,7 +165,7 @@ def gen(args):
             kw = dict(st.get("kw", {}))
             if st.get("control"):
                 kw["control"] = to_input(Image.open(out / f"pose_{t}.png"))
-            graph = MODELS[st["model"]](st["prompt"], refs, args.seed, SIZE, SIZE, "pg", **kw)
+            graph = MODELS[st["model"]](st["prompt"].replace("{desc}", desc.rstrip(".")), refs, args.seed, SIZE, SIZE, "pg", **kw)
             G.run_prompt(graph, dest)
             secs = round(time.time() - t0, 1)
             dest.with_suffix(".json").write_text(json.dumps({"track": track, "stage": i, "frame": t, "seed": args.seed, "prompt": st["prompt"], "secs": secs, "rev": meta}, indent=1))
