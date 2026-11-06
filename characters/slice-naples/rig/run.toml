@@ -1,0 +1,55 @@
+anim = "run"
+canvas = [130, 104]
+frame_ms = 70
+dark = [1, 1, 15]
+outline = 4
+inner_outline = 2
+src_outline = 4
+
+[body]
+src = "characters/slice-naples/sprites/idle/sheet.png"
+frame = 0
+frame_w = 130
+erase = [
+  [[25,40],[45,40],[47,52],[50,60],[55,68],[60,76],[64,82],[64,104],[25,104]],
+  [[83,40],[115,40],[115,104],[70,104],[73,82],[78,72],[82,62],[83,52]],
+  [[40,84],[115,84],[115,104],[40,104]],
+]
+
+[limb]
+leg = [[250,200,143],[249,193,132],[204,145,139]]
+arm = [[250,200,143],[249,193,132],[204,145,139]]
+
+[foot]
+src = "characters/slice-naples/sprites/idle/sheet.png"
+frame = 0
+frame_w = 130
+box = [72, 81, 100, 98]
+anchor = [80, 91]
+
+[hand]
+src = "characters/slice-naples/sprites/idle/sheet.png"
+frame = 0
+frame_w = 130
+box = [31, 62, 50, 82]
+anchor = [40, 63]
+
+[arm]
+shoulder_near = [86, 48]
+shoulder_far = [44, 48]
+len = 22
+w = 4
+swing = 0.9
+
+[gait]
+kind = "run"
+leg = 24
+thigh = 0.5
+leg_w = 5
+lean = 6
+lean_down = 2
+stride = 1.3
+clear = 1.15
+bob = 0.7
+ground = 97
+hip = [70, 74]

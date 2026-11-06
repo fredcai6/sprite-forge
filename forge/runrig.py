@@ -37,7 +37,7 @@ RUN_LEG = [
 ]
 RUN_HIP = [0.90, 0.80, 0.90, 0.99, 0.90, 0.80, 0.90, 0.99]    # hip height above ground per frame (down lowest)
 # arm hand target relative to the shoulder (x, y) in arm-lengths, by the same-side LEG phase: back when that leg is forward
-RUN_ARM = [(-0.50, 0.30), (-0.36, 0.52), (-0.02, 0.60), (0.36, 0.36), (0.52, -0.02), (0.38, 0.30), (0.02, 0.60), (-0.36, 0.50)]
+RUN_ARM = [(-0.45, 0.72), (-0.30, 0.82), (0.0, 0.88), (0.35, 0.78), (0.62, 0.50), (0.40, 0.74), (0.02, 0.88), (-0.30, 0.80)]
 
 # walk: 8 frames, always one foot down. p0 heel strike, p1 loading, p2 mid-stance, p3 push-off, p4 toe-off, p5 swing back, p6 swing pass, p7 reach.
 WALK_LEG = [
@@ -65,8 +65,13 @@ def ik(root, target, l1, l2, bend):
     a = (l1 * l1 - l2 * l2 + dist * dist) / (2 * dist)
     h = np.sqrt(max(l1 * l1 - a * a, 0))
     n = np.array([-u[1], u[0]])          # clockwise-perpendicular in image coords
-    if n[0] * bend < 0:
-        n = -n
+    if bend > 0:                          # knee: forward of the line
+        if n[0] < 0:
+            n = -n
+    else:                                 # elbow: the candidate that sits further back, lower on a tie
+        c1, c2 = np.array(root, float) + u * a + n * h, np.array(root, float) + u * a - n * h
+        if (c2[0] - 0.3 * c2[1]) < (c1[0] - 0.3 * c1[1]):
+            n = -n
     mid = np.array(root, float) + u * a + n * h
     end = np.array(root, float) + u * dist
     return mid, end

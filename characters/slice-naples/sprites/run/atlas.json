@@ -7,23 +7,13 @@
  "frame_ms": 70,
  "loop": true,
  "rev": {
-  "sha": "c285e8ad6dad6ad644e864198b4b7a21adca8aa7",
+  "sha": "594ee00d05b729c55789967acc2dca1f04d84b6f",
   "dirty": true,
   "comfy": "v0.44.0"
  },
  "source": {
-  "run": "keys3",
-  "model": "qwen-edit",
-  "cell": 9.010416666666666,
-  "poses": [
-   "run_contact_a/1",
-   "run_down_a/1",
-   "run_pass_a/1",
-   "run_up_a/1",
-   "run_contact_b/1",
-   "run_down_b/1",
-   "run_pass_b/1",
-   "run_up_b/1"
-  ]
+  "rig": "characters/slice-naples/rig/run.toml",
+  "body": "characters/slice-naples/sprites/idle/sheet.png",
+  "gait": "run"
  }
 }
