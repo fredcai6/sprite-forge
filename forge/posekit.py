@@ -241,6 +241,9 @@ class Figure:
             self._draw_part(d, part, j, xf, s, 0, grow=0.6)
         return im.resize((size, size), Image.LANCZOS).convert("RGB")
 
+    def mannequin_body(self, t, size=1024, scale=None):
+        return self.mannequin(t, size, scale, torso=True)
+
     def lines(self, t, size=1024, scale=None, line=1.1, ss=2):
         parts, j = self._parts(t)
         xf, s = self._xf(size * ss, scale and scale * ss)
