@@ -7,3 +7,4 @@
 - slice-jumbo redone: 330x240 frames (art height 240), run 8f @70ms, idle 6, jump, fall, cold, special (belly flop). Tip is left free; floppy sagging slice with tiny legs.
 - mutant redesigned (sewer scavenger, patchwork pizza-box vest, boots): 170x120 frames (height 120), run 8f @70ms, idle 6, bite 6. Old walk removed from manifest. Ground-level; the game clips for drains.
 - alewife: 150x170 frames (height 170), idle 6, wave 6 (wave has a few stray hair-wisp pixels). hq/alewife-polaroid.png 300x300 (head + stein, from the same sprite key pose, hard-edged).
+- slice props/maps/pies as above. NY areas wallstreet, centralpark, brooklyn landed in assets/backgrounds/newyork/<area>/ (far, mid, near, ground 256x120, door ~170 tall). Near layers cleaned (forge.neardeclutter): only ground-line furniture; also applied to old per-city near.png files.

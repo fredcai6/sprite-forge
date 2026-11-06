@@ -1,0 +1,20 @@
+models = ["klein"]
+seeds = [1, 2, 3, 4]
+width = 768
+height = 768
+comfy_args = ["--reserve-vram", "1.5"]
+template = "{action}"
+[shots.shot_pepperoni]
+prompt = "Hand-painted late-1990s pixel-art game projectile icon: a round red pepperoni disc with darker spots, drawn chunky and large filling most of the picture, seen face-on and slightly tilted as if spinning, very thick near-black outline, bold flat saturated colours, a small bright highlight, simple readable shape at tiny size. No motion lines, no sparkles, no ring, no text. Flat solid magenta background."
+[shots.shot_jalapeno]
+prompt = "Hand-painted late-1990s pixel-art game projectile icon: a green jalapeno pepper, drawn chunky and large filling most of the picture, seen face-on and slightly tilted as if spinning, very thick near-black outline, bold flat saturated colours, a small bright highlight, simple readable shape at tiny size. No motion lines, no sparkles, no ring, no text. Flat solid magenta background."
+[shots.shot_garlic]
+prompt = "Hand-painted late-1990s pixel-art game projectile icon: a white garlic bulb, drawn chunky and large filling most of the picture, seen face-on and slightly tilted as if spinning, very thick near-black outline, bold flat saturated colours, a small bright highlight, simple readable shape at tiny size. No motion lines, no sparkles, no ring, no text. Flat solid magenta background."
+[shots.shot_mushroom]
+prompt = "Hand-painted late-1990s pixel-art game projectile icon: a tan mushroom with a cap and stem, drawn chunky and large filling most of the picture, seen face-on and slightly tilted as if spinning, very thick near-black outline, bold flat saturated colours, a small bright highlight, simple readable shape at tiny size. No motion lines, no sparkles, no ring, no text. Flat solid magenta background."
+[shots.shot_basil]
+prompt = "Hand-painted late-1990s pixel-art game projectile icon: a green basil leaf, drawn chunky and large filling most of the picture, seen face-on and slightly tilted as if spinning, very thick near-black outline, bold flat saturated colours, a small bright highlight, simple readable shape at tiny size. No motion lines, no sparkles, no ring, no text. Flat solid magenta background."
+[shots.shot_pineapple]
+prompt = "Hand-painted late-1990s pixel-art game projectile icon: a yellow pineapple chunk with a green leaf tuft, drawn chunky and large filling most of the picture, seen face-on and slightly tilted as if spinning, very thick near-black outline, bold flat saturated colours, a small bright highlight, simple readable shape at tiny size. No motion lines, no sparkles, no ring, no text. Flat solid magenta background."
+[shots.shot_sausage]
+prompt = "Hand-painted late-1990s pixel-art game projectile icon: a brown sausage chunk, drawn chunky and large filling most of the picture, seen face-on and slightly tilted as if spinning, very thick near-black outline, bold flat saturated colours, a small bright highlight, simple readable shape at tiny size. No motion lines, no sparkles, no ring, no text. Flat solid magenta background."
