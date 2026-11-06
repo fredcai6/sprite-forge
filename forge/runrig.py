@@ -200,6 +200,10 @@ def crop_part(spec, base):
     ys, xs = np.nonzero(patch[..., 3])
     py0, px0 = ys.min(), xs.min()
     patch = patch[py0:ys.max() + 1, px0:xs.max() + 1]
+    if "lift_dark" in spec:
+        # black shoes vanish into the black outline: raise their near-black fill to a dark violet
+        m = (patch[..., 3] > 0) & (patch[..., :3].astype(int).sum(-1) < spec.get("lift_below", 60))
+        patch[m, :3] = spec["lift_dark"]
     anchor = (spec["anchor"][0] - px0, spec["anchor"][1] - py0)
     return patch, anchor
 
