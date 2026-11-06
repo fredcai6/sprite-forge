@@ -355,7 +355,8 @@ class Rig:
             over(body, bp, int(round(hipx - ba[0])) + int(g.get("body_dx", 0)), int(round(hip_y - ba[1])))
         else:
             over(body, self.drips(t, n), int(g.get("body_dx", 0)), dy)
-        order = [far_arm, far_leg, body, near_leg, near_arm]
+        # A front-facing pizza's arm on the face side swings behind the body, not across its face.
+        order = [far_arm, near_arm, far_leg, body, near_leg] if c["arm"].get("behind") else [far_arm, far_leg, body, near_leg, near_arm]
         out = np.zeros((Hc, W, 4), np.uint8)
         dark = np.array(self.dark, np.uint8)
         for lay in order:

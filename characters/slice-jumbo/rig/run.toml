@@ -36,6 +36,7 @@ box = [98, 152, 124, 182]
 anchor = [112, 154]
 
 [arm]
+behind = true
 shoulder_near = [214, 118]
 shoulder_far = [122, 118]
 len = 40
