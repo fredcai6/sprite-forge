@@ -1,0 +1,13 @@
+# Filming: phone up, a nervous lean between two poses.
+run = "keys3"
+model = "qwen-edit"
+cell = 8.3
+canvas = [120, 118]
+frame_ms = 200
+preview_scale = 3
+[[frames]]
+pose = "film_a/1"
+hold = 2
+[[frames]]
+pose = "film_b/1"
+hold = 2

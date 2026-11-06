@@ -1,0 +1,15 @@
+# Fleeing in tears: four running poses, wailing.
+run = "keys3"
+model = "qwen-edit"
+cell = 8.3
+canvas = [150, 118]
+frame_ms = 80
+preview_scale = 3
+[[frames]]
+pose = "flee_a/1"
+[[frames]]
+pose = "flee_d/1"
+[[frames]]
+pose = "flee_b/1"
+[[frames]]
+pose = "flee_c/1"

@@ -1,0 +1,25 @@
+{
+ "frame": {
+  "w": 120,
+  "h": 118
+ },
+ "count": 4,
+ "frame_ms": 200,
+ "loop": true,
+ "rev": {
+  "sha": "184b424b4e6f46a1289bf61bcdfc6ebdff881f08",
+  "dirty": true,
+  "comfy": "v0.44.0"
+ },
+ "source": {
+  "run": "keys3",
+  "model": "qwen-edit",
+  "cell": 8.3,
+  "poses": [
+   "film_a/1",
+   "film_a/1",
+   "film_b/1",
+   "film_b/1"
+  ]
+ }
+}
