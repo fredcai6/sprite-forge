@@ -177,7 +177,7 @@ def gen(args):
     frames = [int(x) for x in args.frames.split(",")] if args.frames else list(range(fig.n))
     for t in frames:   # the pose images, saved for the review sheet
         if rigline:
-            lineart.render(rframes[t], SIZE)[0].save(out / f"pose_{t}.png")
+            lineart.render(rframes[t], SIZE, *lineart.layout(rframes, SIZE)).save(out / f"pose_{t}.png")
         else:
             getattr(fig, tr["pose"])(t, SIZE).save(out / f"pose_{t}.png")
     seeds = [int(x) for x in args.seeds.split(",")] if args.seeds else [args.seed]
@@ -270,7 +270,6 @@ def sprite(args):
     W, H = [int(x) for x in args.canvas.split(",")] if args.canvas else (pw, ph)
     s = min(0.9 * SIZE / pw, 0.9 * SIZE / ph)          # source px per sprite px of the pose render
     ox, oy = (SIZE - pw * s) / 2, (SIZE - ph * s) / 2
-    ground_src = oy + pose["ground"] * s               # image row of the skeleton's ground
     ow = 0 if rigline else cfg["sprite"].get("outline", 0)    # a rig frame's outline is already in its lines
     infl = 1 + 2 * ow / (H * 0.95)               # the outline is added on top, so paint the figure smaller
     imgs = {}
@@ -280,7 +279,7 @@ def sprite(args):
             rgb = np.asarray(Image.open(f).convert("RGB"))
             imgs[t] = (rgb, deshadow(rgb, keyout(rgb)))
     hs = [np.ptp(np.nonzero(a.any(1))[0]) + 1 for _, a in imgs.values()]
-    grid_k, grid_o = (lineart.render(rframes[0], SIZE)[1:] if rigline else (None, None))
+    grid_k, grid_o = (lineart.layout(rframes, SIZE) if rigline else (None, None))
     # the ground row is where the stance frames' feet land (their lowest pixel, 97th percentile over frames); a frame whose feet
     # sit higher than that is in the air, and stays there
     ground_src = float(np.percentile([np.nonzero(a.any(1))[0].max() + 1 for _, a in imgs.values()], 97))
@@ -309,6 +308,15 @@ def sprite(args):
         "frame": {"w": W, "h": H}, "count": len(frames), "frame_ms": fig.motion.get("frame_ms", 70), "loop": True, "rev": rev(),
         "source": {"poseguide": track + TAG, "motion": motion, "seed": args.seed, "place": args.place, "frames": names}}, indent=1))
     review(char, motion, track + TAG, args.seed, frames, names, fig, d, last)
+
+
+def make(args):
+    """gen, then one review sheet per seed. Run the whole thing through the queue:
+    gpu submit --vram 30G --name pg-CHAR -- .venv/bin/python -m forge.poseguide make CHAR MOTION qwen-pose-run --seeds 1,2 --name GAME/ANIM"""
+    gen(args)
+    for sd in [int(x) for x in args.seeds.split(",")] if args.seeds else [args.seed]:
+        args.seed = sd
+        sprite(args)
 
 
 def land(args):
@@ -362,7 +370,7 @@ def review(char, motion, track, seed, frames, names, fig, d, last):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["gen", "sprite", "land"])
+    ap.add_argument("cmd", choices=["gen", "sprite", "make", "land"])
     ap.add_argument("char"); ap.add_argument("motion"); ap.add_argument("track")
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--frames", default="")
@@ -378,4 +386,4 @@ if __name__ == "__main__":
     TAG = ("-" + a.tag) if a.tag else ""
     if a.name:
         CUR = str(Path.home() / "projects/probable-octo-funicular/assets/sprites" / a.name / "sheet.png")
-    {"gen": gen, "sprite": sprite, "land": land}[a.cmd](a)
+    {"gen": gen, "sprite": sprite, "make": make, "land": land}[a.cmd](a)

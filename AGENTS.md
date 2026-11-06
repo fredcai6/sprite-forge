@@ -27,3 +27,12 @@ as `sprite-forge-comfy:latest`.
 - Neither model nods on request. Head motion comes from `forge/animate.py`.
 - Derek's native scale is about 6.1 source pixels per sprite pixel; at 185px tall he keeps his detail.
 - Outputs and comfy.log live in `/mnt/data/sprite-forge`, weights in `/mnt/data/models/comfy`.
+
+## Pose-guided runs (humans)
+
+For a character whose body reads as a human skeleton, `forge/poseguide.py` draws a run or walk from a skeleton:
+`characters/NAME/pose.toml` (body plan, master, prompt notes) plus `forge/motions/MOTION.toml` (gait table) feed
+`forge/posekit.py`, which renders the OpenPose skeleton that Qwen-Image-Edit paints the master onto (track `qwen-pose-run`).
+One command through the queue: `gpu submit --vram 30G --name pg-NAME -- .venv/bin/python -m forge.poseguide make NAME MOTION qwen-pose-run --seeds 1,2 --name GAME/ANIM`
+writes review sheets to `/mnt/data/sprite-forge/review/pose-options/`; `poseguide land NAME MOTION qwen-pose-run --seed N --name GAME/ANIM` imports the pick.
+It does not work on bodies a skeleton does not describe (pizza slices, turtles): the master's stance wins. Keep `forge.runrig` for those.
