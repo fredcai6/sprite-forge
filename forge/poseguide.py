@@ -38,11 +38,11 @@ TRACKS = {
     "qwen-pose": dict(pose="openpose", stages=[dict(model="qwen-edit", refs=["master", "pose"], prompt=(
         "Image 1 is the character. Image 2 is a pose skeleton for a side view. Redraw the exact same character from image 1, same colours, "
         "proportions, thick dark outline and chunky pixel-art game style, in the pose of the skeleton in image 2: put the head, arms and legs "
-        "exactly where the skeleton's limbs go, both legs from the same hip, with the crossing and bending the skeleton shows. " + COMMON + " " + BG + ".")])),
+        "exactly where the skeleton's limbs go, both legs from the same hip, with the crossing and bending the skeleton shows. " + COMMON + " " + BG + "."))]),
     "qwen-mannequin": dict(pose="mannequin", stages=[dict(model="qwen-edit", refs=["master", "pose"], prompt=(
         "Image 1 is the character. Image 2 shows black limb shapes: the arms and legs of the pose wanted. Redraw the exact same character from image 1, "
         "same colours, proportions, thick dark outline and chunky pixel-art game style, with its arms and legs exactly on the black limb shapes of "
-        "image 2 and its body above the legs. " + COMMON + " " + BG + ".")])),
+        "image 2 and its body above the legs. " + COMMON + " " + BG + "."))]),
     # Track 3: Qwen-Image-InstantX union ControlNet (pose) on Qwen-Image-Edit, character from the master
     "qwen-cn-pose": dict(pose="openpose", stages=[dict(model="qwen-edit", refs=["master"], control=True, kw=dict(cn_strength=0.8), prompt=(
         "Redraw this exact same character, same colours, proportions, thick dark outline and chunky pixel-art game style, running in the pose given. "
