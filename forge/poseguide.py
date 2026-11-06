@@ -328,19 +328,24 @@ def land(args):
     shutil.copy(d / f"sheet_{args.seed}.png", out / "sheet.png")
     shutil.copy(d / f"atlas_{args.seed}.json", out / "atlas.json")
     name, anim = args.name.split("/")
-    import importlib.util
-    spec = importlib.util.spec_from_file_location("import_sprites", Path.home() / "projects/probable-octo-funicular/scripts/import-sprites.py")
+    importer = ROOT / project()["importer"]
+    spec = importlib.util.spec_from_file_location("import_sprites", importer)
     imp = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(imp)
-    imp.FORGE = ROOT / "characters"          # read from this worktree, not the shared checkout
+    imp.FORGE = ROOT / "characters"
     imp.main(char, f"pg-{motion}", name, anim)
 
 
 CUR = ""
 
 
+# Where a project keeps its game: forge.toml beside its characters, with importer and assets paths.
+def project():
+    return tomllib.loads((ROOT / "forge.toml").read_text())
+
+
 def review(char, motion, track, seed, frames, names, fig, d, last):
-    out = Path("/mnt/data/sprite-forge/review/pose-options")
+    out = DATA / "review/pose-options"
     out.mkdir(parents=True, exist_ok=True)
     z = 3
     track = track
@@ -385,5 +390,5 @@ if __name__ == "__main__":
     a = ap.parse_args()
     TAG = ("-" + a.tag) if a.tag else ""
     if a.name:
-        CUR = str(Path.home() / "projects/probable-octo-funicular/assets/sprites" / a.name / "sheet.png")
+        CUR = str(ROOT / project()["assets"] / "sprites" / a.name / "sheet.png")
     {"gen": gen, "sprite": sprite, "make": make, "land": land}[a.cmd](a)

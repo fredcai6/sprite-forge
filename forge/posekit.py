@@ -26,7 +26,8 @@ from PIL import Image, ImageDraw
 
 # ---- motion tables live in forge/motions/*.toml; body plans in characters/NAME/pose.toml ---------
 import tomllib
-ROOT = Path(__file__).resolve().parent.parent
+MOTIONS = Path(__file__).resolve().parent / "motions"
+from .generate import ROOT
 
 
 def ik(root, target, l1, l2, bend):
@@ -56,7 +57,9 @@ def _ang(v):
 def load_motion(name_or_path):
     p = Path(name_or_path)
     if not p.exists():
-        p = ROOT / "forge" / "motions" / f"{name_or_path}.toml"
+        p = ROOT / "motions" / f"{name_or_path}.toml"          # a project's own motions come first
+        if not p.exists():
+            p = MOTIONS / f"{name_or_path}.toml"
     return tomllib.loads(p.read_text())
 
 

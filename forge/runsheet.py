@@ -8,9 +8,9 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw
 
-from .generate import ROOT
+from .generate import DATA, ROOT
 
-PLATE = ROOT / "characters/references/muybridge-plate60-side.png"
+PLATE = Path(__file__).resolve().parent / "references/muybridge-plate60-side.png"
 # (label, column, row) in the plate: contact, down, pass, flight, reach
 REFS = [("contact", 3, 1), ("down", 4, 1), ("pass", 3, 0), ("flight", 1, 1), ("flight/reach", 2, 1)]
 COLS = [(0, 360), (370, 740), (750, 1120), (1130, 1500), (1505, 1875)]
@@ -47,7 +47,7 @@ def main(rig, out=None):
         cx, cy = (i % per) * w * z, y0 + (i // per) * (h * z + 16)
         canvas.paste(bg.convert("RGB"), (cx, cy))
         d.text((cx + 3, cy + h * z + 2), f"{name} {anim} {i}", fill=(255, 255, 255))
-    out = Path(out or f"/mnt/data/sprite-forge/review/{name}-{anim}.png")
+    out = Path(out or DATA / f"review/{name}-{anim}.png")
     out.parent.mkdir(parents=True, exist_ok=True)
     canvas.save(out)
     print(out, canvas.size)

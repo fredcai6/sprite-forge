@@ -12,16 +12,19 @@ from PIL import Image
 from .pixelize import black_alpha
 from .workflows import MODELS
 
-ROOT = Path(__file__).resolve().parent.parent
+# The tool lives in REPO. The characters it works on live in the project that owns them: run from
+# that project's art folder, or point FORGE_PROJECT at it.
+REPO = Path(__file__).resolve().parent.parent
+ROOT = Path(os.environ.get("FORGE_PROJECT", Path.cwd())).resolve()
 DATA = Path(os.environ.get("FORGE_DATA", "/mnt/data/sprite-forge"))
 API = "http://127.0.0.1:8188"
 KEY = (255, 0, 255)
 
 
 def rev():
-    sha = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True).stdout.strip()
-    dirty = bool(subprocess.run(["git", "status", "--porcelain"], cwd=ROOT, capture_output=True, text=True).stdout.strip())
-    return {"sha": sha or None, "dirty": dirty, "comfy": (ROOT / "comfy/COMFY_REF").read_text().strip()}
+    sha = subprocess.run(["git", "rev-parse", "HEAD"], cwd=REPO, capture_output=True, text=True).stdout.strip()
+    dirty = bool(subprocess.run(["git", "status", "--porcelain"], cwd=REPO, capture_output=True, text=True).stdout.strip())
+    return {"sha": sha or None, "dirty": dirty, "comfy": (REPO / "comfy/COMFY_REF").read_text().strip()}
 
 
 def post(path, body):
@@ -98,7 +101,7 @@ def main():
     print(f"{len(todo)} images to make", flush=True)
     if not todo:
         return
-    proc = subprocess.Popen([ROOT / "comfy/run.sh", *spec.get("comfy_args", [])], stdout=open(DATA / "comfy.log", "a"), stderr=subprocess.STDOUT)
+    proc = subprocess.Popen([REPO / "comfy/run.sh", *spec.get("comfy_args", [])], stdout=open(DATA / "comfy.log", "a"), stderr=subprocess.STDOUT)
     stop = lambda *_: (subprocess.run(["docker", "stop", "-t", "5", "sprite-forge-comfy"]), sys.exit(143))
     signal.signal(signal.SIGTERM, stop)
     try:
