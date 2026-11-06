@@ -12,3 +12,4 @@
 - dc areas georgetown, mall, federal; naples areas harbor, center, hillside landed in assets/backgrounds/<city>/<area>/. Weak: naples/center ground cobbles read dark; naples/hillside mid has faint pink wash.
 - california areas downtown, beach, bungalows landed (bungalows door.png is 200x300, a porch/house front). Lettering check done at 1x over 2 passes x 15 areas (mid layers, 1280x250 strips): no lettering found; california/downtown has a clock-face glyph on one tower (a shape, left).
 - slice-ny run: new 8-frame cycle (contact/down/pass/up, both legs, arms in opposition) @70ms, frame 140x124. Other slice-ny anims (idle/jump/fall/cold) still old until keys3 finishes (a GPU memory fault killed the first keys job; resubmitted).
+- slice-naples redone at 104: frames 130x104, run 8f @70ms, idle 6, jump, fall, cold, special = forward dash pose (8 frames).

@@ -1,22 +1,21 @@
 {
  "frame": {
-  "w": 150,
-  "h": 124
+  "w": 130,
+  "h": 104
  },
- "count": 9,
- "frame_ms": 110,
+ "count": 8,
+ "frame_ms": 80,
  "loop": false,
  "rev": {
-  "sha": "4dea945420019a518ec2b5bd79e870ee09d54f1d",
+  "sha": "c285e8ad6dad6ad644e864198b4b7a21adca8aa7",
   "dirty": true,
   "comfy": "v0.44.0"
  },
  "source": {
-  "run": "keys",
+  "run": "keys3",
   "model": "qwen-edit",
-  "cell": 7.723214285714286,
+  "cell": 9.010416666666666,
   "poses": [
-   "special_a/1",
    "special_a/1",
    "special_a/1",
    "special_b/1",

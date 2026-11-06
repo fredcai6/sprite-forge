@@ -1,0 +1,23 @@
+{
+ "frame": {
+  "w": 130,
+  "h": 104
+ },
+ "count": 2,
+ "frame_ms": 90,
+ "loop": true,
+ "rev": {
+  "sha": "c285e8ad6dad6ad644e864198b4b7a21adca8aa7",
+  "dirty": true,
+  "comfy": "v0.44.0"
+ },
+ "source": {
+  "run": "keys3",
+  "model": "qwen-edit",
+  "cell": 9.010416666666666,
+  "poses": [
+   "fall/1",
+   "fall/2"
+  ]
+ }
+}
