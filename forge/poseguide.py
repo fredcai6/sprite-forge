@@ -159,15 +159,28 @@ def sprite(args):
     s = min(0.9 * SIZE / W, 0.9 * SIZE / H)          # source px per sprite px, same transform as the pose render
     ox, oy = (SIZE - W * s) / 2, (SIZE - H * s) / 2
     ow = cfg["sprite"].get("outline", 0)
-    frames, names = [], []
+    infl = 1 + 2 * ow / (H * 0.95)               # the outline is added on top, so paint the figure smaller
+    imgs = {}
     for t in range(fig.n):
         f = d / f"{last}_{t}_{args.seed}.png"
-        if not f.exists():
-            continue
-        rgb = np.asarray(Image.open(f).convert("RGB"))
-        alpha = keyout(rgb)
-        sp = to_sprite(rgb, alpha, pal[0], pal[1], s * (1 + 2 * ow / (H * 0.95)), (ox + (W * s) * (1 - 1 / (1 + 2 * ow / (H * 0.95))) / 2, oy + (H * s) * (1 - 1 / (1 + 2 * ow / (H * 0.95))) / 2), (W, H), cfg["sprite"]["accent"])
-        sp = despeckle(sp)
+        if f.exists():
+            rgb = np.asarray(Image.open(f).convert("RGB"))
+            imgs[t] = (rgb, keyout(rgb))
+    if args.place == "fit":
+        # same rule as forge.compose: one cell for the whole run (median figure height -> fit_h), each frame placed by
+        # ground contact and horizontal centroid
+        hs = [np.ptp(np.nonzero(a.any(1))[0]) + 1 for _, a in imgs.values()]
+        cell = float(np.median(hs)) / (H * 0.93) * infl
+    else:
+        cell = s * infl
+    frames, names = [], []
+    for t, (rgb, alpha) in imgs.items():
+        ys, xs = np.nonzero(alpha)
+        if args.place == "fit":
+            origin = (xs.mean() - W / 2 * cell, ys.max() + 1 - (H - 2 - ow) * cell)
+        else:
+            origin = (ox + (W * s) * (1 - 1 / infl) / 2, oy + (H * s) * (1 - 1 / infl) / 2)
+        sp = despeckle(to_sprite(rgb, alpha, pal[0], pal[1], cell, origin, (W, H), cfg["sprite"]["accent"]))
         if ow:
             sp = thicken(sp, ow, pal[0][np.argmin(pal[1][:, 0])])
         frames.append(sp)
@@ -205,5 +218,6 @@ if __name__ == "__main__":
     ap.add_argument("char"); ap.add_argument("motion"); ap.add_argument("track")
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--frames", default="")
+    ap.add_argument("--place", default="fit", choices=["fit", "fixed"])
     a = ap.parse_args()
     {"gen": gen, "sprite": sprite}[a.cmd](a)
