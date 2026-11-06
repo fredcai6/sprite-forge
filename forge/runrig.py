@@ -246,6 +246,28 @@ class Rig:
         self.base = base
         self._lean = {}
 
+    def drips(self, t, n):
+        """Sauce drips that lengthen and let go a drop through the cycle: cfg [drips] points=[[x,y,phase],...] at the tips of
+        the drips already in the body art (body coordinates), amp, colours."""
+        body = self.body.copy()
+        d = self.cfg.get("drips")
+        if not d:
+            return body
+        amp = d.get("amp", 5)
+        main, shade_c = d["colour"], d["shade"]
+        for x, y, ph in d["points"]:
+            f = 0.5 + 0.5 * np.sin(2 * np.pi * (t / n) + ph)
+            ext = int(round(amp * f))
+            for k in range(1, ext + 1):
+                for dx in (-1, 0, 1):
+                    body[y + k, x + dx] = (*(shade_c if dx == 1 else main), 255)
+            if ext == amp:   # the drop lets go
+                for k in range(3, 6):
+                    for dx in (-1, 0, 1):
+                        if not (k in (3, 5) and dx != 0):
+                            body[y + ext + k, x + dx] = (*(shade_c if dx == 1 else main), 255)
+        return body
+
     def pose_frames(self):
         c = self.cfg
         g = c["gait"]
@@ -328,12 +350,11 @@ class Rig:
         lean = g.get("lean", 0) + g.get("lean_down", 0) * (1 if kind == "run" and (t % n) in (1, 5) else 0)
         if lean:
             key = round(lean * 2) / 2
-            if key not in self._lean:
-                self._lean[key] = rotate_patch(self.body, g["hip"], key)
-            bp, ba = self._lean[key]
+            bt = self.drips(t, n)
+            bp, ba = rotate_patch(bt, g["hip"], key)
             over(body, bp, int(round(hipx - ba[0])) + int(g.get("body_dx", 0)), int(round(hip_y - ba[1])))
         else:
-            over(body, self.body, int(g.get("body_dx", 0)), dy)
+            over(body, self.drips(t, n), int(g.get("body_dx", 0)), dy)
         order = [far_arm, far_leg, body, near_leg, near_arm]
         out = np.zeros((Hc, W, 4), np.uint8)
         dark = np.array(self.dark, np.uint8)
