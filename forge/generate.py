@@ -1,7 +1,7 @@
 """Generates a run: every shot in a run file, at every seed, for every model. Finished images are
 skipped, so rerunning the same command resumes. Submit it through the GPU queue:
 
-    gpu submit --vram 30G --name sprite-derek -- .venv/bin/python -m forge.generate characters/derek/runs/keys.toml [model ...]
+    ws submit --cores 2 --mem 34G --vram 30G --name sprite-derek -- .venv/bin/python -m forge.generate characters/derek/runs/keys.toml [model ...]
 """
 import hashlib, json, os, shutil, signal, subprocess, sys, time, tomllib, urllib.error, urllib.request
 from pathlib import Path
