@@ -20,7 +20,8 @@ as `sprite-forge-comfy:latest`.
 1. `characters/NAME/character.toml` holds the description, sprite height and palette families;
    put references in `references/` and run `python -m forge.palette_build NAME`.
 2. Write key poses in `characters/NAME/runs/X.toml`, then generate through the GPU queue:
-   `ws submit --cores 2 --mem 34G --vram 30G --name sprite-NAME -- .venv/bin/python -m forge.generate characters/NAME/runs/X.toml qwen-edit`
+   `ws submit --cores 2 --mem 34G --vram 30G --expect 10m --name sprite-NAME -- .venv/bin/python -m forge.generate characters/NAME/runs/X.toml qwen-edit`
+   `--expect` (required) is how long the run should take: generation runs took up to 6.5 min (32 runs, 11-05 to 11-06). The 20m for pose guides is a guess. It's an estimate for the queue's timeline, never enforced.
    (`--mem` and `--cores` are measured: ComfyUI's container peaked at 30.7 GB for generate runs and 31.7 GB
    for pose runs, model files included, on 1.4-2 cores, across 145 runs from 2026-11-03 to 11-07.)
 3. Look at `python -m forge.contact RUN_DIR OUT.png` and choose keys.
@@ -41,7 +42,7 @@ as `sprite-forge-comfy:latest`.
 For a character whose body reads as a human skeleton, `forge/poseguide.py` draws a run or walk from a skeleton:
 `characters/NAME/pose.toml` (body plan, master, prompt notes) plus `forge/motions/MOTION.toml` (gait table) feed
 `forge/posekit.py`, which renders the OpenPose skeleton that Qwen-Image-Edit paints the master onto (track `qwen-pose-run`).
-One command through the queue: `ws submit --cores 2 --mem 34G --vram 30G --name pg-NAME -- .venv/bin/python -m forge.poseguide make NAME MOTION qwen-pose-run --seeds 1,2 --name GAME/ANIM`
+One command through the queue: `ws submit --cores 2 --mem 34G --vram 30G --expect 20m --name pg-NAME -- .venv/bin/python -m forge.poseguide make NAME MOTION qwen-pose-run --seeds 1,2 --name GAME/ANIM`
 writes review sheets to `/mnt/data/sprite-forge/review/pose-options/`; `poseguide land NAME MOTION qwen-pose-run --seed N --name GAME/ANIM` imports the pick.
 It does not work on bodies a skeleton does not describe (pizza slices, turtles): the master's stance wins. Keep `forge.runrig` for those.
 

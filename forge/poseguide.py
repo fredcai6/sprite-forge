@@ -312,7 +312,7 @@ def sprite(args):
 
 def make(args):
     """gen, then one review sheet per seed. Run the whole thing through the queue:
-    ws submit --cores 2 --mem 34G --vram 30G --name pg-CHAR -- .venv/bin/python -m forge.poseguide make CHAR MOTION qwen-pose-run --seeds 1,2 --name GAME/ANIM"""
+    ws submit --cores 2 --mem 34G --vram 30G --expect 20m --name pg-CHAR -- .venv/bin/python -m forge.poseguide make CHAR MOTION qwen-pose-run --seeds 1,2 --name GAME/ANIM"""
     gen(args)
     for sd in [int(x) for x in args.seeds.split(",")] if args.seeds else [args.seed]:
         args.seed = sd
